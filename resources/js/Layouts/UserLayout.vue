@@ -27,8 +27,7 @@ const checkScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const imageHeight = document.querySelector('.bg-image')?.offsetHeight || 0;
 
-  // Invertir la lógica de visibilidad
-  if (scrollTop > lastScrollTop.value || scrollTop <= 0) {
+  if (scrollTop > lastScrollTop.value && scrollTop > 0) {
     isLineVisible.value = false;
   } else {
     isLineVisible.value = true;
@@ -70,15 +69,15 @@ onUnmounted(() => {
     ]"
     :style="{ backgroundColor: `rgba(255, 255, 255, ${headerOpacity})` }">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-between items-center h-14">
           <button @click="toggleMenu" class="mr-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group">
             <span class="sr-only">Abrir menú principal</span>
-            <svg class="h-6 w-6" :stroke="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <svg class="h-7 w-7" :stroke="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" class="group-hover:stroke-blue-600 transition-colors duration-200" />
             </svg>
           </button>
 
-          <a href="https://maps.app.goo.gl/WbUcf9nLRv3Pitut6" target="_blank" rel="noopener noreferrer" class="flex items-center group">
+          <a href="https://goo.gl/maps/your-dealership-location" target="_blank" rel="noopener noreferrer" class="flex items-center group">
             <svg class="h-5 w-5 mr-1 sm:mr-2" :class="[isScrolledPastImage || !hasHeroImage ? 'text-blue-900' : 'text-white', 'group-hover:text-blue-600 transition-colors duration-200']" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" class="group-hover:text-blue-600 transition-colors duration-200" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" class="group-hover:text-blue-600 transition-colors duration-200" />
@@ -89,7 +88,7 @@ onUnmounted(() => {
       </div>
 
       <div :class="[
-        'relative transition-all duration-300 mt-2',
+        'relative transition-all duration-300 -mt-4',
         {'opacity-0': !isLineVisible},
         isScrolledPastImage || !hasHeroImage ? 'text-blue-900' : 'text-white'
       ]">
@@ -97,11 +96,10 @@ onUnmounted(() => {
           <div class="flex items-center justify-center h-6">
             <div class="h-px bg-current flex-grow"></div>
             <Link :href="route('welcome')" class="mx-6 flex-shrink-0">
-              <svg role="img" aria-label="Volkswagen" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" :fill="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'" stroke="none">
-                <title>Volkswagen</title>
-                <path
-                  d="M12 22.586c-5.786 0-10.543-4.8-10.543-10.586 0-1.2.214-2.357.6-3.471l6.172 12c.085.171.171.3.385.3.215 0 .3-.129.386-.3l2.871-6.386q.064-.129.129-.129c.086 0 .086.086.129.129l2.914 6.386c.086.171.171.3.386.3.214 0 .3-.129.385-.3l6.172-12c.385 1.071.6 2.228.6 3.471-.043 5.786-4.8 10.586-10.586 10.586m0-13.329c-.086 0-.086-.086-.129-.128l-3.3-7.115a10.12 10.12 0 0 1 6.858 0l-3.3 7.115c-.043.042-.043.128-.129.128m-3.471 7.714c-.086 0-.086-.085-.129-.128L3 6.47c.943-1.542 2.314-2.828 3.9-3.728l3.814 8.228c.086.172.172.215.3.215h1.972c.128 0 .214-.043.3-.215l3.771-8.228c1.586.9 2.957 2.186 3.9 3.728L15.6 16.843q-.065.128-.129.128c-.085 0-.085-.085-.128-.128L13.286 12.3c-.086-.171-.172-.214-.3-.214h-1.972c-.128 0-.214.043-.3.214l-2.057 4.543c-.043.043-.043.128-.128.128M12 24c6.643 0 12-5.357 12-12S18.643 0 12 0 0 5.357 0 12s5.357 12 12 12">
-                </path>
+              <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11" :fill="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'">
+                <g transform="matrix(10.188387870788574, 0, 0, 10.188387870788574, -251.519936680809, -252.79260253906244)">
+                  <path d="M75,120.4c-24.9,0-45.3-20.5-45.3-45.4c0-5.6,1-10.9,2.9-15.9l26.5,53.3c0.3,0.7,0.8,1.3,1.6,1.3 c0.8,0,1.3-0.6,1.6-1.3l12.2-27.3c0.1-0.3,0.3-0.6,0.6-0.6s0.4,0.3,0.6,0.6l12.2,27.3c0.3,0.7,0.8,1.3,1.6,1.3 c0.8,0,1.3-0.6,1.6-1.3l26.5-53.3c1.9,5,2.9,10.3,2.9,15.9C120.3,99.9,99.9,120.4,75,120.4z M75,64.7c-0.3,0-0.4-0.3-0.6-0.6 l-14.2-32c4.6-1.7,9.6-2.6,14.8-2.6c5.2,0,10.2,0.9,14.8,2.6l-14.2,32C75.4,64.5,75.3,64.7,75,64.7z M60.5,97.6 c-0.3,0-0.4-0.3-0.6-0.6l-23-46.4c4.1-6.3,9.6-11.6,16.3-15.3l16.6,36.9C70,72.8,70.5,73,71,73h8c0.6,0,1-0.1,1.3-0.8l16.6-36.9 c6.6,3.7,12.2,9,16.3,15.3L90,97c-0.1,0.3-0.3,0.6-0.6,0.6c-0.3,0-0.4-0.3-0.6-0.6l-8.7-19.8c-0.3-0.7-0.7-0.8-1.3-0.8h-8 c-0.6,0-1,0.1-1.3,0.8L61.1,97C61,97.3,60.8,97.6,60.5,97.6z M75,125c27.7,0,50-22.3,50-50c0-27.7-22.3-50-50-50 c-27.7,0-50,22.3-50,50C25,102.7,47.3,125,75,125z" />
+                </g>
               </svg>
             </Link>
             <div class="h-px bg-current flex-grow"></div>
