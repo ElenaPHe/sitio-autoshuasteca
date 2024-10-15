@@ -72,17 +72,17 @@ onUnmounted(() => {
         <div class="flex justify-between items-center h-14">
           <button @click="toggleMenu" class="mr-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group">
             <span class="sr-only">Abrir menú principal</span>
-            <svg class="h-7 w-7" :stroke="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" class="group-hover:stroke-blue-600 transition-colors duration-200" />
+            <svg class="h-7 w-7" :stroke="isScrolledPastImage || !hasHeroImage ? '#002873' : 'white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" class="group-hover:stroke-[rgb(0,176,240)] transition-colors duration-200" />
             </svg>
           </button>
 
           <a href="https://goo.gl/maps/your-dealership-location" target="_blank" rel="noopener noreferrer" class="flex items-center group">
-            <svg class="h-5 w-5 mr-1 sm:mr-2" :class="[isScrolledPastImage || !hasHeroImage ? 'text-blue-900' : 'text-white', 'group-hover:text-blue-600 transition-colors duration-200']" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" class="group-hover:text-blue-600 transition-colors duration-200" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" class="group-hover:text-blue-600 transition-colors duration-200" />
+            <svg class="h-5 w-5 mr-4 sm:mr-2" :class="[isScrolledPastImage || !hasHeroImage ? 'text-[#002873]' : 'text-white', 'group-hover:text-[rgb(0,176,240)] transition-colors duration-200']" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" class="group-hover:text-[rgb(0,176,240)] transition-colors duration-200" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" class="group-hover:text-[rgb(0,176,240)] transition-colors duration-200" />
             </svg>
-            <span :class="[isScrolledPastImage || !hasHeroImage ? 'text-blue-900' : 'text-white', 'hidden sm:inline-block group-hover:text-blue-600 transition-colors duration-200']">Autos de la Huasteca</span>
+            <span :class="[isScrolledPastImage || !hasHeroImage ? 'text-[#002873]' : 'text-white', 'hidden sm:inline-block group-hover:text-[rgb(0,176,240)] transition-colors duration-200']">Autos de la Huasteca</span>
           </a>
         </div>
       </div>
@@ -90,11 +90,11 @@ onUnmounted(() => {
       <div :class="[
         'relative transition-all duration-300 -mt-4',
         {'opacity-0': !isLineVisible},
-        isScrolledPastImage || !hasHeroImage ? 'text-blue-900' : 'text-white'
+        isScrolledPastImage || !hasHeroImage ? 'text-[#002873]' : 'text-white'
       ]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div class="flex items-center justify-center h-6">
-            <div class="h-px bg-current flex-grow"></div>
+            <div class="h-0.5 bg-current flex-grow"></div>
             <Link :href="route('welcome')" class="mx-6 flex-shrink-0">
               <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11" :fill="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'">
                 <g transform="matrix(10.188387870788574, 0, 0, 10.188387870788574, -251.519936680809, -252.79260253906244)">
@@ -102,7 +102,7 @@ onUnmounted(() => {
                 </g>
               </svg>
             </Link>
-            <div class="h-px bg-current flex-grow"></div>
+            <div class="h-0.5 bg-current flex-grow"></div>
           </div>
         </div>
       </div>
