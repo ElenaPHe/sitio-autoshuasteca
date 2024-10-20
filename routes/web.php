@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,14 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/seccionbienvenida/{id}/editImage', [InicioController::class, 'editImage'])->name('inicio.editImage');
     // Route::put('/seccionbienvenida/{id}', [InicioController::class, 'updateImagenPrincipal'])->name('inicio.actualizarImagenPrincipal');
+
+    // Seccion Mantenimiento
+    Route::get('/seccion-mantenimiento', [MantenimientoController::class, 'index'])->name('mantenimiento.index');
+    Route::get('/seccion-mantenimiento/create', [MantenimientoController::class, 'create'])->name('mantenimiento.create');
+    Route::post('/seccion-mantenimiento', [MantenimientoController::class, 'store'])->name('mantenimiento.store');
+    Route::get('/seccion-mantenimiento/{id}/edit', [MantenimientoController::class, 'edit'])->name('mantenimiento.edit');
+    Route::put('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'actualizar'])->name('mantenimiento.actualizar');
+    Route::delete('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimiento.destroy');
 
 
 
