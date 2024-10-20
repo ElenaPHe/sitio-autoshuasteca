@@ -28,8 +28,7 @@ onMounted(() => {
                     'text-3xl font-bold mb-4 transition-all duration-1000 ease-out font-vwheadbold',
                     { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                 ]">
-                    <span class="font-vwheadlight">Autos </span>
-                     Nuevos
+                     Seminuevos
                 </h2>
             </div>
 

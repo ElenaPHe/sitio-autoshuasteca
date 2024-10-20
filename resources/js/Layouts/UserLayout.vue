@@ -12,7 +12,7 @@ const isLineVisible = ref(true);
 const lastScrollTop = ref(0);
 
 const hasHeroImage = computed(() => {
-    return ['Welcome', 'Secciones/Servicios'].includes(page.component);
+    return ['Welcome', 'Secciones/Garantia', 'Secciones/Refacciones', 'Secciones/Mantenimiento'].includes(page.component);
 });
 
 const toggleMenu = () => {
@@ -62,7 +62,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <!-- <div class="min-h-screen"> -->
+    <div class="min-h-screen">
     <header :class="[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         { 'opacity-0 translate-y-[-20px]': !isPageLoaded, 'opacity-100 translate-y-0': isPageLoaded }
@@ -140,11 +140,19 @@ onUnmounted(() => {
             <nav class="flex-grow py-8 px-4">
                 <Link :href="route('welcome')"
                     class="block py-2 text-lg text-white hover:bg-blue-700 rounded px-2 mb-2">
-                Home
+                Inicio
                 </Link>
                 <Link :href="route('autosnuevos')"
                     class="block py-2 text-lg text-white hover:bg-blue-700 rounded px-2 mb-2">
                 Autos Nuevos
+                </Link>
+                <Link :href="route('seminuevos')"
+                    class="block py-2 text-lg text-white hover:bg-blue-700 rounded px-2 mb-2">
+                Seminuevos
+                </Link>
+                <Link :href="route('refacciones')"
+                    class="block py-2 text-lg text-white hover:bg-blue-700 rounded px-2 mb-2">
+                Refacciones
                 </Link>
                 <div class="relative">
                     <button @click="toggleSubMenu"
@@ -156,36 +164,34 @@ onUnmounted(() => {
                         </svg>
                     </button>
                     <div v-if="isSubMenuOpen" class="pl-4 mt-2 space-y-2">
-                        <Link :href="route('servicios')"
+                        <Link :href="route('mantenimiento')"
                             class="block py-2 text-base text-white hover:bg-blue-700 rounded px-2">
-                        Servicio 1
+                         Precios de Mantenimiento
                         </Link>
-                        <Link :href="route('servicios')"
+                        <Link :href="route('garantia')"
                             class="block py-2 text-base text-white hover:bg-blue-700 rounded px-2">
-                        Servicio 2
+                            Garantia
                         </Link>
                     </div>
                 </div>
-                <Link :href="route('servicios')"
-                    class="block py-2 text-lg text-white hover:bg-blue-700 rounded px-2 mb-2">
-                Nueva Sección
-                </Link>
+
             </nav>
         </div>
     </div>
 
-    <main>
+    <main class="">
         <slot />
     </main>
-    <!-- </div> -->
+    </div>
 
-    <footer>
+    <!-- <footer >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <p class="text-center text-sm text-gray-500">
                 &copy; 2024 Autos de la Huasteca. Todos los derechos reservados.
             </p>
         </div>
-    </footer>
+    </footer> -->
+
 </template>
 
 <style scoped>

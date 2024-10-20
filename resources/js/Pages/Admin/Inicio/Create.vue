@@ -61,20 +61,10 @@ function submit() {
             console.log('Error al enviar el formulario', errors);
         },
         onFinish: () => {
-            // Limpiar el formulario
-            form.imagen = null;
-            form.carrusel = [];
-            form.promociones = [
-                {
-                    id: tempIdCounter++, // ID temporal
-                    titulo: '',
-                    imagen: null,
-                    descripcion: '',
-                }
-            ];
+            // Redirigir a index
+            form.reset();
+            window.location.href = route('inicio.index');
 
-            // Redirigir al listado de inicios
-            window.location = route('inicio.index');
         },
     });
 }

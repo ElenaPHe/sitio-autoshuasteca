@@ -4,6 +4,10 @@ import UserLayout from '@/Layouts/UserLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
+const props = defineProps({
+    inicios: Object,
+});
+
 const isContentLoaded = ref(false);
 
 onMounted(() => {
@@ -18,8 +22,9 @@ onMounted(() => {
   <Head title="Home" />
 
   <UserLayout>
-    <div class="relative h-screen">
-      <div class="bg-image h-3/4  bg-cover bg-center" style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');">
+    <div class="relative h-screen" v-for="info in inicios" :key="info.id">
+      <!-- <div class="bg-image h-3/4  bg-cover bg-center" style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');"> -->
+        <div class="bg-image h-3/4  bg-cover bg-center" :style="` background-image: url('/storage/${info.imagen}'); `">
         <!-- Contenido superpuesto en la imagen -->
         <!-- <div class="absolute inset-0 flex items-center justify-center">
           <h1 :class="[
@@ -46,10 +51,14 @@ onMounted(() => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
-      <div class="h-screen font-vwtext">
-        <h1>Hola</h1>
+
+      <div class="container mx-auto py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">Descubre todas las promociones</h2>
+
       </div>
+
     </div>
+
   </UserLayout>
 </template>
 

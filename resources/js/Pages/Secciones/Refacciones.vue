@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Head title="Nueva Sección" />
+  <Head title="Refacciones" />
 
   <UserLayout>
     <div class="relative h-screen">
@@ -25,7 +25,7 @@ onMounted(() => {
             'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
             {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
           ]">
-            Nueva Sección
+             Sección de Refacciones
           </h1>
         </div>
       </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,17 +26,31 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('welcome');
+// Route::get('/', function () {
+//     return Inertia::render('Welcome');
+// })->name('welcome');
+
+Route::get('/', [InicioController::class, 'seccionwelcomeindex'])->name('welcome');
 
 Route::get('/Modelos/', function () {
     return Inertia::render('Secciones/AutosNuevos');
 })->name('autosnuevos');
 
-Route::get('/Servicios/', function () {
-    return Inertia::render('Secciones/Servicios');
-})->name('servicios');
+Route::get('/Seminuevos/', function () {
+    return Inertia::render('Secciones/Seminuevos');
+})->name('seminuevos');
+
+Route::get('/Garantia/', function () {
+    return Inertia::render('Secciones/Garantia');
+})->name('garantia');
+
+Route::get('/Refacciones/', function () {
+    return Inertia::render('Secciones/Refacciones');
+})->name('refacciones');
+
+Route::get('/Mantenimiento/', function () {
+    return Inertia::render('Secciones/Mantenimiento');
+})->name('mantenimiento');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -43,9 +58,29 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/SeccionBienvenida/', function () {
-        return Inertia::render('Admin/Nuevos/Index');
-    })->name('admin-nuevos');
+    // Route::get('/SeccionBienvenida/', function () {
+    //     return Inertia::render('Admin/Nuevos/Index');
+    // })->name('admin-nuevos');
+
+    Route::get('/seccionbienvenida', [InicioController::class, 'index'])->name('inicio.index');
+    Route::get('/seccionbienvenida/create', [InicioController::class, 'create'])->name('inicio.create');
+    Route::post('/seccionbienvenida', [InicioController::class, 'store'])->name('inicio.store');
+    Route::get('/seccionbienvenida/{id}/edit', [InicioController::class, 'edit'])->name('inicio.edit');
+    Route::put('/seccionbienvenida/{id}', [InicioController::class, 'actualizar'])->name('inicio.actualizar');
+
+    // Route::get('/seccionbienvenida/{id}/editImage', [InicioController::class, 'editImage'])->name('inicio.editImage');
+    // Route::put('/seccionbienvenida/{id}', [InicioController::class, 'updateImagenPrincipal'])->name('inicio.actualizarImagenPrincipal');
+
+
+
+
+    // Route::get('/BienvenidaCreate/', function () {
+    //     return Inertia::render('Admin/Nuevos/Create');
+    // })->name('admin-nuevos-create');
+
+    Route::get('/BienvenidaEdit/', function () {
+        return Inertia::render('Admin/Nuevos/Edit');
+    })->name('admin-nuevos-edit');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
