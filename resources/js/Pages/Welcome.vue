@@ -71,7 +71,7 @@ const goToSlide = (index) => {
 
 <template>
 
-    <Head title="Home" />
+    <Head title="Bienvenido" />
 
     <UserLayout>
         <div class="relative h-screen" v-for="info in inicios" :key="info.id">
@@ -92,7 +92,7 @@ const goToSlide = (index) => {
             <!-- Nombre de la empresa -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 text-center">
                 <h2 :class="[
-                    'text-3xl sm:text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 ease-out font-vwheadbold',
+                    'text-3xl sm:text-4xl md:text-5xl mb-4 transition-all duration-1000 ease-out font-vwheadbold',
                     { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                 ]">
                     Autos de la Huasteca
@@ -135,7 +135,7 @@ const goToSlide = (index) => {
 
             <!-- Contenido de promociones -->
             <div class="container mx-auto py-12">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-vwheadlight text-center mb-8">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-vwheadlight text-center mb-16">
                     Descubre todas las <span class="font-vwheadbold">promociones</span>
                 </h2>
                 <div v-for="(promocion, index) in info.promociones" :key="promocion.id"
@@ -148,7 +148,7 @@ const goToSlide = (index) => {
                              class="w-full h-auto shadow-lg">
                     </div>
                     <div :class="[
-                        'w-full md:w-1/2 px-4',
+                        'w-full md:w-1/2 px-4 mt-6',
                         index % 2 === 0 ? 'md:order-2' : 'md:order-1'
                     ]">
                         <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">{{ promocion.titulo }}</h3>
@@ -168,4 +168,9 @@ const goToSlide = (index) => {
         aspect-ratio: 4 / 3;
     }
 }
+
+.transition-none {
+    transition: none;
+}
+
 </style>

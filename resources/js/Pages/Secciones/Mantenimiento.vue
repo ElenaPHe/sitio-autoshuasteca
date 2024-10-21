@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue';
 import UserLayout from '@/Layouts/UserLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
+const props = defineProps({
+    mantenimiento: Object,
+});
+
 const isContentLoaded = ref(false);
 
 onMounted(() => {
@@ -24,7 +28,7 @@ onMounted(() => {
                 <!-- Contenido superpuesto en la imagen -->
                 <div class="absolute inset-0 flex items-center justify-center">
                     <h1 :class="[
-                        'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
+                        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vwheadbold text-white shadow-lg transition-all duration-1000 ease-out',
                         { 'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                     ]">
                         Mantenimiento
@@ -33,19 +37,21 @@ onMounted(() => {
             </div>
 
             <!-- Contenido adicional -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-vwtext ">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <h2 :class="[
-                    'text-3xl font-bold mb-4 transition-all duration-1000 ease-out font-vwheadbold text-center',
+                    'text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 transition-all duration-1000 ease-out font-vwheadbold text-center',
                     { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                 ]">
                     <span class="font-vwheadlight">Todos los precios </span>
                     incluyen:
                 </h2>
 
-                <div class="min-w-scren grid grid-cols-2 sm:grid-cols-6 justify-center items-center space-x-4 space-y-8 mx-auto max-w-7xl p-4 border border-blue-500">
-                    <div class="flex flex-col items-center space-y-2 border border-red-400 ">
+                <!--Servicios -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mx-auto max-w-7xl p-2 m-14 font-vwtext">
+                    <!-- cambio de aceite -->
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" fill="#001E50"  version="1.1" id="Layer_1"
+                            <svg class="w-16 sm:w-20 lg:w-24" fill="#001E50"  version="1.1" id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 512 512" xml:space="preserve" stroke="#001E50">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -69,12 +75,12 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                            <p class="text-center">Cambio de <br> aceite</p>
+                            <p class="text-center text-sm sm:text-base fo">Cambio de <br> aceite</p>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-2 border border-red-400">
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" version="1.1" id="Capa_1"
+                            <svg class="w-16 sm:w-20 lg:w-24" version="1.1" id="Capa_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 22.335 22.335" xml:space="preserve" fill="#001E50" stroke="#001E50"
                                 stroke-width="0.00022335000000000004">
@@ -94,12 +100,12 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center">Relleno de <br> Niveles</p>
+                        <p class="text-center text-sm sm:text-base">Relleno de <br> Niveles</p>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-2 border border-red-400">
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" fill="#001E50" version="1.1" id="Layer_1"
+                            <svg class="w-16 sm:w-20 lg:w-24" fill="#001E50" version="1.1" id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 512 512" xml:space="preserve" stroke="#001E50">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -115,12 +121,12 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center">Limpiado de <br> parabrisas</p>
+                        <p class="text-center text-sm sm:text-base">Limpiado de <br> parabrisas</p>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-2 border border-red-400">
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" viewBox="0 0 24.00 24.00" fill="none"
+                            <svg class="w-16 sm:w-20 lg:w-24" viewBox="0 0 24.00 24.00" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" stroke="#001E50">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -137,12 +143,12 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center ">Inspección de puntos de <br> seguridad y funcionalidad</p>
+                        <p class="text-center text-sm sm:text-base">Inspección de puntos de <br> seguridad y funcionalidad</p>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-2 border border-red-400">
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" viewBox="0 0 8.4666669 8.4666669" id="svg8" version="1.1"
+                            <svg class="w-16 sm:w-20 lg:w-24" viewBox="0 0 8.4666669 8.4666669" id="svg8" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
                                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -168,12 +174,12 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center">Diagnostico por <br> computadora</p>
+                        <p class="text-center text-sm sm:text-base">Diagnostico por <br> computadora</p>
                     </div>
 
-                    <div class="flex flex-col items-center space-y-2 border border-red-400">
+                    <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-20 h-20 sm:w-16 sm:h-16 lg:w-24 lg:h-24" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-16 sm:w-20 lg:w-24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" stroke="#001E50">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -192,14 +198,23 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center">Nano-Protección de <br> pintura</p>
+                        <p class="text-center text-sm sm:text-base">Nano-Protección de <br> pintura</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
+                <h2 :class="[
+                    'text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 transition-all duration-1000 ease-out font-vwheadlight text-center',
+                    { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
+                ]">
+                Modelos
+                </h2>
+
+
 
             </div>
-            <div class="h-screen font-vwtext flex items-center justify-center bg-gray-100">
-                <h1 class="text-4xl font-bold">Tabla de precios</h1>
-            </div>
+
         </div>
     </UserLayout>
 </template>
