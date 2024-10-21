@@ -86,7 +86,7 @@ const deleteMantenimiento = (id) => {
                                         {{ info.titulo }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <img :src="`/storage/${info.imagen}`" alt="Imagen" class="w-16 h-16 object-cover">
+                                        <img :src="`/storage/${info.imagen}`" alt="Imagen" class="w-16 object-cover">
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ info.paqueteOne }}

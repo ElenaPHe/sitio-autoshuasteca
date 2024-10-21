@@ -7,7 +7,7 @@ const props = defineProps(['mantenimiento']);
 
 const form = useForm({
     titulo: props.mantenimiento.titulo,
-    imagen: null,
+    imagen: props.mantenimiento.imagen || null,
     paqueteOne: props.mantenimiento.paqueteOne,
     paqueteTwo: props.mantenimiento.paqueteTwo,
     paqueteThree: props.mantenimiento.paqueteThree,
@@ -71,7 +71,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 1 -->
-                                <input type="text" id="paqueteOne" name="paqueteOne" v-model="form.paqueteOne"
+                                <input type="number" id="paqueteOne" name="paqueteOne" v-model="form.paqueteOne"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -81,7 +81,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 2 -->
-                                <input type="text" id="paqueteTwo" name="paqueteTwo" v-model="form.paqueteTwo"
+                                <input type="number" id="paqueteTwo" name="paqueteTwo" v-model="form.paqueteTwo"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -91,7 +91,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 3 -->
-                                <input type="text" id="paqueteThree" name="paqueteThree" v-model="form.paqueteThree"
+                                <input type="number" id="paqueteThree" name="paqueteThree" v-model="form.paqueteThree"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -101,7 +101,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 4 -->
-                                <input type="text" id="paqueteFour" name="paqueteFour" v-model="form.paqueteFour"
+                                <input type="number" id="paqueteFour" name="paqueteFour" v-model="form.paqueteFour"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -111,7 +111,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 5 -->
-                                <input type="text" id="paqueteFive" name="paqueteFive" v-model="form.paqueteFive"
+                                <input type="number" id="paqueteFive" name="paqueteFive" v-model="form.paqueteFive"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -121,7 +121,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 6 -->
-                                <input type="text" id="paqueteSix" name="paqueteSix" v-model="form.paqueteSix"
+                                <input type="number" id="paqueteSix" name="paqueteSix" v-model="form.paqueteSix"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -131,7 +131,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 7 -->
-                                <input type="text" id="paqueteSeven" name="paqueteSeven" v-model="form.paqueteSeven"
+                                <input type="number" id="paqueteSeven" name="paqueteSeven" v-model="form.paqueteSeven"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -141,7 +141,7 @@ function submit() {
                                 </label>
 
                                 <!-- Input para el paquete 8 -->
-                                <input type="text" id="paqueteEight" name="paqueteEight" v-model="form.paqueteEight"
+                                <input type="number" id="paqueteEight" name="paqueteEight" v-model="form.paqueteEight"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
