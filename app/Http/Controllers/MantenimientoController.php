@@ -19,6 +19,14 @@ class MantenimientoController extends Controller
         ]);
     }
 
+    public function seccionmantenimientoindex()
+    {
+        $mantenimientos = Mantenimiento::all();
+        return Inertia::render('Secciones/Mantenimiento', [
+            'mantenimientos' => $mantenimientos
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('Admin/Mantenimiento/Create');

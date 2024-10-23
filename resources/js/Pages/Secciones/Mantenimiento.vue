@@ -4,7 +4,7 @@ import UserLayout from '@/Layouts/UserLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
-    mantenimiento: Object,
+    mantenimientos: Object,
 });
 
 const isContentLoaded = ref(false);
@@ -15,6 +15,8 @@ onMounted(() => {
         isContentLoaded.value = true;
     }, 300);
 });
+
+console.log(props.mantenimientos);
 </script>
 
 <template>
@@ -47,11 +49,12 @@ onMounted(() => {
                 </h2>
 
                 <!--Servicios -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mx-auto max-w-7xl p-2 m-14 font-vwtext">
+                <div
+                    class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mx-auto max-w-7xl p-2 m-14 font-vwtext">
                     <!-- cambio de aceite -->
                     <div class="flex flex-col items-center space-y-2">
                         <div>
-                            <svg class="w-16 sm:w-20 lg:w-24" fill="#001E50"  version="1.1" id="Layer_1"
+                            <svg class="w-16 sm:w-20 lg:w-24" fill="#001E50" version="1.1" id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 512 512" xml:space="preserve" stroke="#001E50">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -75,7 +78,7 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                            <p class="text-center text-sm sm:text-base fo">Cambio de <br> aceite</p>
+                        <p class="text-center text-sm sm:text-base">Cambio de <br> aceite</p>
                     </div>
 
                     <div class="flex flex-col items-center space-y-2">
@@ -143,7 +146,8 @@ onMounted(() => {
                                 </g>
                             </svg>
                         </div>
-                        <p class="text-center text-sm sm:text-base">Inspección de puntos de <br> seguridad y funcionalidad</p>
+                        <p class="text-center text-sm sm:text-base">Inspección de puntos de <br> seguridad y
+                            funcionalidad</p>
                     </div>
 
                     <div class="flex flex-col items-center space-y-2">
@@ -203,17 +207,123 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
-                <h2 :class="[
-                    'text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 transition-all duration-1000 ease-out font-vwheadlight text-center',
-                    { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
-                ]">
-                Modelos
-                </h2>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-full divide-y divide-gray-300">
+                    <h2
+                        :class="['text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-10 transition-all duration-1000 ease-out font-vwheadlight text-center',
+                            { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }]">
+                        Modelos
+                    </h2>
 
+                    <!-- Tabla de mantenimientos -->
 
+                    <!-- Cuerpo -->
+                    <div v-for="info in mantenimientos" :key="info.id" class="flex flex-col md:flex-col mb-6">
+                        <!-- Título del modelo -->
+                        <div class="text-center mt-8">
+                            <div class="px-6 py-4 whitespace-nowrap text-lg font-vwheadbold text-gray-900">
+                                {{ info.titulo }}
+                            </div>
+                        </div>
+
+                        <!-- Imagen y precios -->
+                        <div class="flex flex-col md:flex-row w-full items-center">
+                            <!-- Imagen -->
+                            <div class="w-full md:w-1/5 px-6 py-4 whitespace-nowrap">
+                                <img :src="`/storage/${info.imagen}`" alt="Imagen"
+                                    class="w-full md:w-30 object-cover mx-auto">
+                            </div>
+
+                            <!-- Precios por kilómetros -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8  w-full ">
+                                <div class="text-center  ">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider ">
+                                        15 mil km. <br> / 1 año
+                                    </div>
+                                    <div
+                                        class="px-6 py-3 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900 ">
+                                        $ {{ info.paqueteOne }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        30 mil km. <br> / 2 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteTwo }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        45 mil km. <br> / 3 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteThree }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        60 mil km. <br> / 4 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteFour }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        75 mil km. <br> / 5 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteFive }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        90 mil km. <br> / 6 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteSix }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        105 mil km. <br> / 7 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteSeven }}
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="px-6 py-3 text-xs font-vwtext text-gray-500 uppercase tracking-wider">
+                                        120 mil km. <br> / 8 años
+                                    </div>
+                                    <div
+                                        class="px-6 py-4 whitespace-nowrap text-center text-m font-vwheadlight text-gray-900">
+                                        $ {{ info.paqueteEight }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
+
+
 
         </div>
     </UserLayout>

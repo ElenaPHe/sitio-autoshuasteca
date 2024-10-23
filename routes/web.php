@@ -32,6 +32,7 @@ use Inertia\Inertia;
 // })->name('welcome');
 
 Route::get('/', [InicioController::class, 'seccionwelcomeindex'])->name('welcome');
+Route::get('/Mantenimiento', [MantenimientoController::class, 'seccionmantenimientoindex'])->name('mantenimiento');
 
 Route::get('/Modelos/', function () {
     return Inertia::render('Secciones/AutosNuevos');
@@ -49,9 +50,9 @@ Route::get('/Refacciones/', function () {
     return Inertia::render('Secciones/Refacciones');
 })->name('refacciones');
 
-Route::get('/Mantenimiento/', function () {
-    return Inertia::render('Secciones/Mantenimiento');
-})->name('mantenimiento');
+// Route::get('/Mantenimiento/', function () {
+//     return Inertia::render('Secciones/Mantenimiento');
+// })->name('mantenimiento');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
