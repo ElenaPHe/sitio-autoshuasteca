@@ -102,7 +102,8 @@ class InicioController extends Controller
     }
 
 
-    public function actualizar(Request $request, $id){
+    public function actualizar(Request $request, $id)
+    {
 
         $inicio = Inicio::findOrFail($id);
 
@@ -311,4 +312,158 @@ class InicioController extends Controller
     //     // Redirigir con un mensaje de éxito
     //     return redirect()->route('inicio.index')->with('success', 'Sección de bienvenida actualizada correctamente.');
     // }
+
+
+    // public function eliminarImagenPromo( $id, $index)
+    // {
+    //     // Validar los datos del formulario
+    //     // $validated = $request->validate([
+    //     //     'promo_index' => 'required|integer',
+    //     // ]);
+
+    //     // Obtener el registro de Inicio a editar
+    //     $inicio = Inicio::findOrFail($id);
+
+    //     //si la imagen existe, en el indice de la promocion
+
+    //     if($inicio->promociones[$index]['imagen']){
+
+    //         $storagePath = $inicio->promociones[$index]['imagen'];
+
+    //         // Eliminar la imagen de la promoción
+    //         if(Storage::disk('public')->exists($storagePath)){
+    //             Storage::disk('public')->delete($storagePath);
+
+    //             $promociones = json_decode($inicio->promociones, true);
+    //             $promociones[$index]['imagen'] = '';
+    //             $inicio->promociones = json_encode($promociones);
+    //             $inicio->save();
+    //         }
+
+    //         return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción eliminada correctamente');
+
+    //     }
+
+    //     return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción no se pudo eliminar');
+    // }
+
+    // public function subirImagenPromo(Request $request, $id, $index)
+    // {
+
+    //     // Obtener el registro de Inicio a editar
+    //     $inicio = Inicio::findOrFail($id);
+
+    //     // Validar la imagen
+    //     $request->validate([
+    //         'promociones.*.imagen' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    //     ]);
+
+
+
+    //     $image = $request->file('promociones')[$index]['imagen'];
+    //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+    //     $promoImagePath = $image->storeAs('Inicio/promociones', $imageName, 'public');
+
+    //     $promociones = $inicio->promociones;
+    //     $promociones[$index]['imagen'] = $promoImagePath;
+
+    //     $inicio->promociones = $promociones;
+    //     $inicio->save();
+
+
+    //     return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción actualizada correctamente');
+    // }
+
+    // public function subirImagenPromo(Request $request, $id, $index)
+    // {
+    //     // Obtener el registro de Inicio a editar
+    //     $inicio = Inicio::findOrFail($id);
+
+    //     // Validar la imagen
+    //     $request->validate([
+    //         'promociones.*.imagen' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    //     ]);
+
+    //     // Verificar que el archivo de imagen exista en la solicitud
+    //     if (!$request->hasFile("promociones.$index.imagen")) {
+    //         return redirect()->route('inicio.edit', $id)->withErrors('La imagen de la promoción no se encontró.');
+    //     }
+
+    //     $image = $request->file("promociones.$index.imagen");
+    //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+    //     $promoImagePath = $image->storeAs('Inicio/promociones', $imageName, 'public');
+
+    //     // Actualizar la imagen en la promoción
+    //     $promociones = $inicio->promociones;
+    //     $promociones[$index]['imagen'] = $promoImagePath;
+
+    //     $inicio->promociones = $promociones;
+    //     $inicio->save();
+
+    //     return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción actualizada correctamente');
+    // }
+
+
+    public function subirImagenPromo(Request $request, $id, $index)
+    {
+        // Obtener el registro de Inicio a editar
+        $inicio = Inicio::findOrFail($id);
+
+        // Puedes mostrar el index y el request para depurar
+        // dd($index, $request->all());
+
+        // / Validar la imagen
+        $request->validate([
+            'promociones.*.imagen' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        // Verificar que el archivo de imagen exista en la solicitud
+        if (!$request->hasFile("promociones.$index.imagen")) {
+            return redirect()->route('inicio.edit', $id)->withErrors('La imagen de la promoción no se encontró.');
+        }
+
+        $image = $request->file("promociones.$index.imagen");
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+        $promoImagePath = $image->storeAs('Inicio/promociones', $imageName, 'public');
+
+        // Actualizar la imagen en la promoción
+        $promociones = $inicio->promociones;
+        $promociones[$index]['imagen'] = $promoImagePath;
+
+        $inicio->promociones = $promociones;
+        $inicio->save();
+
+        return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción actualizada correctamente');
+    }
+
+    public function eliminarImagenPromo($id, $index)
+    {
+        // Obtener el registro de Inicio a editar
+        $inicio = Inicio::findOrFail($id);
+
+        // Verificar si la imagen existe en el índice de la promoción
+        if (isset($inicio->promociones[$index]['imagen']) && $inicio->promociones[$index]['imagen']) {
+            $storagePath = $inicio->promociones[$index]['imagen'];
+
+            // Eliminar la imagen de la promoción
+            if (Storage::disk('public')->exists($storagePath)) {
+                Storage::disk('public')->delete($storagePath);
+
+                // Trabajar directamente con el array de promociones
+                $promociones = $inicio->promociones;
+                $promociones[$index]['imagen'] = '';
+
+                // Actualizar el campo promociones y guardar el registro
+                $inicio->promociones = $promociones;
+                $inicio->save();
+            }
+
+            return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción eliminada correctamente');
+        }
+
+        return redirect()->route('inicio.edit', $id)->with('success', 'Imagen de la promoción no se pudo eliminar');
+    }
 }

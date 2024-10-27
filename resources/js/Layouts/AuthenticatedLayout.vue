@@ -35,6 +35,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Autos Nuevos
                                 </NavLink>
+                                <NavLink :href="route('seminuevos.index')" :active="route().current('seminuevos.index')">
+                                    Seminuevos
+                                </NavLink>
                                 <NavLink :href="route('mantenimiento.index')" :active="route().current('mantenimiento.index')">
                                     Mantenimiento
                                 </NavLink>
@@ -120,6 +123,13 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('inicio.index')" :active="route().current('inicio.index')">
                             Inicio
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('seminuevos.index')" :active="route().current('seminuevos.index')">
+                            Seminuevos
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('mantenimiento.index')" :active="route().current('mantenimiento.index')">
+                            Mantenimiento
                         </ResponsiveNavLink>
                     </div>
 

@@ -15,7 +15,7 @@ const form = useForm({
     promociones: props.inicio.promociones || [
         {
             titulo: '',
-            imagen: null,
+            // imagen: null,
             descripcion: '',
         }
     ],
@@ -44,9 +44,10 @@ const handleImageUpload = (event, field, index = null) => {
 
     if (field === 'imagen') {
         form.imagen = file; // Reemplazar la imagen principal
-    } else if (field === 'promociones') {
-        form.promociones[index].imagen = file; // Reemplazar la imagen de una promoción
     }
+    // else if (field === 'promociones') {
+    //     form.promociones[index].imagen = file; // Reemplazar la imagen de una promoción
+    // }
 };
 
 function addPromocion() {
@@ -59,6 +60,50 @@ function addPromocion() {
 
 function removePromocion(index) {
     form.promociones.splice(index, 1);
+}
+
+
+
+const imagenPromoForm = useForm({
+    // imagen: null,
+    promociones: [
+        {
+            // titulo: '',
+            imagen: null,
+            // descripcion: '',
+        }
+    ],
+});
+
+function onFileChangePromo(event, index) {
+    const file = event.target.files[0];
+    imagenPromoForm.promociones[index].imagen = file;
+}
+
+function subirImagenPromo(index) {
+    imagenPromoForm.post(route('inicio.subirImagenPromo', { id: props.inicio.id, index }), {
+        onSuccess: () => {
+            console.log('Imagen de promo subida');
+            // form.promociones[index].imagen = imagenPromoForm.imagen;
+            imagenPromoForm.reset();
+        },
+        onError: (errors) => {
+            console.log('Error al subir imagen', errors);
+        },
+    });
+}
+
+function eliminarImagenPromo(index) {
+    imagenPromoForm.delete(route('inicio.eliminarImagenPromo', { id: props.inicio.id, index }), {
+        onSuccess: () => {
+            console.log('Imagen de promo eliminada');
+            form.promociones[index].imagen = null;
+            imagenPromoForm.reset();
+        },
+        onError: (errors) => {
+            console.log('Error al eliminar imagen', errors);
+        },
+    });
 }
 
 function submit() {
@@ -113,7 +158,7 @@ function submit() {
 
                             <div>
                                 <label for="promociones" class="block text-sm font-medium text-gray-700">
-                                    Promociones
+                                    Promocionesd
                                 </label>
                                 <div v-for="(promo, index) in form.promociones" :key="index" class="mb-4">
                                     <input type="text" v-model="promo.titulo" placeholder="Titulo de la promoción"
@@ -133,6 +178,23 @@ function submit() {
                                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar</button>
                             </div>
                         </form>
+
+                        <div v-for="(imagenpromo, index) in props.inicio.promociones " :key="index">
+                            <template v-if="imagenpromo.imagen">
+                                <img :src="`/storage/${imagenpromo.imagen}`" alt="Imagen de promoción" class="mt-2 h-20">
+                                <div>{{ imagenpromo.titulo }}</div>
+                                <button @click.prevent="eliminarImagenPromo(index)" class="bg-red-500 text-white px-4 py-2 rounded">Eliminar Imagen</button>
+                            </template>
+                            <template v-else>
+                                <form @submit.prevent="subirImagenPromo(index)" class="space-y-6" enctype="multipart/form-data">
+                                    <label for="">{{imagenpromo.titulo}}</label>
+                                    <label for="">{{imagenpromo.imagen}}</label>
+                                    <input type="file" @change="event => onFileChangePromo(event, index)" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir Imagen</button>
+                                </form>
+                            </template>
+
+                        </div>
                     </div>
                 </div>
             </div>

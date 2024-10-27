@@ -64,7 +64,7 @@ const submit = () => {
                 </div>
 
                 <div class="flex justify-center mt-6">
-                    <PrimaryButton class="w-auto bg-[#00B0F0] hover:bg-[#0094d2] text-white py-2 px-4 rounded-md text-center"
+                    <PrimaryButton class="w-auto text-white py-2 px-4 rounded-md text-center"
                         :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Iniciar sesión
                     </PrimaryButton>

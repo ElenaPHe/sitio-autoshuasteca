@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
 const props = defineProps({
-    seminuevos: Object,
+    seminuevo: Object,
 });
 
 const isContentLoaded = ref(false);
@@ -15,6 +15,8 @@ onMounted(() => {
         isContentLoaded.value = true;
     }, 300);
 });
+
+console.log(props.seminuevo);
 </script>
 
 <template>
@@ -28,25 +30,20 @@ onMounted(() => {
                     'text-4xl font-bold mb-8 text-center transition-all duration-1000 ease-out font-vwheadbold text-gray-800',
                     { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                 ]">
-                    Autos Seminuevos
+                   Info Seminuevo {{ props.seminuevo.infoGeneral.modelo }}
                 </h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <Link v-for="infoSemi in seminuevos" :key="infoSemi.id"
-                        :href="route('seminuevos.show', infoSemi.id)"
-                        class="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex flex-col">
-                    <div class="relative w-full pb-[75%] overflow-hidden">
-                        <img :src="`/storage/${infoSemi.fotoAuto}`" :alt="infoSemi.infoGeneral.title"
-                            class="absolute inset-0 w-full h-full object-cover object-center transition-all duration-300 ease-in-out">
-                    </div>
-                    <div class="p-4 flex-grow">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">{{ infoSemi.infoGeneral.modelo }}</h3>
-                        <p class="text-gray-600 text-sm">{{ infoSemi.id }}</p>
-                    </div>
-                    </Link>
+                    <h1>{{ props.seminuevo.descripcion }}</h1>
                 </div>
 
-
+                <!-- Link para regresar a seminuevos.index-->
+                <div class="flex justify-center mt-8">
+                    <Link :href="route('seminuevos')"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Regresar
+                    </Link>
+                </div>
             </div>
         </div>
     </UserLayout>
