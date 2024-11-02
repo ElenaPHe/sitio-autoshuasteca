@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\MantenimientoController;
+use App\Http\Controllers\NuevosController;
 use App\Http\Controllers\SeminuevosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -82,6 +83,13 @@ Route::middleware('auth')->group(function () {
     // Route::get('/seccionbienvenida/{id}/editImage', [InicioController::class, 'editImage'])->name('inicio.editImage');
     // Route::put('/seccionbienvenida/{id}', [InicioController::class, 'updateImagenPrincipal'])->name('inicio.actualizarImagenPrincipal');
 
+    // Seccion Nuevos
+    Route::get('/seccion-nuevos', [NuevosController::class, 'index'])->name('nuevos.index');
+    Route::get('/seccion-nuevos/create', [NuevosController::class, 'create'])->name('nuevos.create');
+    Route::get('/seccion-nuevos/{id}/edit', [NuevosController::class, 'edit'])->name('nuevos.edit');
+    Route::post('/seccion-nuevos', [NuevosController::class, 'store'])->name('nuevos.store');
+
+    Route::put('/seccion-nuevos/{id}', [NuevosController::class, 'actualizaInfoNuevo'])->name('nuevos.update');
 
     // Seccion Seminuevos
     Route::get('/seccion-seminuevos', [SeminuevosController::class, 'index'])->name('seminuevos.index');
