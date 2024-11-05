@@ -91,6 +91,33 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/seccion-nuevos/{id}', [NuevosController::class, 'actualizaInfoNuevo'])->name('nuevos.update');
 
+
+    //Seccion Nuevos cambio de imagenes
+    //foto auto
+    Route::post('seccion-nuevos/{id}/subirImagen', [NuevosController::class, 'subirFotoAuto'])->name('nuevos.cambiarFotoAuto');
+    Route::delete('seccion-nuevos/{id}/eliminarImagen', [NuevosController::class, 'eliminarFotoAuto'])->name('nuevos.eliminarFotoAuto');
+
+    //galeria
+    Route::post('seccion-nuevos/{id}/subirGaleria', [NuevosController::class, 'subirImagenGaleria'])->name('nuevos.cambiarImagenGaleria');
+    Route::delete('seccion-nuevos/{id}/galeria/{index}', [NuevosController::class, 'eliminarImagenGaleria'])->name('nuevos.eliminarImagenGaleria');
+
+    //Colores cambio de imagenes
+    Route::post('seccion-nuevos/{id}/subirColor', [NuevosController::class, 'subirImagenColor'])->name('nuevos.cambiarImagenColor');
+    Route::delete('seccion-nuevos/eliminarColor/{id}/{index}', [NuevosController::class, 'eliminarImagenColor'])->name('nuevos.eliminarImagenColor');
+
+    //Galeria Diseño contenido
+    Route::post('seccion-nuevos/{id}/subirDiseno/{index}', [NuevosController::class, 'subirImagenDisenio'])->name('nuevos.cambiarImagenDesingContent');
+    Route::delete('seccion-nuevos/eliminarDiseno/{id}/{index}', [NuevosController::class, 'eliminarImagenDesingContent'])->name('nuevos.eliminarImagenDesingContent');
+
+    //Galeria Tecnologia
+    Route::post('seccion-nuevos/{id}/subirTecnologia/{index}', [NuevosController::class, 'subirImagenTecnologia'])->name('nuevos.cambiarImagenTecnologiaContenido');
+    Route::delete('seccion-nuevos/eliminarTecnologia/{id}/{index}', [NuevosController::class, 'eliminarImagenTecnologia'])->name('nuevos.eliminarImagenTecnologiaContenido');
+
+    //Imagen versiones
+    Route::post('seccion-nuevos/{id}/subirVersiones/{index}', [NuevosController::class, 'subirImagenVersiones'])->name('nuevos.cambiarImagenVersiones');
+    Route::delete('seccion-nuevos/eliminarVersiones/{id}/{index}', [NuevosController::class, 'eliminarImagenVersiones'])->name('nuevos.eliminarImagenVersiones');
+
+
     // Seccion Seminuevos
     Route::get('/seccion-seminuevos', [SeminuevosController::class, 'index'])->name('seminuevos.index');
     Route::get('/seccion-seminuevos/create', [SeminuevosController::class, 'create'])->name('seminuevos.create');

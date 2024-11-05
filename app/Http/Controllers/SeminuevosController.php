@@ -47,8 +47,11 @@ class SeminuevosController extends Controller
 
         $seminuevo = new Seminuevo();
 
+        $modelo = $request->input('infoGeneral.modelo');
 
-        $folderName = "autosSeminuevos/";
+        $folderName = "autosSeminuevos/{$modelo}";
+
+        // $folderName .= $modelo;
 
 
         // Si se sube una imagen, guardarla en la carpeta publica

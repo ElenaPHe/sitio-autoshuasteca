@@ -67,17 +67,17 @@ function onfileUploadAuto(event) {
     const file = event.target.files[0];
     formNuevos.fotoAuto = file;
 }
-
+// Función para manejar la subida de imágenes de diseño de contenido
 function onfileUploadDesingContent(event, index) {
     const file = event.target.files[0];
     formNuevos.disenioContenido[index].imagen = file;
 }
-
+// Función para manejar la subida de imágenes de colores
 function onfileUploadColores(event) {
     const files = Array.from(event.target.files);
     formNuevos.colores = files;
 }
-
+// Función para manejar la subida de imágenes de tecnología de contenido
 function onfileUploadTecnologiaContenido(event, index) {
     const file = event.target.files[0];
     formNuevos.tecnologiaContenido[index].imagen = file;
@@ -88,7 +88,7 @@ function onfileUploadGaleria(event) {
     const files = Array.from(event.target.files);
     formNuevos.galeria = files;
 }
-
+// Función para manejar la subida de imágenes de versiones
 function onfileUploadVersion(event, index) {
     const file = event.target.files[0];
     formNuevos.versiones[index].imagen = file;
@@ -103,11 +103,11 @@ function addDesingContent() {
         imagen: null,
     });
 }
-
+// Función para eliminar el diseño de contenido
 function removeDesingContent(index) {
     formNuevos.disenioContenido.splice(index, 1);
 }
-
+// Función para agregar tecnología de contenido
 function addTecnologiaContenido() {
     formNuevos.tecnologiaContenido.push({
         titulo: '',
@@ -116,10 +116,11 @@ function addTecnologiaContenido() {
         imagen: null,
     });
 }
+// Función para eliminar tecnología de contenido
 function removeTecnologiaContenido(index) {
     formNuevos.tecnologiaContenido.splice(index, 1);
 }
-
+// Función para agregar versión
 function addVersion() {
     formNuevos.versiones.push({
         nomVersion: '',
@@ -134,10 +135,10 @@ function addVersion() {
         caracteristicas: [],
     });
 }
+// Función para eliminar versión
 function removeVersion(index) {
     formNuevos.versiones.splice(index, 1);
 }
-
 const submitAuto = () => {
     formNuevos.post(route('nuevos.store'), {
         onSuccess: () => {
@@ -155,276 +156,297 @@ const submitAuto = () => {
     <Head title="Inicio" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Contendo de inicio</h2>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de inicio</h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="">
-
-                            <form @submit.prevent="submitAuto" enctype="multipart/form-data">
-
-                                <!-- Modelo -->
-                                <div class="mb-4">
-                                    <label for="modelo" class="block text-sm font-medium text-gray-700">
-                                        Modelo
-                                    </label>
-                                    <input type="text" name="modelo" id="modelo" v-model="formNuevos.modelo"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-vwtext">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl text-gray-900 text-center mb-8">Formulario de autos nuevos</h1>
+                <form @submit.prevent="submitAuto" class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <div class="p-6 space-y-6">
+                        <!-- Informacion general -->
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Información General</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="modelo" class="block text-sm font-medium text-gray-700">Modelo</label>
+                                    <input type="text" id="modelo" v-model="formNuevos.modelo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Foto del Auto -->
-                                <div class="mb-4">
-                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">
-                                        Foto del Auto
+                                <div>
+                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">Imagen
                                     </label>
-                                    <input type="file" id="fotoAuto" name="fotoAuto" @change="onfileUploadAuto"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input type="file" id="fotoAuto" @change="onfileUploadAuto"
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-800 hover:file:bg-indigo-100">
                                 </div>
-
-                                <!-- Información General -->
-                                <div class="mb-4">
-                                    <label for="eslogan" class="block text-sm font-medium text-gray-700">
-                                        Eslogan
-                                    </label>
-                                    <input type="text" name="eslogan" id="eslogan"
-                                        v-model="formNuevos.infoGeneral.eslogan"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="precio" class="block text-sm font-medium text-gray-700">
-                                        Precio
-                                    </label>
-                                    <input type="text" name="precio" id="precio" v-model="formNuevos.infoGeneral.precio"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="motor" class="block text-sm font-medium text-gray-700">
-                                        Motor
-                                    </label>
-                                    <input type="text" name="motor" id="motor" v-model="formNuevos.infoGeneral.motor"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="motor" class="block text-sm font-medium text-gray-700">
-                                        Transmisión
-                                    </label>
-                                    <input type="text" name="trans" id="trans"
-                                        v-model="formNuevos.infoGeneral.transmision"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="motor" class="block text-sm font-medium text-gray-700">
-                                        Potencia
-                                    </label>
-                                    <input type="text" name="pote" id="pote" v-model="formNuevos.infoGeneral.potencia"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="motor" class="block text-sm font-medium text-gray-700">
-                                        Torque
-                                    </label>
-                                    <input type="text" name="torque" id="torque" v-model="formNuevos.infoGeneral.torque"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="motor" class="block text-sm font-medium text-gray-700">
-                                        Versiones
-                                    </label>
-                                    <input type="text" name="versiones" id="versiones"
-                                        v-model="formNuevos.infoGeneral.versiones"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="eslogan" class="block text-sm font-medium text-gray-700">Eslogan</label>
+                                    <input type="text" id="eslogan" v-model="formNuevos.infoGeneral.eslogan"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Diseño -->
-                                <div class="mb-4">
-                                    <label for="titulo" class="block text-sm font-medium text-gray-700">
-                                        Título
-                                    </label>
-                                    <input type="text" name="titulo" id="titulo" v-model="formNuevos.disenio.titulo"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="encabezado" class="block text
-                                    -sm font-medium text-gray-700">
-                                        Encabezado
-                                    </label>
-                                    <input type="text" name="encabezado" id="encabezado"
-                                        v-model="formNuevos.disenio.encabezado"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="descripcion" class="block text-sm font-medium text-gray-700">
-                                        Descripción
-                                    </label>
-                                    <textarea name="descripcion" id="descripcion"
-                                        v-model="formNuevos.disenio.descripcion"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                <div>
+                                    <label for="precio" class="block text-sm font-medium text-gray-700">Precio</label>
+                                    <input type="number" id="precio" v-model="formNuevos.infoGeneral.precio"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Diseño de Contenido -->
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Diseño de Contenido</label>
-                                    <button type="button" @click="addDesingContent"
-                                        class="mt-1 mb-2 px-4 py-2 bg-blue-500 text-white rounded-md">Agregar Diseño de
-                                        Contenido</button>
-                                    <div v-for="(content, index) in formNuevos.disenioContenido" :key="index"
-                                        class="mb-4 border p-4 rounded-md">
-                                        <label for="titulo"
-                                            class="block text-sm font-medium text-gray-700">Título</label>
-                                        <input type="text" :name="'titulo' + index" v-model="content.titulo"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <label for="subtitulo"
-                                            class="block text-sm font-medium text-gray-700">Subtítulo</label>
-                                        <input type="text" :name="'subtitulo' + index" v-model="content.subtitulo"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <label for="descripcion"
-                                            class="block text-sm font-medium text-gray-700">Descripción</label>
-                                        <textarea :name="'descripcion' + index" v-model="content.descripcion"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
-
-                                        <label for="imagen"
-                                            class="block text-sm font-medium text-gray-700">Imagen</label>
-                                        <input type="file" :name="'imagen' + index"
-                                            @change="event => onfileUploadDesingContent(event, index)"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <button type="button" @click="removeDesingContent(index)"
-                                            class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar</button>
-                                    </div>
+                                <div>
+                                    <label for="motor" class="block text-sm font-medium text-gray-700">Motor</label>
+                                    <input type="text" id="motor" v-model="formNuevos.infoGeneral.motor"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Colores -->
-                                <!-- Colores -->
-                                <div class="mb-4">
-                                    <label for="colores" class="block text-sm font-medium text-gray-700">
-                                        Colores
-                                    </label>
-                                    <input type="file" id="colores" name="colores" accept="image/*" multiple @change="onfileUploadColores"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                    <!-- <div class="mt-2">
-                                        <div v-for="(color, index) in formNuevos.colores" :key="index" class="inline-block mr-2">
-                                            <img :src="URL.createObjectURL(color)" alt="Color" class="h-10 w-10 object-cover rounded-full">
-                                        </div>
-                                    </div> -->
+                                <div>
+                                    <label for="trans"
+                                        class="block text-sm font-medium text-gray-700">Transmisión</label>
+                                    <input type="text" id="trans" v-model="formNuevos.infoGeneral.transmision"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Tecnología -->
-                                <div class="mb-4">
-                                    <label for="titulo" class="block text-sm font-medium text-gray-700">
-                                        Título
-                                    </label>
-                                    <input type="text" name="titulo" id="titulo" v-model="formNuevos.tecnologia.titulo"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="encabezado" class="block text
-                                    -sm font-medium text-gray-700">
-                                        Encabezado
-                                    </label>
-                                    <input type="text" name="encabezado" id="encabezado"
-                                        v-model="formNuevos.tecnologia.encabezado"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                    <label for="descripcion" class="block text-sm font-medium text-gray-700">
-                                        Descripción
-                                    </label>
-                                    <textarea name="descripcion" id="descripcion"
-                                        v-model="formNuevos.tecnologia.descripcion"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                <div>
+                                    <label for="pote" class="block text-sm font-medium text-gray-700">Potencia</label>
+                                    <input type="text" id="pote" v-model="formNuevos.infoGeneral.potencia"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Tecnología de Contenido -->
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Tecnología de Contenido</label>
-                                    <button type="button" @click="addTecnologiaContenido"
-                                        class="mt-1 mb-2 px-4 py-2 bg-blue-500 text-white rounded-md">Agregar Tecnología de Contenido</button>
-                                    <div v-for="(content, index) in formNuevos.tecnologiaContenido" :key="index" class="mb-4 border p-4 rounded-md">
-                                        <label for="titulo" class="block text-sm font-medium text-gray-700">Título</label>
-                                        <input type="text" :name="'titulo' + index" v-model="content.titulo"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <label for="subtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
-                                        <input type="text" :name="'subtitulo' + index" v-model="content.subtitulo"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                                        <textarea :name="'descripcion' + index" v-model="content.descripcion"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
-
-                                        <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen</label>
-                                        <input type="file" :name="'imagen' + index" @change="event => onfileUploadTecnologiaContenido(event, index)"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <button type="button" @click="removeTecnologiaContenido(index)"
-                                            class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar</button>
-                                    </div>
+                                <div>
+                                    <label for="torque" class="block text-sm font-medium text-gray-700">Torque</label>
+                                    <input type="text" id="torque" v-model="formNuevos.infoGeneral.torque"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Galería -->
-                                <div class="mb-4">
-                                    <label for="galeria" class="block text-sm font-medium text-gray-700">
-                                        Galería
-                                    </label>
-                                    <input type="file" id="galeria" name="galeria" accept="image/*" multiple @change="onfileUploadGaleria"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                    <!-- <div class="mt-2">
-                                        <div v-for="(imagen, index) in formNuevos.galeria" :key="index" class="inline-block mr-2">
-                                            <img :src="URL.createObjectURL(imagen)" alt="Imagen" class="h-10 w-10 object-cover rounded-full">
-                                        </div>
-                                    </div> -->
+                                <div>
+                                    <label for="versiones"
+                                        class="block text-sm font-medium text-gray-700">Versiones</label>
+                                    <input type="text" id="versiones" v-model="formNuevos.infoGeneral.versiones"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <!-- Versiones -->
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Versiones</label>
-                                    <button type="button" @click="addVersion" class="mt-1 mb-2 px-4 py-2 bg-blue-500 text-white rounded-md">Agregar Versión</button>
-                                    <div v-for="(version, index) in formNuevos.versiones" :key="index" class="mb-4 border p-4 rounded-md">
-                                        <label for="nomVersion" class="block text-sm font-medium text-gray-700">Nombre de la Versión</label>
-                                        <input type="text" :name="'nomVersion' + index" v-model="version.nomVersion"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen</label>
-                                        <input type="file" :name="'imagen' + index" @change="event => onfileUploadVersion(event, index)"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                        <div class="mt-4">
-                                            <label class="block text-sm font-medium text-gray-700">Información General</label>
-                                            <div v-for="(info, infoIndex) in version.infoGen" :key="infoIndex" class="mb-4">
-                                                <label for="precioVersion" class="block text-sm font-medium text-gray-700">Precio</label>
-                                                <input type="text" :name="'precioVersion' + index + infoIndex" v-model="info.precioVersion"
-                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                                <label for="rendimiento" class="block text-sm font-medium text-gray-700">Rendimiento</label>
-                                                <input type="text" :name="'rendimiento' + index + infoIndex" v-model="info.rendimiento"
-                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-
-                                                <label for="potencia" class="block text-sm font-medium text-gray-700">Potencia</label>
-                                                <input type="text" :name="'potencia' + index + infoIndex" v-model="info.potencia"
-                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-4">
-                                            <label class="block text-sm font-medium text-gray-700">Características</label>
-                                            <button type="button" @click="version.caracteristicas.push('')" class="mt-1 mb-2 px-4 py-2 bg-blue-500 text-white rounded-md">Agregar Característica</button>
-                                            <div v-for="(caracteristica, carIndex) in version.caracteristicas" :key="carIndex" class="mb-4">
-                                                <input type="text" :name="'caracteristica' + index + carIndex" v-model="version.caracteristicas[carIndex]"
-                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                <button type="button" @click="version.caracteristicas.splice(carIndex, 1)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar</button>
-                                            </div>
-                                        </div>
-
-                                        <button type="button" @click="removeVersion(index)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar Versión</button>
-                                    </div>
+                            </div>
+                        </div>
+                        <!-- Diseño -->
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Diseño</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="designHeader"
+                                        class="block text-sm font-medium text-gray-700">Encabezado</label>
+                                    <input type="text" id="designHeader" v-model="formNuevos.disenio.encabezado"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-center text-center">
-                                        Enviar
-                                    </button>
+                                <div>
+                                    <label for="designDescription"
+                                        class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <textarea id="designDescription" v-model="formNuevos.disenio.descripcion" rows="3"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- Diseño Contenido -->
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-semibold text-gray-800">Diseño contenido</h2>
+                                <button type="button" @click="addDesingContent"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Agregar contenido
+                                </button>
+                            </div>
+                            <div v-for="(content, index) in formNuevos.disenioContenido" :key="index"
+                                class="bg-gray-50 p-4 rounded-md space-y-4">
+                                <div>
+                                    <label :for="'contentTitle' + index"
+                                        class="block text-sm font-medium text-gray-700">Titulo</label>
+                                    <input type="text" :id="'contentTitle' + index" v-model="content.titulo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'contentSubtitle' + index"
+                                        class="block text-sm font-medium text-gray-700">Subtitulo</label>
+                                    <input type="text" :id="'contentSubtitle' + index" v-model="content.subtitulo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'contentDescription' + index"
+                                        class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <textarea :id="'contentDescription' + index" v-model="content.descripcion" rows="3"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                </div>
+                                <div>
+                                    <label :for="'contentImage' + index"
+                                        class="block text-sm font-medium text-gray-700">Imagen</label>
+                                    <input type="file" :id="'contentImage' + index"
+                                        @change="event => onfileUploadDesingContent(event, index)"
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                </div>
+                                <button type="button" @click="removeDesingContent(index)"
+                                    class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Colores -->
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Colores</h2>
+                            <div>
+                                <label for="colores" class="block text-sm font-medium text-gray-700">Imagen</label>
+                                <input type="file" id="colores" multiple @change="onfileUploadColores"
+                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" accept="image/*">
+                            </div>
+                        </div>
+                        <!-- Seguridad o tecnologia -->
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Seguridad-Tecnologia</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="designHeader"
+                                        class="block text-sm font-medium text-gray-700">Titulo</label>
+                                    <input type="text" id="designTitle" v-model="formNuevos.tecnologiaContenido.titulo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="designHeader"
+                                        class="block text-sm font-medium text-gray-700">Encabezado</label>
+                                    <input type="text" id="designHeader"
+                                        v-model="formNuevos.tecnologiaContenido.encabezado"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="designDescription"
+                                        class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <textarea id="designDescription"
+                                        v-model="formNuevos.tecnologiaContenido.descripcion" rows="3"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tecnologia Contenido -->
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-semibold text-gray-800"> Contenido de Seguridad-Tecnologia</h2>
+                                <button type="button" @click="addTecnologiaContenido"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Agregar contenido
+                                </button>
+                            </div>
+                            <div v-for="(content, index) in formNuevos.tecnologiaContenido" :key="index"
+                                class="bg-gray-50 p-4 rounded-md space-y-4">
+                                <div>
+                                    <label :for="'contentTitle' + index"
+                                        class="block text-sm font-medium text-gray-700">Titulo</label>
+                                    <input type="text" :id="'contentTitle' + index" v-model="content.titulo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'contentSubtitle' + index"
+                                        class="block text-sm font-medium text-gray-700">Subtitulo</label>
+                                    <input type="text" :id="'contentSubtitle' + index" v-model="content.subtitulo"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'contentDescription' + index"
+                                        class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <textarea :id="'contentDescription' + index" v-model="content.descripcion" rows="3"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                </div>
+                                <div>
+                                    <label :for="'contentImage' + index"
+                                        class="block text-sm font-medium text-gray-700">Imagen</label>
+                                    <input type="file" :id="'contentImage' + index"
+                                        @change="event => onfileUploadTecnologiaContenido(event, index)"
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                </div>
+                                <button type="button" @click="removeTecnologiaContenido(index)"
+                                    class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Eliminar contenido
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Galeria -->
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Galería</h2>
+                            <div>
+                                <label for="galeria" class="block text-sm font-medium text-gray-700">Imagen</label>
+                                <input type="file" id="galeria" multiple @change="onfileUploadGaleria"
+                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                            </div>
+                        </div>
+                        <!-- Versiones -->
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-semibold text-gray-800">Versiones</h2>
+                                <button type="button" @click="addVersion"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Agregar versión
+                                </button>
+                            </div>
+                            <div v-for="(version, index) in formNuevos.versiones" :key="index"
+                                class="bg-gray-50 p-4 rounded-md space-y-4">
+                                <div>
+                                    <label :for="'versionName' + index"
+                                        class="block text-sm font-medium text-gray-700">Nombre
+                                        de la versión</label>
+                                    <input type="text" :id="'versionName' + index" v-model="version.nomVersion"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'versionImage' + index"
+                                        class="block text-sm font-medium text-gray-700">Imagen</label>
+                                    <input type="file" :id="'versionImage' + index"
+                                        @change="event => onfileUploadVersion(event, index)"
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                </div>
+                                <div>
+                                    <label :for="'versionPrice' + index"
+                                        class="block text-sm font-medium text-gray-700">Precio</label>
+                                    <input type="number" :id="'versionPrice' + index"
+                                        v-model="version.infoGen[0].precioVersion"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'versionPerformance' + index"
+                                        class="block text-sm font-medium text-gray-700">Rendimiento</label>
+                                    <input type="text" :id="'versionPerformance' + index"
+                                        v-model="version.infoGen[0].rendimiento"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'versionPower' + index"
+                                        class="block text-sm font-medium text-gray-700">Potencia</label>
+                                    <input type="text" :id="'versionPower' + index"
+                                        v-model="version.infoGen[0].potencia"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <!-- agregar caracteristicas -->
+                                <div class="flex justify-between items-center">
+                                    <h2 class="text-xl font-semibold text-gray-800">Características</h2>
+                                    <button type="button" @click="version.caracteristicas.push('')"
+                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar
+                                        Característica</button>
+                                </div>
+                                <div v-for="(caracteristica, carIndex) in version.caracteristicas" :key="carIndex"
+                                    class="mb-4">
+                                    <input type="text" :name="'caracteristica' + index + carIndex"
+                                        v-model="version.caracteristicas[carIndex]"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <button type="button" @click="version.caracteristicas.splice(carIndex, 1)"
+                                        class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Eliminar</button>
+                                </div>
+                                <button type="button" @click="removeVersion(index)"
+                                    class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Eliminar versión
+                                </button>
+                            </div>
+                        </div>
 
-                            </form>
+                        <!-- Boton de enviar -->
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Enviar
+                            </button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+
     </AuthenticatedLayout>
 </template>

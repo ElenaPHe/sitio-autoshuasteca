@@ -42,10 +42,11 @@ const submit = () => {
 </script>
 
 <template>
+
     <Head title="Seminuevos" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Contendo de Seminuevos</h2>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de Seminuevos</h2>
         </template>
 
         <div class="py-12">
@@ -56,61 +57,133 @@ const submit = () => {
                             <h1>Formulario Autos Seminuevos</h1>
                         </div>
 
-                        <form @submit.prevent="submit" enctype="multipart/form-data">
+                        <form @submit.prevent="submit" enctype="multipart/form-data"
+                            class="bg-white shadow-md rounded-lg overflow-hidden">
                             <!-- Foto del Auto -->
                             <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Foto del Auto:</label>
-                                <input type="file" @change="form.fotoAuto = $event.target.files[0]" class="block w-full" accept="image/*" />
+                                <label class="block text-sm font-medium text-gray-700">Foto del Auto:</label>
+                                <input type="file" @change="form.fotoAuto = $event.target.files[0]"
+                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-800 hover:file:bg-indigo-100" />
                             </div>
-
+                            <h2 class="text-xl font-vwheadbold text-gray-800">Información General</h2>
                             <!-- Información General -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Información General:</label>
-                                <input v-model="form.infoGeneral.marca" type="text" class="block w-full" placeholder="Marca" />
-                                <input v-model="form.infoGeneral.modelo" type="text" class="block w-full" placeholder="Modelo" />
-                                <input v-model="form.infoGeneral.year" type="text" class="block w-full mt-2" placeholder="Año" />
-                                <input v-model="form.infoGeneral.kilometraje" type="text" class="block w-full mt-2" placeholder="Kilometraje" />
-                                <input v-model="form.infoGeneral.color" type="text" class="block w-full mt-2" placeholder="Color" />
-                                <input v-model="form.infoGeneral.numpuertas" type="text" class="block w-full mt-2" placeholder="Número de Puertas" />
-                                <input v-model="form.infoGeneral.transmision" type="text" class="block w-full mt-2" placeholder="Transmisión" />
-                                <input v-model="form.infoGeneral.motor" type="text" class="block w-full mt-2" placeholder="Motor" />
-                                <input v-model="form.infoGeneral.colorInterno" type="text" class="block w-full mt-2" placeholder="Color Interno" />
-                                <input v-model="form.infoGeneral.tipoAuto" type="text" class="block w-full mt-2" placeholder="Tipo de Auto" />
-                                <input v-model="form.infoGeneral.version" type="text" class="block w-full mt-2" placeholder="Version" />
-                                <input v-model="form.infoGeneral.precio" type="text" class="block w-full mt-2" placeholder="Precio" />
-                                <input v-model="form.infoGeneral.precioAnterior" type="text" class="block w-full mt-2" placeholder="Precio Anterior" />
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <input v-model="form.infoGeneral.marca" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Marca" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.modelo" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Modelo" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.year" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Año" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.kilometraje" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Kilometraje" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.color" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Color" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.numpuertas" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Número de Puertas" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.transmision" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Transmisión" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.motor" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Motor" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.colorInterno" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Color Interno" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.tipoAuto" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Tipo de Auto" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.version" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Version" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.precio" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Precio" />
+                                </div>
+                                <div>
+                                    <input v-model="form.infoGeneral.precioAnterior" type="text"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Precio Anterior" />
+                                </div>
+
+
+
 
 
                             </div>
 
                             <!-- Descripción -->
+                            <h2 class="text-xl font-vwheadbold text-gray-800">Descripción</h2>
                             <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
-                                <textarea v-model="form.descripcion" class="block w-full" placeholder="Descripción del auto"></textarea>
+                                <textarea v-model="form.descripcion"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Descripción del auto"></textarea>
                             </div>
 
                             <!-- Información del Distribuidor -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Información del Distribuidor:</label>
-                                <input v-model="form.infoDistribuidor.nombre" type="text" class="block w-full" placeholder="Nombre del Distribuidor" />
-                                <input v-model="form.infoDistribuidor.estado" type="text" class="block w-full mt-2" placeholder="Estado" />
-                                <input v-model="form.infoDistribuidor.ciudad" type="text" class="block w-full mt-2" placeholder="Ciudad" />
-                                <input v-model="form.infoDistribuidor.fechaAlta" type="text" class="block w-full mt-2" placeholder="Fecha de Alta" />
-                                <input v-model="form.infoDistribuidor.telefono" type="text" class="block w-full mt-2" placeholder="Teléfono" />
+                            <h2 class="text-xl font-vwheadbold text-gray-800">Información del distruibuidor</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input v-model="form.infoDistribuidor.nombre" type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Nombre del Distribuidor" />
+                                <input v-model="form.infoDistribuidor.estado" type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Estado" />
+                                <input v-model="form.infoDistribuidor.ciudad" type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Ciudad" />
+                                <input v-model="form.infoDistribuidor.fechaAlta" type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Fecha de Alta" />
+                                <input v-model="form.infoDistribuidor.telefono" type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    placeholder="Teléfono" />
                             </div>
 
                             <!-- Carrusel (Múltiples Imágenes) -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Carrusel de Imágenes:</label>
-                                <input type="file" multiple @change="form.carrusel = $event.target.files" class="block w-full" accept="image/*" />
+                            <h2 class="text-xl font-vwheadbold text-gray-800">Carrusel de imagenes</h2>
+                            <div class="space-y-4">
+                                <input type="file" multiple @change="form.carrusel = $event.target.files"
+                                    class="mt-1 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                                    accept="image/*" />
                             </div>
 
                             <!-- Botón de Envío -->
                             <div>
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar</button>
+                                <button type="submit"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Enviar
+                                </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
