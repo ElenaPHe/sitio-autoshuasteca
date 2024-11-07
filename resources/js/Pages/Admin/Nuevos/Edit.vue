@@ -18,6 +18,7 @@ const formNuevos = useForm({
         potencia: props.nuevo.infoGeneral.potencia || '',
         torque: props.nuevo.infoGeneral.torque || '',
         versiones: props.nuevo.infoGeneral.versiones || '',
+        stock: props.nuevo.infoGeneral.stock || '',
     },
     disenio: {
         titulo: props.nuevo.disenio?.titulo || '',
@@ -87,7 +88,7 @@ function eliminarFotoAuto() {
             preserveScroll: true,
             onSuccess: () => {
                 console.log('La imagen se ha eliminado correctamente');
-                window.location.reload();
+                // window.location.reload();
             },
             onError: (errors) => {
                 console.log(errors);
@@ -407,6 +408,12 @@ const actualizaAuto = () => {
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
                                             <div>
+                                                <label for="stock"
+                                                    class="block text-sm font-medium text-gray-700">Stock</label>
+                                                <input type="number" min="1" id="torque" v-model="formNuevos.infoGeneral.stock"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            </div>
+                                            <div>
                                                 <label for="versiones"
                                                     class="block text-sm font-medium text-gray-700">Versiones</label>
                                                 <input type="text" id="versiones"
@@ -480,21 +487,21 @@ const actualizaAuto = () => {
                                                 <label for="designHeader"
                                                     class="block text-sm font-medium text-gray-700">Titulo</label>
                                                 <input type="text" id="designTitle"
-                                                    v-model="formNuevos.tecnologiaContenido.titulo"
+                                                    v-model="formNuevos.tecnologia.titulo"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
                                             <div>
                                                 <label for="designHeader"
                                                     class="block text-sm font-medium text-gray-700">Encabezado</label>
                                                 <input type="text" id="designHeader"
-                                                    v-model="formNuevos.tecnologiaContenido.encabezado"
+                                                    v-model="formNuevos.tecnologia.encabezado"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
                                             <div>
                                                 <label for="designDescription"
                                                     class="block text-sm font-medium text-gray-700">Descripción</label>
                                                 <textarea id="designDescription"
-                                                    v-model="formNuevos.tecnologiaContenido.descripcion" rows="3"
+                                                    v-model="formNuevos.tecnologia.descripcion" rows="3"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
                                             </div>
                                         </div>

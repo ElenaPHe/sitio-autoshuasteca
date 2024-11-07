@@ -17,6 +17,7 @@ const formNuevos = useForm({
         potencia: '',
         torque: '',
         versiones: '',
+        stock: '',
     },
     disenio: {
         titulo: '',
@@ -212,6 +213,11 @@ const submitAuto = () => {
                                 <div>
                                     <label for="torque" class="block text-sm font-medium text-gray-700">Torque</label>
                                     <input type="text" id="torque" v-model="formNuevos.infoGeneral.torque"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="torque" class="block text-sm font-medium text-gray-700">Cantidad en Existencia</label>
+                                    <input type="number" id="stock" min="1"  v-model="formNuevos.infoGeneral.stock"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                                 <div>

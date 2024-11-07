@@ -12,7 +12,7 @@ const isLineVisible = ref(true);
 const lastScrollTop = ref(0);
 
 const hasHeroImage = computed(() => {
-    return ['Welcome', 'Secciones/Garantia', 'Secciones/Refacciones', 'Secciones/Mantenimiento'].includes(page.component);
+    return ['Welcome', 'Secciones/Garantia', 'Secciones/Refacciones', 'Secciones/Mantenimiento', 'Secciones/ShowNuevos'].includes(page.component);
 });
 
 const toggleMenu = () => {
@@ -35,16 +35,16 @@ const checkScroll = () => {
 
     lastScrollTop.value = scrollTop <= 0 ? 0 : scrollTop;
 
-    isScrolledPastImage.value = scrollTop > imageHeight * 0.95;
+    isScrolledPastImage.value = scrollTop > imageHeight * 0.75;
 
     if (hasHeroImage.value) {
         if (scrollTop > imageHeight) {
-            headerOpacity.value = Math.min((scrollTop - imageHeight) / 100, 0.95);
+            headerOpacity.value = Math.min((scrollTop - imageHeight) / 100, 0.75);
         } else {
             headerOpacity.value = 0;
         }
     } else {
-        headerOpacity.value = 0.95;
+        headerOpacity.value = 0.75;
     }
 };
 
@@ -64,7 +64,7 @@ onUnmounted(() => {
 <template>
     <div class="min-h-screen">
     <header :class="[
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-20',
         { 'opacity-0 translate-y-[-20px]': !isPageLoaded, 'opacity-100 translate-y-0': isPageLoaded }
     ]" :style="{ backgroundColor: `rgba(255, 255, 255, ${headerOpacity})` }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,12 +102,12 @@ onUnmounted(() => {
             'relative transition-all duration-300 -mt-4',
             { 'opacity-0': !isLineVisible },
             isScrolledPastImage || !hasHeroImage ? 'text-[#002873]' : 'text-white'
-        ]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                <div class="flex items-center justify-center h-6">
-                    <div class="h-0.5 bg-current flex-grow"></div>
-                    <Link :href="route('welcome')" class="mx-6 flex-shrink-0">
-                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11"
+        ]" >
+            <div class="max-w-full  relative">
+                <div class=" max-w-full flex items-center justify-center h-6" >
+                    <div class="h-0.5 bg-current flex-grow sm:w-1/3 lg:w-1/3 md:w-1/3"></div>
+                    <Link :href="route('welcome')" class=" flex-shrink-0" style="margin-left: 14px; margin-right: 14px;">
+                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9"
                         :fill="isScrolledPastImage || !hasHeroImage ? 'currentColor' : 'white'">
                         <g
                             transform="matrix(10.188387870788574, 0, 0, 10.188387870788574, -251.519936680809, -252.79260253906244)">

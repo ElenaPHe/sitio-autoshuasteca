@@ -16,6 +16,22 @@ class NuevosController extends Controller
             'nuevos' => $nuevos
         ]);
     }
+    public function seccionnuevosindex()
+    {
+        $nuevos = Nuevo::all();
+        return Inertia::render('Secciones/AutosNuevos', [
+            'nuevos' => $nuevos
+        ]);
+    }
+    public function showNuevo($id)
+    {
+        $nuevos = Nuevo::findOrFail($id);
+        return Inertia::render('Secciones/ShowNuevos', [
+            'nuevo' => $nuevos
+        ]);
+    }
+
+
 
     public function create()
     {

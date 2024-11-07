@@ -36,12 +36,14 @@ use Inertia\Inertia;
 Route::get('/', [InicioController::class, 'seccionwelcomeindex'])->name('welcome');
 Route::get('/Mantenimiento', [MantenimientoController::class, 'seccionmantenimientoindex'])->name('mantenimiento');
 Route::get('/Seminuevos', [SeminuevosController::class, 'seccionseminuevosindex'])->name('seminuevos');
+Route::get('/AutosNuevos', [NuevosController::class, 'seccionnuevosindex'])->name('autosnuevos');
 
 Route::get('/Seminuevos/{id}', [SeminuevosController::class, 'showSeminuevo'])->name('seminuevos.show');
+Route::get('/AutosNuevos/{id}', [NuevosController::class, 'showNuevo'])->name('autosnuevos.show');
 
-Route::get('/Modelos/', function () {
-    return Inertia::render('Secciones/AutosNuevos');
-})->name('autosnuevos');
+// Route::get('/Modelos/', function () {
+//     return Inertia::render('Secciones/AutosNuevos');
+// })->name('autosnuevos');
 
 // Route::get('/Seminuevos/', function () {
 //     return Inertia::render('Secciones/Seminuevos');
