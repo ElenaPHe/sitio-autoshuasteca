@@ -23,9 +23,25 @@ class SeminuevosController extends Controller
     public function seccionseminuevosindex()
     {
         $seminuevos = Seminuevo::all();
+
+
+
+        $marcasAuto = Seminuevo::all()->map(function ($seminuevo) {
+            return $seminuevo->infoGeneral['marca'];
+        })->unique();
+
+        $yearsAutos = Seminuevo::all()->map(function ($seminuevo) {
+            return $seminuevo->infoGeneral['year'];
+        })->unique();
+
         return Inertia::render('Secciones/Seminuevos', [
-            'seminuevos' => $seminuevos
+            'seminuevos' => $seminuevos,
+            'marcasAuto' => $marcasAuto,
+            'yearsAutos' => $yearsAutos,
         ]);
+
+        // return json_encode($seminuevos);
+
     }
 
     public function create()

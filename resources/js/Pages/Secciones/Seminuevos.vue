@@ -2,19 +2,67 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import UserLayout from '@/Layouts/UserLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const props = defineProps({
-    seminuevos: Object,
+    seminuevos: Array,
+    marcasAuto: Array,
+    yearsAutos: Array,
 });
 
 const isContentLoaded = ref(false);
+const selectedMarca = ref(''); // Estado para la marca seleccionada
+const selectedYear = ref(''); // Estado para el año seleccionado
+const selectedTransmicion = ref('');
+const sortOrder = ref(''); // Estado para el ordenamiento de precio
+// const sortYear = ref(''); // Estado para el ordenamiento de año
 
 onMounted(() => {
     setTimeout(() => {
         isContentLoaded.value = true;
     }, 300);
 });
+
+// Computed property para filtrar y ordenar los autos
+const filteredSeminuevos = computed(() => {
+    let filtered = props.seminuevos;
+
+    // Filtrado por marca
+    if (selectedMarca.value !== '') {
+        filtered = filtered.filter(auto => auto.infoGeneral.marca === selectedMarca.value);
+    }
+
+    if (selectedYear.value !== '') {
+        filtered = filtered.filter(auto => auto.infoGeneral.year === selectedYear.value);
+    }
+
+    if(selectedTransmicion.value !== ''){
+        filtered = filtered.filter(auto => auto.infoGeneral.transmision === selectedTransmicion.value);
+    }
+
+    // Ordenamiento por precio
+    if (sortOrder.value === 'asc') {
+        filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.precio) - parseFloat(b.infoGeneral.precio));
+    } else if (sortOrder.value === 'desc') {
+        filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.precio) - parseFloat(a.infoGeneral.precio));
+    } else if (sortOrder.value === "yearAsc"){
+        filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.year) - parseFloat(b.infoGeneral.year));
+    } else if (sortOrder.value === "yearDesc"){
+        filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.year) - parseFloat(a.infoGeneral.year));
+    } else if (sortOrder.value === "kiloAsc"){
+        filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.kilometraje) - parseFloat(b.infoGeneral.kilometraje));
+    } else if (sortOrder.value === "kiloDesc"){
+        filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.kilometraje) - parseFloat(a.infoGeneral.kilometraje));
+    }
+
+    return filtered;
+});
+
+function formatKm(value) {
+    if (value == null) return '';
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 </script>
 
 <template>
@@ -22,6 +70,9 @@ onMounted(() => {
     <Head title="Autos Seminuevos" />
 
     <UserLayout>
+
+
+
         <div class="relative min-h-screen pt-8 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <h2 :class="[
@@ -31,7 +82,53 @@ onMounted(() => {
                     Autos Seminuevos
                 </h2>
                 <div class="space-y-6">
-                    <Link v-for="infoSemi in seminuevos" :key="infoSemi.id"
+
+                    <div class="flex justify-start items-start space-x-4">
+                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Marcas:</label>
+                        <select v-model="selectedMarca" class="border rounded p-2 ">
+                            <option value="">Todas las marcas</option>
+                            <option v-for="marca in marcasAuto" :key="marca.id" :value="marca">{{ marca }}</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-start items-start space-x-4">
+                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Año:</label>
+                        <select v-model="selectedYear" class="border rounded p-2 ">
+                            <option value="">Todas las años</option>
+                            <option v-for="year in yearsAutos" :key="year.id" :value="year">{{ year }}</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-start items-start space-x-4">
+                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Transmisión:</label>
+                        <select v-model="selectedTransmicion" class="border rounded p-2 ">
+                            <option value="">Transmisión</option>
+                            <option value="Automatica">Automatica</option>
+                            <option value="Standard">Standard</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-end items-center space-x-4" style="font-size: 10pt;">
+                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Ordenar por:</label>
+                        <select v-model="sortOrder" id="sortOrder" class="border rounded p-2">
+                            <option value="">😼</option>
+                            <option value="asc">Menor precio</option>
+                            <option value="desc">Mayor precio</option>
+                            <option value="yearAsc">Año: Menor a Mayor</option>
+                            <option value="yearDesc">Año: Mayor a Menor</option>
+                            <option value="kiloAsc">Menor kilometraje</option>
+                            <option value="kiloDesc">Mayor kilometraje</option>
+                        </select>
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="space-y-6">
+                    <Link v-for="infoSemi in filteredSeminuevos" :key="infoSemi.id"
                         :href="route('seminuevos.show', infoSemi.id)"
                         class="block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex flex-col md:flex-row">
@@ -115,7 +212,7 @@ onMounted(() => {
                                     </svg>
                                     <div>
                                         <p class="text-sm font-vwheadlight text-gray-500">Kilometraje</p>
-                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.kilometraje }}</p>
+                                        <p class="text-base font-vwheadlight">{{ formatKm(infoSemi.infoGeneral.kilometraje) }} km</p>
                                     </div>
                                 </div>
 
