@@ -36,7 +36,7 @@ const filteredSeminuevos = computed(() => {
         filtered = filtered.filter(auto => auto.infoGeneral.year === selectedYear.value);
     }
 
-    if(selectedTransmicion.value !== ''){
+    if (selectedTransmicion.value !== '') {
         filtered = filtered.filter(auto => auto.infoGeneral.transmision === selectedTransmicion.value);
     }
 
@@ -45,13 +45,13 @@ const filteredSeminuevos = computed(() => {
         filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.precio) - parseFloat(b.infoGeneral.precio));
     } else if (sortOrder.value === 'desc') {
         filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.precio) - parseFloat(a.infoGeneral.precio));
-    } else if (sortOrder.value === "yearAsc"){
+    } else if (sortOrder.value === "yearAsc") {
         filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.year) - parseFloat(b.infoGeneral.year));
-    } else if (sortOrder.value === "yearDesc"){
+    } else if (sortOrder.value === "yearDesc") {
         filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.year) - parseFloat(a.infoGeneral.year));
-    } else if (sortOrder.value === "kiloAsc"){
+    } else if (sortOrder.value === "kiloAsc") {
         filtered = filtered.slice().sort((a, b) => parseFloat(a.infoGeneral.kilometraje) - parseFloat(b.infoGeneral.kilometraje));
-    } else if (sortOrder.value === "kiloDesc"){
+    } else if (sortOrder.value === "kiloDesc") {
         filtered = filtered.slice().sort((a, b) => parseFloat(b.infoGeneral.kilometraje) - parseFloat(a.infoGeneral.kilometraje));
     }
 
@@ -59,6 +59,10 @@ const filteredSeminuevos = computed(() => {
 });
 
 function formatKm(value) {
+    if (value == null) return '';
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function formatPrice(value) {
     if (value == null) return '';
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -74,55 +78,55 @@ function formatKm(value) {
 
 
         <div class="relative min-h-screen pt-8 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <h2 :class="[
-                    'text-3xl sm:text-4xl font-bold mb-8 text-center transition-all duration-1000 ease-out font-vwheadbold text-gray-800',
+                    'text-4xl sm:text-5xl font-bold mb-12 text-center transition-all duration-1000 ease-out font-vwheadbold text-gray-800',
                     { 'opacity-0 translate-y-[20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
                 ]">
                     Autos Seminuevos
                 </h2>
-                <div class="space-y-6">
 
-                    <div class="flex justify-start items-start space-x-4">
-                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Marcas:</label>
-                        <select v-model="selectedMarca" class="border rounded p-2 ">
-                            <option value="">Todas las marcas</option>
-                            <option v-for="marca in marcasAuto" :key="marca.id" :value="marca">{{ marca }}</option>
-                        </select>
+                <div class="bg-white shadow-lg p-6 mb-8">
+                    <h3 class="text-2xl font-vwheadbold text-gray-800 mb-6">Filtros</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <label for="marca" class="block text-sm font-medium text-gray-700">Marca:</label>
+                            <select v-model="selectedMarca" id="marca" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="">Todas las marcas</option>
+                                <option v-for="marca in marcasAuto" :key="marca" :value="marca">{{ marca }}</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="year" class="block text-sm font-medium text-gray-700">Año:</label>
+                            <select v-model="selectedYear" id="year" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="">Todos los años</option>
+                                <option v-for="year in yearsAutos" :key="year" :value="year">{{ year }}</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="transmision" class="block text-sm font-medium text-gray-700">Transmisión:</label>
+                            <select v-model="selectedTransmicion" id="transmision" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="">Todas</option>
+                                <option value="Automatica">Automática</option>
+                                <option value="Standard">Estándar</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="sortOrder" class="block text-sm font-medium text-gray-700">Ordenar por:</label>
+                            <select v-model="sortOrder" id="sortOrder" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="">Seleccionar</option>
+                                <option value="asc">Menor precio</option>
+                                <option value="desc">Mayor precio</option>
+                                <option value="yearAsc">Año (ascendente)</option>
+                                <option value="yearDesc">Año (descendente)</option>
+                                <option value="kiloAsc">Menor kilometraje</option>
+                                <option value="kiloDesc">Mayor kilometraje</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="flex justify-start items-start space-x-4">
-                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Año:</label>
-                        <select v-model="selectedYear" class="border rounded p-2 ">
-                            <option value="">Todas las años</option>
-                            <option v-for="year in yearsAutos" :key="year.id" :value="year">{{ year }}</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-start items-start space-x-4">
-                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Transmisión:</label>
-                        <select v-model="selectedTransmicion" class="border rounded p-2 ">
-                            <option value="">Transmisión</option>
-                            <option value="Automatica">Automatica</option>
-                            <option value="Standard">Standard</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-end items-center space-x-4" style="font-size: 10pt;">
-                        <label for="sortOrder" class="text-lg font-vwheadlight text-gray-800">Ordenar por:</label>
-                        <select v-model="sortOrder" id="sortOrder" class="border rounded p-2">
-                            <option value="">😼</option>
-                            <option value="asc">Menor precio</option>
-                            <option value="desc">Mayor precio</option>
-                            <option value="yearAsc">Año: Menor a Mayor</option>
-                            <option value="yearDesc">Año: Mayor a Menor</option>
-                            <option value="kiloAsc">Menor kilometraje</option>
-                            <option value="kiloDesc">Mayor kilometraje</option>
-                        </select>
-                    </div>
-
-
-
                 </div>
 
 
@@ -130,13 +134,12 @@ function formatKm(value) {
                 <div class="space-y-6">
                     <Link v-for="infoSemi in filteredSeminuevos" :key="infoSemi.id"
                         :href="route('seminuevos.show', infoSemi.id)"
-                        class="block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                        class="block bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex flex-col md:flex-row">
                         <!-- Imagen del auto -->
                         <div class="w-full md:w-2/5 aspect-[4/3] overflow-hidden relative">
-                            <img :src="`/storage/${infoSemi.fotoAuto}`"
-                                 :alt="infoSemi.infoGeneral.title"
-                                 class="w-full h-full object-cover">
+                            <img :src="`/storage/${infoSemi.fotoAuto}`" :alt="infoSemi.infoGeneral.title"
+                                class="w-full h-full object-cover">
                         </div>
 
                         <!-- Información del auto -->
@@ -212,7 +215,8 @@ function formatKm(value) {
                                     </svg>
                                     <div>
                                         <p class="text-sm font-vwheadlight text-gray-500">Kilometraje</p>
-                                        <p class="text-base font-vwheadlight">{{ formatKm(infoSemi.infoGeneral.kilometraje) }} km</p>
+                                        <p class="text-base font-vwheadlight">{{
+                                            formatKm(infoSemi.infoGeneral.kilometraje) }} km</p>
                                     </div>
                                 </div>
 
@@ -277,7 +281,8 @@ function formatKm(value) {
                                     </svg>
                                     <div>
                                         <p class="text-sm font-vwheadlight text-gray-500">Color Interior</p>
-                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.colorInterno }}</p>
+                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.colorInterno }}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -300,31 +305,14 @@ function formatKm(value) {
                                     </div>
                                 </div>
 
-                                <!-- Tipo de Auto -->
-                                <div class="flex items-center space-x-2">
-                                    <svg class="h-10" viewBox="0 0 24.00 24.00" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg" stroke="#001E50"
-                                        stroke-width="0.00024000000000000003">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M2 14.803v6.447c0 .414.336.75.75.75h1.614a.75.75 0 0 0 .74-.627L5.5 19h13l.395 2.373a.75.75 0 0 0 .74.627h1.615a.75.75 0 0 0 .75-.75v-6.447a5.954 5.954 0 0 0-1-3.303l-.78-1.17a1.994 1.994 0 0 1-.178-.33h.994a.75.75 0 0 0 .671-.415l.25-.5A.75.75 0 0 0 21.287 8H19.6l-.31-1.546a2.5 2.5 0 0 0-1.885-1.944C15.943 4.17 14.141 4 12 4c-2.142 0-3.943.17-5.405.51a2.5 2.5 0 0 0-1.886 1.944L4.399 8H2.714a.75.75 0 0 0-.67 1.085l.25.5a.75.75 0 0 0 .67.415h.995a1.999 1.999 0 0 1-.178.33L3 11.5c-.652.978-1 2.127-1 3.303zm15.961-4.799a4 4 0 0 0 .34.997H5.699c.157-.315.271-.65.34-.997l.632-3.157a.5.5 0 0 1 .377-.39C8.346 6.157 10 6 12 6c2 0 3.654.156 4.952.458a.5.5 0 0 1 .378.389l.631 3.157zM5.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 14.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                                fill="#001e50"></path>
-                                        </g>
-                                    </svg>
-                                    <div>
-                                        <p class="text-sm font-vwheadlight text-gray-500">Tipo de Auto</p>
-                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.tipoAuto }}</p>
-                                    </div>
-                                </div>
                             </div>
                             <div class="flex justify-items-end space-x-2">
                                 <div>
                                     <p class="text-sm font-vwheadlight text-gray-500">Precio</p>
-                                    <p class="text-lg font-vwheadlight">{{ infoSemi.infoGeneral.precio }}</p>
-                                    <p class="text-lg font-vwheadlight line-through">${{ infoSemi.infoGeneral.precioAnterior }}</p>
+                                    <p class="text-lg font-vwheadlight">${{ formatPrice(infoSemi.infoGeneral.precio) }}
+                                    </p>
+                                    <p class="text-lg font-vwheadlight line-through">${{
+                                        formatPrice(infoSemi.infoGeneral.precioAnterior) }}</p>
                                 </div>
                             </div>
                         </div>

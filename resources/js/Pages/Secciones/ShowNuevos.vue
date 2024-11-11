@@ -218,7 +218,7 @@ const selectedVersion = ref(0);
                     <!-- Puntos de navegación -->
                     <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                         <button v-for="(_, index) in props.nuevo.colores" :key="index" @click="goToSlide(index)"
-                            :class="['w-3 h-3 rounded-full transition-all', currentIndex === index ? 'bg-white' : 'bg-gray-400 hover:bg-gray-300']"></button>
+                            :class="['w-3 h-3 rounded-full transition-all', currentIndex === index ? 'bg-slate-400' : 'bg-gray-500 hover:bg-gray-400']"></button>
                     </div>
                 </div>
             </div>

@@ -74,12 +74,13 @@ const goToSlide = (index) => {
     <Head title="Bienvenido" />
 
     <UserLayout>
-        <div class="relative h-screen" v-for="info in inicios" :key="info.id">
-            <!-- <div class="bg-image h-3/4  bg-cover bg-center" style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');"> -->
-            <div class="bg-image h-3/4  bg-cover bg-center"
-                :style="` background-image: url('/storage/${info.imagen}'); `">
-                <!-- Contenido superpuesto en la imagen -->
-                <!-- <div class="absolute inset-0 flex items-center justify-center">
+
+        <div v-for="item in inicios" :key="item.id" class="h-3/4">
+            <div class=" relative bg-image  bg-cover bg-center"
+            :style="` background-image: url('/storage/${item.imagen}'); `" style="height: 80vh;">
+
+            <!-- Contenido superpuesto en la imagen -->
+            <!-- <div class="absolute inset-0 flex items-center justify-center">
           <h1 :class="[
             'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
             {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
@@ -87,7 +88,24 @@ const goToSlide = (index) => {
             Home
           </h1>
         </div> -->
-            </div>
+        </div>
+
+        </div>
+
+        <div class="relative" v-for="info in inicios" :key="info.id">
+            <!-- <div class="bg-image h-3/4  bg-cover bg-center" style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');"> -->
+            <!-- <div class=" relative bg-image h-3/4  bg-cover bg-center" -->
+                <!-- :style="` background-image: url('/storage/${info.imagen}'); `"> -->
+                <!-- Contenido superpuesto en la imagen -->
+                <!-- <div class="absolute inset-0 flex items-center justify-center">
+              <h1 :class="[
+                'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
+                {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
+              ]">
+                Home
+              </h1>
+            </div> -->
+            <!-- </div> -->
 
             <!-- Nombre de la empresa -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 text-center">
@@ -139,19 +157,20 @@ const goToSlide = (index) => {
                     Descubre todas las <span class="font-vwheadbold">promociones</span>
                 </h2>
                 <div v-for="(promocion, index) in info.promociones" :key="promocion.id"
-                     class="flex flex-col md:flex-row items-center mb-12 md:mb-24">
+                    class="flex flex-col md:flex-row items-center mb-12 md:mb-24">
                     <div :class="[
                         'w-full md:w-1/2 mb-6 md:mb-0',
                         index % 2 === 0 ? 'md:order-1' : 'md:order-2'
                     ]">
                         <img :src="`/storage/${promocion.imagen}`" :alt="promocion.titulo"
-                             class="w-full h-auto shadow-lg">
+                            class="w-full h-auto shadow-lg">
                     </div>
                     <div :class="[
                         'w-full md:w-1/2 px-4 mt-6',
                         index % 2 === 0 ? 'md:order-2' : 'md:order-1'
                     ]">
-                        <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">{{ promocion.titulo }}</h3>
+                        <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">{{
+                            promocion.titulo }}</h3>
                         <p class="text-base sm:text-lg font-vwheadlight text-gray-700">{{ promocion.descripcion }}</p>
                     </div>
                 </div>
@@ -159,7 +178,11 @@ const goToSlide = (index) => {
 
 
         </div>
+
+
+
     </UserLayout>
+
 </template>
 
 <style scoped>
@@ -172,5 +195,4 @@ const goToSlide = (index) => {
 .transition-none {
     transition: none;
 }
-
 </style>

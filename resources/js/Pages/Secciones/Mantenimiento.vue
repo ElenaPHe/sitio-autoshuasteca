@@ -24,19 +24,29 @@ console.log(props.mantenimientos);
     <Head title="Mantenimiento" />
 
     <UserLayout>
-        <div class="relative h-screen">
-            <div class="bg-image h-3/4 bg-cover bg-center"
-                style="background-image: url('https://vw-huasteca.com.mx/Assets/img/mantenimiento/vw-mantenimiento-main.jpg');">
-                <!-- Contenido superpuesto en la imagen -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <h1 :class="[
-                        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vwheadbold text-white shadow-lg transition-all duration-1000 ease-out',
-                        { 'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }
-                    ]">
-                        Mantenimiento
-                    </h1>
+
+        <div class="h-3/4">
+            <div class="relative bg-image bg-cover bg-center"
+                style="background-image: url('https://vw-huasteca.com.mx/Assets/img/mantenimiento/vw-mantenimiento-main.jpg'); height: 80vh;">
+
+                <div class="
+                    absolute inset-0 flex
+                    items-center justify-center
+                    sm:justify-start sm:items-center sm:pt-36
+                    lg:justify-start lg:items-center lg:pt-28"
+                    style="top: 50%;">
+                        <h1 :class="[
+                            'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vwheadbold text-white shadow-lg transition-all duration-1000 ease-out',
+                            { 'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }]">
+                            Mantenimiento <span><br>  &nbsp; &nbsp;Volkswagen</span>
+                        </h1>
+
                 </div>
+
             </div>
+        </div>
+
+        <div class="relative">
 
             <!-- Contenido adicional -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -231,7 +241,7 @@ console.log(props.mantenimientos);
                             <!-- Imagen -->
                             <div class="w-full md:w-1/5 px-6 py-4 whitespace-nowrap">
                                 <img :src="`/storage/${info.imagen}`" alt="Imagen"
-                                    class="w-full md:w-30 object-cover mx-auto">
+                                    class="w-60 md:w-56 object-cover mx-auto">
                             </div>
 
                             <!-- Precios por kilómetros -->
