@@ -47,19 +47,19 @@ class RefaccionesController extends Controller
 
         $validatedData['estado'] = false;
 
-        $folderName = 'refacciones/' . str_replace(' ', '_', $validatedData['nombre']);
+        $folderName = 'refacciones/' .  $validatedData['nombre'] ."/";
 
         if ($request->hasFile('imagen')) {
             $image = $request->file('imagen');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs($folderName, $imageName, 'public');
+            $imageName = time() . '.' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs("{$folderName}/imagen", $imageName, 'public');
             $validatedData['imagen'] = $imagePath;
         }
 
         if ($request->hasFile('carruselKit')) {
             $carruselPath = [];
             foreach ($request->file('carruselKit') as $carrusel) {
-                $carruselName = time() . '.' . $carrusel->getClientOriginalExtension();
+                $carruselName = time() . '.' . $carrusel->getClientOriginalName();
                 $carruselPath[] = $carrusel->storeAs("{$folderName}/carrusel", $carruselName, 'public');
             }
             $validatedData['carruselKit'] = $carruselPath;
@@ -85,7 +85,7 @@ class RefaccionesController extends Controller
         if ($refacciones) {
             $validatedData = $request->validate([
                 // 'imagen' => 'nullable|mimes:png,jpg,jpeg,svg|max:5120',
-                'nombre' => 'required|string',
+                // 'nombre' => 'required|string',
                 'infoGeneral' => 'nullable|array',
                 'tipoRefaccion' => 'required|string',
                 'infoKit' => 'nullable|array',
@@ -115,7 +115,8 @@ class RefaccionesController extends Controller
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $imagePath = $image->storeAs("{$folderName}/imagen", $imageName, 'public');
             }
-            $refacciones->update(['imagen' => $imagePath]);
+            $refacciones->update([
+                'imagen' => $imagePath]);
             return back()->with('success', 'Imagen subida correctamente');
         } else {
             return back()->with('error', 'No se encontro la imagen');
