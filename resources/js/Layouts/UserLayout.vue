@@ -12,7 +12,7 @@ const isLineVisible = ref(true);
 const lastScrollTop = ref(0);
 
 const hasHeroImage = computed(() => {
-    return ['Welcome', 'Secciones/Garantia', 'Secciones/Refacciones', 'Secciones/Mantenimiento', 'Secciones/ShowNuevos'].includes(page.component);
+    return ['Welcome', 'Secciones/Garantia', 'Secciones/Mantenimiento', 'Secciones/ShowNuevos'].includes(page.component);
 });
 
 const toggleMenu = () => {

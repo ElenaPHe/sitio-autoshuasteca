@@ -159,7 +159,6 @@ function eliminarImagenColor(index) {
     }
 }
 
-
 //Manejo para cambiar la imagen de desingContent
 const formDisenioContenido = useForm({
     disenioContenido: props.nuevo.disenioContenido.map(content => ({
@@ -167,12 +166,6 @@ const formDisenioContenido = useForm({
         imagen: null,
     })),
 });
-
-// function onfileUploadDisenio(event, index) {
-//     const file = event.target.files[0];
-//     formDisenioContenido.disenioContenido[index].imagen = file;
-// }
-
 function onfileUploadDisenio(event, index) {
     const file = event.target.files[0];
     formDisenioContenido.disenioContenido[index].imagen = file;
@@ -243,6 +236,7 @@ function eliminarImagenTecnologiaContenido(index) {
         });
     }
 }
+
 //Manejo para cambiar la imagen de la version
 const formVersion = useForm({
     versiones: props.nuevo.versiones.map(version => ({
@@ -293,11 +287,9 @@ function addDesingContent() {
         imagen: null,
     });
 }
-
 function removeDesingContent(index) {
     formNuevos.disenioContenido.splice(index, 1);
 }
-
 function addTecnologiaContenido() {
     formNuevos.tecnologiaContenido.push({
         titulo: '',
@@ -358,15 +350,15 @@ const actualizaAuto = () => {
                                 <div class="p-6 space-y-6">
                                     <!-- Informacion general -->
                                     <div class="space-y-4">
-                                        <h2 class="text-xl font-semibold text-gray-800">Información General</h2>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <h2 class="text-xl font-semibold text-gray-800">Información general de {{ props.nuevo.modelo }} </h2>
+                                        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
                                                 <label for="modelo"
                                                     class="block text-sm font-medium text-gray-700">Modelo</label>
                                                 <input type="text" id="modelo" v-model="formNuevos.modelo"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="space-y-4">
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

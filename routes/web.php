@@ -5,6 +5,7 @@ use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\NuevosController;
 use App\Http\Controllers\SeminuevosController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RefaccionesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,9 +35,11 @@ use Inertia\Inertia;
 // })->name('welcome');
 
 Route::get('/', [InicioController::class, 'seccionwelcomeindex'])->name('welcome');
+
 Route::get('/Mantenimiento', [MantenimientoController::class, 'seccionmantenimientoindex'])->name('mantenimiento');
 Route::get('/Seminuevos', [SeminuevosController::class, 'seccionseminuevosindex'])->name('seminuevos');
 Route::get('/AutosNuevos', [NuevosController::class, 'seccionnuevosindex'])->name('autosnuevos');
+Route::get('/Refacciones', [RefaccionesController::class, 'seccioneRefaccionesIndex'])->name('refacciones');
 
 Route::get('/Seminuevos/{id}', [SeminuevosController::class, 'showSeminuevo'])->name('seminuevos.show');
 Route::get('/AutosNuevos/{id}', [NuevosController::class, 'showNuevo'])->name('autosnuevos.show');
@@ -53,9 +56,9 @@ Route::get('/Garantia/', function () {
     return Inertia::render('Secciones/Garantia');
 })->name('garantia');
 
-Route::get('/Refacciones/', function () {
-    return Inertia::render('Secciones/Refacciones');
-})->name('refacciones');
+// Route::get('/Refacciones/', function () {
+//     return Inertia::render('Secciones/Refacciones');
+// })->name('refacciones');
 
 // Route::get('/Mantenimiento/', function () {
 //     return Inertia::render('Secciones/Mantenimiento');
@@ -64,6 +67,7 @@ Route::get('/Refacciones/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
 
@@ -144,6 +148,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/seccion-mantenimiento/{id}/edit', [MantenimientoController::class, 'edit'])->name('mantenimiento.edit');
     Route::put('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'actualizar'])->name('mantenimiento.actualizar');
     Route::delete('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimiento.destroy');
+
+
+    //Seccion Refacciones
+    Route::get('/seccion-refacciones', [RefaccionesController::class, 'index'])->name('refacciones.index');
+    Route::get('/seccion-refacciones/create', [RefaccionesController::class, 'create'])->name('refacciones.create');
+    Route::post('/seccion-refacciones', [RefaccionesController::class, 'store'])->name('refacciones.store');
+    Route::get('/seccion-refacciones/{id}/edit', [RefaccionesController::class, 'edit'])->name('refacciones.edit');
+
+    Route::put('/seccion-refacciones/{id}', [RefaccionesController::class, 'update'])->name('refacciones.update');
+
+    //Refacciones Imagen Update y Delete
+    Route::post('seccion-refacciones/{id}/subirImagen', [RefaccionesController::class, 'subirImagen'])->name('refacciones.subirImagen');
+    Route::delete('seccion-refacciones/{id}/eliminarImagen', [RefaccionesController::class, 'eliminarImagen'])->name('refacciones.eliminarImagen');
+
+    //Refacciones Carrusel Update y Delete
+    Route::post('seccion-refacciones/{id}/subirCarrusel', [RefaccionesController::class, 'subirImagenCarrusel'])->name('refacciones.subirCarrusel');
+    Route::delete('seccion-refacciones/eliminarCarrusel/{id}/{index}', [RefaccionesController::class, 'eliminarImagenCarrusel'])->name('refacciones.eliminarCarrusel');
+
+
 
 
 

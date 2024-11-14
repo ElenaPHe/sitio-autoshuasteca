@@ -154,6 +154,7 @@ const submitAuto = () => {
 
 <template>
 
+
     <Head title="Inicio" />
     <AuthenticatedLayout>
         <template #header>
