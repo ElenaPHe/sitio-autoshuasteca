@@ -229,6 +229,19 @@ class NuevosController extends Controller
         }
     }
 
+    public function cambiarEstado($id)
+    {
+        $nuevo = Nuevo::findOrFail($id);
+
+        if ($nuevo) {
+            $nuevo->estado = !$nuevo->estado;
+            $nuevo->save();
+            return redirect()->back();
+        } else {
+            return redirect()->route('nuevos.index');
+        }
+    }
+
     public function subirFotoAuto(Request $request, $id)
     {
         $nuevo = Nuevo::findOrFail($id);

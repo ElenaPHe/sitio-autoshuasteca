@@ -7,8 +7,27 @@ const props = defineProps({
     seminuevos: Object,
 });
 
+const form= useForm({
+
+});
+
+function eliminarSeminuevo(id) {
+    if (confirm('¿Estás seguro de eliminar este seminuevo?')) {
+        form.delete(route('seminuevos.destroy', id),
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    console.log('Eliminado');
+                },
+                onError: (error) => {
+                    console.log(error);
+                }
+            });
+    }
+}
 
 console.log(props.seminuevos);
+
 
 </script>
 
@@ -41,6 +60,10 @@ console.log(props.seminuevos);
                                 <Link :href="`/seccion-seminuevos/${infoSemi.id}/edit`"
                                     class="inline-block text-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out">
                                 Editar</Link>
+
+                                <button @click="eliminarSeminuevo(infoSemi.id)"                                    class="inline-block text-center bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out">
+                                Eliminar</button>
+
                             </div>
 
                         </div>

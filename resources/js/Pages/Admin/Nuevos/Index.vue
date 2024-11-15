@@ -11,6 +11,24 @@ function formatPrice(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const form = useForm({
+    estado: false,
+});
+
+function cambiarEstado(id) {
+    form.post(route('nuevos.cambiarEstado', id),
+{
+    onSuccess: () => {
+        console.log('success');
+    },
+    onError: (error) => {
+        console.log(error);
+    },
+    preserveScroll: true,
+    preserveState: true,
+});
+}
+
 console.log(props.nuevos);
 </script>
 
@@ -44,6 +62,11 @@ console.log(props.nuevos);
                                     class="inline-block text-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out">
                                 Editar
                                 </Link>
+                                <button @click="cambiarEstado(infoNuevo.id)"
+                                    :class="infoNuevo.estado ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'"
+                                    class="inline-block text-center text-white px-4 py-2 rounded-md transition duration-200 ease-in-out">
+                                    {{ infoNuevo.estado ? 'Deshabilitar' : 'Habilitar' }}
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -136,36 +136,7 @@ class SeminuevosController extends Controller
 
         $folderName = "autosSeminuevos/";
 
-        // Crear un identificador único para la carpeta de cada auto seminuevo
-        // $folderName = uniqid('autoSeminuevo_', true);
 
-        // Guardar la imagen principal (fotoAuto)
-        // if ($request->hasFile('fotoAuto')) {
-        //     // Eliminar la imagen antigua
-        //     if ($seminuevo->fotoAuto) {
-        //         Storage::disk('public')->delete($seminuevo->fotoAuto);
-        //     }
-        //     // Guardar la nueva imagen
-        //     $image = $request->file('fotoAuto');
-        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
-        //     $fotoAutoPath = $image->storeAs("{$folderName}/fotoAuto", $imageName, 'public');
-        //     $seminuevo->fotoAuto = $fotoAutoPath;
-        // }
-
-        // Guardar las imágenes del carrusel
-        // $carruselPaths = [];
-        // if ($request->hasFile('carrusel')) {
-        //     // Eliminar las imágenes antiguas del carrusel
-        //     foreach ($seminuevo->carrusel as $oldCarruselImage) {
-        //         Storage::disk('public')->delete($oldCarruselImage);
-        //     }
-        //     // Guardar las nuevas imágenes
-        //     foreach ($request->file('carrusel') as $carruselImage) {
-        //         $imageName = time() . '_' . $carruselImage->getClientOriginalExtension();
-        //         $carruselPaths[] = $carruselImage->storeAs("{$folderName}/carrusel", $imageName, 'public');
-        //     }
-        //     $seminuevo->carrusel = $carruselPaths;
-        // }
 
         // Actualizar los demás campos
         $seminuevo->infoGeneral = $request->input('infoGeneral');
@@ -177,6 +148,33 @@ class SeminuevosController extends Controller
 
         // Redirigir con un mensaje de éxito
         return redirect()->route('seminuevos.index')->with('success', 'Auto seminuevo actualizado correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $seminuevo = Seminuevo::findOrFail($id);
+
+        $pathfotoAuto = $seminuevo->fotoAuto;
+
+        // Eliminar la imagen principal
+        if (Storage::disk('public')->exists($pathfotoAuto)) {
+            Storage::disk('public')->delete($pathfotoAuto);
+        }
+
+        // Eliminar las imágenes del carrusel
+        if ($seminuevo->carrusel) {
+            foreach ($seminuevo->carrusel as $carruselImage) {
+                if (Storage::disk('public')->exists($carruselImage)) {
+                    Storage::disk('public')->delete($carruselImage);
+                }
+            }
+        }
+
+        // Eliminar el registro de la base de datos
+        $seminuevo->delete();
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('seminuevos.index')->with('success', 'Auto seminuevo eliminado correctamente');
     }
 
 
@@ -235,7 +233,6 @@ class SeminuevosController extends Controller
 
         return back()->with('success', 'Carrusel actualizado correctamente');
     }
-
 
 
     public function eliminarImagen($id)

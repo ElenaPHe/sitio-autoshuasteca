@@ -27,6 +27,17 @@ class RefaccionesController extends Controller
         return Inertia::render('Secciones/Refacciones', ['refacciones' => $refacciones]);
     }
 
+    public function showRefaccion($id)
+    {
+        $refaccion = Refacciones::findOrFail($id);
+
+
+
+        return Inertia::render('Secciones/ShowRefacciones', [
+            'refaccion' => $refaccion
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('Admin/Refacciones/Create');

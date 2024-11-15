@@ -43,6 +43,7 @@ Route::get('/Refacciones', [RefaccionesController::class, 'seccioneRefaccionesIn
 
 Route::get('/Seminuevos/{id}', [SeminuevosController::class, 'showSeminuevo'])->name('seminuevos.show');
 Route::get('/AutosNuevos/{id}', [NuevosController::class, 'showNuevo'])->name('autosnuevos.show');
+Route::get('/Refacciones/{id}', [RefaccionesController::class, 'showRefaccion'])->name('refacciones.show');
 
 // Route::get('/Modelos/', function () {
 //     return Inertia::render('Secciones/AutosNuevos');
@@ -77,8 +78,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/seccionbienvenida', [InicioController::class, 'index'])->name('inicio.index');
 
-    Route::post('/inicio/{id}/subirImagenPromo/{index}', [InicioController::class, 'subirImagenPromo'])->name('inicio.subirImagenPromo');
+    //inicio subir y eliminar imagen
+    Route::post('/inicio/{id}/subirImagen', [InicioController::class, 'subirImagen'])->name('inicio.subirImagen');
+    Route::delete('/inicio/{id}/eliminarImagen', [InicioController::class, 'eliminarImagen'])->name('inicio.eliminarImagen');
 
+    Route::post('/inicio/{id}/subirCarrusel', [InicioController::class, 'subirCarrusel'])->name('inicio.subirCarrusel');
+    Route::delete('/inicio/{id}/eliminarCarrusel', [InicioController::class, 'eliminarCarrusel'])->name('inicio.eliminarCarrusel');
+
+
+    Route::post('/inicio/{id}/subirImagenPromo/{index}', [InicioController::class, 'subirImagenPromo'])->name('inicio.subirImagenPromo');
     Route::delete('/seccionbienvenida/eliminarImagenPromo/{id}/{index}', [InicioController::class, 'eliminarImagenPromo'])->name('inicio.eliminarImagenPromo');
 
     Route::get('/seccionbienvenida/create', [InicioController::class, 'create'])->name('inicio.create');
@@ -96,6 +104,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/seccion-nuevos', [NuevosController::class, 'store'])->name('nuevos.store');
 
     Route::put('/seccion-nuevos/{id}', [NuevosController::class, 'actualizaInfoNuevo'])->name('nuevos.update');
+    Route::post('/seccion-nuevos/{id}/cambiarEstado', [NuevosController::class, 'cambiarEstado'])->name('nuevos.cambiarEstado');
 
 
     //Seccion Nuevos cambio de imagenes
@@ -130,6 +139,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/seccion-seminuevos', [SeminuevosController::class, 'store'])->name('seminuevos.store');
     Route::get('/seccion-seminuevos/{id}/edit', [SeminuevosController::class, 'edit'])->name('seminuevos.edit');
     Route::put('/seccion-seminuevos/{id}', [SeminuevosController::class, 'update'])->name('seminuevos.update');
+    Route::delete('/seccion-seminuevos/{id}', [SeminuevosController::class, 'destroy'])->name('seminuevos.destroy');
 
 
     //Seminuevos Imagen Update y Delete
@@ -186,4 +196,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
