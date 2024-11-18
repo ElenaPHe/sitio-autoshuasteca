@@ -188,15 +188,20 @@ onMounted(() => {
                                 <input v-model="form.infoGeneral.kilometraje" type="text" class="block w-full mt-2"
                                     placeholder="Kilometraje" />
                                 <input v-model="form.infoGeneral.color" type="text" class="block w-full mt-2"
-                                    placeholder="Color" />
+                                    placeholder="Color" style="text-transform: capitalize;" />
                                 <input v-model="form.infoGeneral.numpuertas" type="text" class="block w-full mt-2"
                                     placeholder="Número de Puertas" />
-                                <input v-model="form.infoGeneral.transmision" type="text" class="block w-full mt-2"
-                                    placeholder="Transmisión" />
+                                <!-- <input v-model="form.infoGeneral.transmision" type="text"  class="block w-full mt-2"
+                                    placeholder="Transmisión" /> -->
+                                    <select class="block w-full mt-2" name="" id="" v-model="form.infoGeneral.transmision">
+                                        <option value="">Selecciona una transmisión</option>
+                                        <option value="manual">Manual</option>
+                                        <option value="automatica">Automática</option>
+                                    </select>
                                 <input v-model="form.infoGeneral.motor" type="text" class="block w-full mt-2"
                                     placeholder="Motor" />
                                 <input v-model="form.infoGeneral.colorInterno" type="text" class="block w-full mt-2"
-                                    placeholder="Color Interno" />
+                                    placeholder="Color Interno" style="text-transform: capitalize;"  />
                                 <input v-model="form.infoGeneral.tipoAuto" type="text" class="block w-full mt-2"
                                     placeholder="Tipo de Auto" />
                                 <input v-model="form.infoGeneral.precio" type="text" class="block w-full mt-2"

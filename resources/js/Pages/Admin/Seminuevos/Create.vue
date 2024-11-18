@@ -91,7 +91,7 @@ const submit = () => {
                                 <div>
                                     <input v-model="form.infoGeneral.color" type="text"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Color" />
+                                        placeholder="Color" style="text-transform: capitalize;" />
                                 </div>
                                 <div>
                                     <input v-model="form.infoGeneral.numpuertas" type="text"
@@ -99,9 +99,14 @@ const submit = () => {
                                         placeholder="Número de Puertas" />
                                 </div>
                                 <div>
-                                    <input v-model="form.infoGeneral.transmision" type="text"
+                                    <!-- <input v-model="form.infoGeneral.transmision" type="text"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Transmisión" />
+                                        placeholder="Transmisión" /> -->
+                                        <select v-model="form.infoGeneral.transmision" name="" id="" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            <option value="">Seleccione una transmisión</option>
+                                            <option value="manual">Manual</option>
+                                            <option value="automatica">Automática</option>
+                                        </select>
                                 </div>
                                 <div>
                                     <input v-model="form.infoGeneral.motor" type="text"
@@ -111,7 +116,7 @@ const submit = () => {
                                 <div>
                                     <input v-model="form.infoGeneral.colorInterno" type="text"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Color Interno" />
+                                        placeholder="Color Interno" style="text-transform: capitalize;" />
                                 </div>
                                 <div>
                                     <input v-model="form.infoGeneral.tipoAuto" type="text"

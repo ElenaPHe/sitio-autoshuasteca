@@ -176,8 +176,8 @@ const submitAuto = () => {
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                                 <div>
-                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">Imagen
-                                    </label>
+                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">Imagen 
+                                    <small>(Se recomienda imagen 1600x900)</small></label>
                                     <input type="file" id="fotoAuto" @change="onfileUploadAuto"
                                         class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-800 hover:file:bg-indigo-100">
                                 </div>
@@ -216,6 +216,8 @@ const submitAuto = () => {
                                     <input type="text" id="torque" v-model="formNuevos.infoGeneral.torque"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
+
+
                                 <div>
                                     <label for="torque" class="block text-sm font-medium text-gray-700">Cantidad en Existencia</label>
                                     <input type="number" id="stock" min="1"  v-model="formNuevos.infoGeneral.stock"

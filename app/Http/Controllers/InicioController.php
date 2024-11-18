@@ -107,8 +107,8 @@ class InicioController extends Controller
 
         $inicio = Inicio::findOrFail($id);
 
-        $inicio->imagen = $request->imagen;
-        $inicio->carrusel = $request->carrusel;
+        // $inicio->imagen = $request->imagen;
+        // $inicio->carrusel = $request->carrusel;
         $inicio->promociones = $request->promociones;
 
         $inicio->save();
@@ -207,7 +207,7 @@ class InicioController extends Controller
 
         // / Validar la imagen
         $request->validate([
-            'promociones.*.imagen' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'promociones.*.imagen' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         // Verificar que el archivo de imagen exista en la solicitud

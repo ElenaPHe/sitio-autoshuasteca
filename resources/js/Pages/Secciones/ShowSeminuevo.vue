@@ -13,16 +13,27 @@ const currentIndex = ref(0);
 const transitionEnabled = ref(true);
 
 const nextSlide = () => {
-    currentIndex.value = (currentIndex.value + 1) % props.seminuevo.carrusel.length;
+    transitionEnabled.value = true;
+    if (currentIndex.value === props.seminuevo.carrusel.length - 1) {
+        setTimeout(() => {
+            transitionEnabled.value = false;
+            currentIndex.value = 0;
+        }, 500);
+    } else {
+        currentIndex.value++;
+    }
 };
 
 const prevSlide = () => {
-    currentIndex.value =
-        (currentIndex.value - 1 + props.seminuevo.carrusel.length) % props.seminuevo.carrusel.length;
-};
-
-const goToSlide = (index) => {
-    currentIndex.value = index;
+    transitionEnabled.value = true;
+    if (currentIndex.value === 0) {
+        setTimeout(() => {
+            transitionEnabled.value = false;
+            currentIndex.value = props.seminuevo.carrusel.length - 1;
+        }, 500);
+    } else {
+        currentIndex.value--;
+    }
 };
 
 onMounted(() => {
@@ -30,6 +41,16 @@ onMounted(() => {
         isContentLoaded.value = true;
     }, 300);
 });
+
+function formatPrice(value) {
+    if (value == null) return '';
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function formatKilometraje(value) {
+    if (value == null) return '';
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 </script>
 
 <template>
@@ -37,7 +58,7 @@ onMounted(() => {
 
     <UserLayout>
         <div class="relative min-h-screen bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 ">
                 <!-- Breadcrumb -->
                 <nav class="mb-8">
                     <ol class="flex items-center space-x-2 text-sm text-gray-500">
@@ -88,16 +109,9 @@ onMounted(() => {
                                     class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-l-md hover:bg-opacity-75 transition-all">
                                     &#10095;
                                 </button>
-
-                                <!-- Puntos de navegación -->
-                                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    <button v-for="(_, index) in seminuevo.imagenes" :key="index" @click="goToSlide(index)"
-                                        :class="['w-3 h-3 rounded-full transition-all', currentIndex === index ? 'bg-white' : 'bg-gray-400 hover:bg-gray-300']"></button>
-                                </div>
                             </div>
                         </div>
                     </div>
-
 
                     <!-- Ficha tecnica -->
                     <div class="w-full lg:w-1/2 space-y-6">
@@ -108,8 +122,8 @@ onMounted(() => {
                                 <span class="text-2xl font-vwheadlight">{{ seminuevo.infoGeneral.year }}</span>
                             </h1>
                             <div class="flex items-baseline mt-4">
-                                <span class="text-3xl font-vwheadbold text-[#001E50]">${{ seminuevo.infoGeneral.precio }}</span>
-                                <span class="ml-2 text-lg text-gray-500 line-through">${{ seminuevo.infoGeneral.precioAnterior }}</span>
+                                <span class="text-3xl font-vwheadbold text-[#001E50]">${{ formatPrice(seminuevo.infoGeneral.precio) }}</span>
+                                <span class="ml-2 text-lg text-gray-500 line-through">${{ formatPrice(seminuevo.infoGeneral.precioAnterior)}}</span>
                             </div>
                         </div>
 
@@ -120,7 +134,7 @@ onMounted(() => {
                                 <div class="space-y-3">
                                     <div>
                                         <p class="text-sm text-gray-500">Kilometraje</p>
-                                        <p class="font-vwheadlight">{{ seminuevo.infoGeneral.kilometraje }}</p>
+                                        <p class="font-vwheadlight">{{ formatKilometraje(seminuevo.infoGeneral.kilometraje) }}</p>
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-500">Transmisión</p>
@@ -156,8 +170,6 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <!-- Informacion Descripcion -->
@@ -211,5 +223,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.transition-none {
+    transition: none;
+}
 
 </style>

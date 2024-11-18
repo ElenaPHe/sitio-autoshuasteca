@@ -193,7 +193,7 @@ onMounted(() => {
 
                 <!-- Back Button -->
                 <div class="flex justify-center mt-8">
-                    <Link :href="route('seminuevos')"
+                    <Link :href="route('refacciones')"
                         class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#001E50] hover:bg-[#002a6e] transition-colors duration-200">
                     <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

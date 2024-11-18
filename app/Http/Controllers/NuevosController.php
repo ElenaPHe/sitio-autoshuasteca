@@ -62,7 +62,7 @@ class NuevosController extends Controller
             'tecnologiaContenido.*.subtitulo' => 'nullable|string',
             'tecnologiaContenido.*.descripcion' => 'nullable|string',
             'tecnologiaContenido.*.imagen' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
-            'galeria.*' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:5120',
+            'galeria.*' => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:5120',
             'versiones' => 'nullable|array'
 
         ]);
@@ -292,7 +292,7 @@ class NuevosController extends Controller
 
 
         $request->validate([
-            'galeria.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'galeria.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $folderName = "autosNuevos/" . $nuevo->modelo . "/galeria";

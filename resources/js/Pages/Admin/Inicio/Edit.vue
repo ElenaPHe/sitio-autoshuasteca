@@ -122,13 +122,17 @@ function removePromocion(index) {
 //Manejar el cambio de imagen de promociones
 const imagenPromoForm = useForm({
     // imagen: null,
-    promociones: [
-        {
-            // titulo: '',
-            imagen: null,
-            // descripcion: '',
-        }
-    ],
+    // promociones: [
+    //     {
+    //         // titulo: '',
+    //         imagen: null,
+    //         // descripcion: '',
+    //     }
+    // ],
+    promociones: props.inicio.promociones.map(content => ({
+        ...content,
+        imagen: null,
+    })),
 });
 
 function onFileChangePromo(event, index) {

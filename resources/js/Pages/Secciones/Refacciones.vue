@@ -43,10 +43,11 @@ console.log(props.refacciones);
 </script>
 
 <template>
+
   <Head title="Refacciones" />
 
   <UserLayout>
-    <div class="relative min-h-screen bg-gray-100">
+    <div class="relative min-h-screen bg-gray-100 pt-20 pb-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2
           :class="[

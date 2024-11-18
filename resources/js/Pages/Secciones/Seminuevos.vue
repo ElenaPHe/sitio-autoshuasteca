@@ -236,7 +236,7 @@ function formatPrice(value) {
                                     </svg>
                                     <div>
                                         <p class="text-sm font-vwheadlight text-gray-500">Transmisión</p>
-                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.transmision }}</p>
+                                        <p class="text-base font-vwheadlight">{{ infoSemi.infoGeneral.transmision === 'manual' ? 'Manual' : infoSemi.infoGeneral.transmision === 'automatica' ? 'Automática' : infoSemi.infoGeneral.transmision }}</p>
                                     </div>
                                 </div>
 
