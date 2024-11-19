@@ -12,7 +12,7 @@ const isLineVisible = ref(true);
 const lastScrollTop = ref(0);
 
 const hasHeroImage = computed(() => {
-    return ['Welcome', 'Secciones/Garantia', 'Secciones/Mantenimiento', 'Secciones/ShowNuevos'].includes(page.component);
+    return ['Welcome', 'Secciones/Mantenimiento', 'Secciones/ShowNuevos'].includes(page.component);
 });
 
 const toggleMenu = () => {
@@ -185,7 +185,7 @@ onUnmounted(() => {
         <main class="flex-grow">
             <slot />
         </main>
-        
+
         <footer class="w-full font-vwtex" style="background-color: white; border-top: 2px solid; ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <!--Grid-->

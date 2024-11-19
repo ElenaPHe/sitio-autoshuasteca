@@ -613,201 +613,206 @@ const actualizaAuto = () => {
 
 
                         <!-- Form para cambiar la imagen del auto -->
-                        <div class="mb-4">
-                            <p>Foto principal del modelo</p>
+                        <div class="mb-6 mt-10 border-t pt-6">
+                            <p class="text-lg font-semibold text-gray-800">Foto principal del modelo</p>
                             <template v-if="props.nuevo.fotoAuto">
-                                <img :src="`/storage/${props.nuevo.fotoAuto}`" alt="Foto del auto" class="mt-4 h-40">
-                                <button @click="eliminarFotoAuto"
-                                    class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar Imagen</button>
+                                <div class="flex flex-col items-center space-y-4">
+                                    <img :src="`/storage/${props.nuevo.fotoAuto}`" alt="Foto del auto"
+                                        class="mt-4 w-full max-w-xs rounded-lg shadow-md object-cover h-auto">
+                                    <button @click="eliminarFotoAuto"
+                                        class="px-6 py-2 bg-red-500 text-white text-sm font-medium rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+                                        Eliminar Imagen
+                                    </button>
+                                </div>
                             </template>
                             <template v-else>
                                 <form @submit.prevent="subirFotoAuto" class="space-y-6" enctype="multipart/form-data">
                                     <label for="fotoAuto" class="block text-sm font-medium text-gray-700">
                                         Foto del auto
                                     </label>
-                                    <input type="file" @change="onfileUploadAuto" class="mt-1 block
-                                        w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                        focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" accept="image/*">
+                                    <input type="file" @change="onfileUploadAuto"
+                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-lg shadow-sm focus:outline-none
+                                            focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <button type="submit"
-                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                        Imagen</button>
+                                        class="w-full sm:w-auto px-6 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                        Subir Imagen
+                                    </button>
                                 </form>
                             </template>
                         </div>
 
+
                         <!--Form para cambiar la imagen de Diseño contenido -->
-                        <div class="mb-4">
-                            <p class="pt-6">Imagen Diseño contenido</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div v-for="(imagenpromo, index) in props.nuevo.disenioContenido " :key="index"
-                                    class="bg-white p -4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
+                        <div class="mb-10 border-b pb-6">
+                            <p class="pt-6 text-lg font-semibold text-gray-800">Imagen Diseño Contenido</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                <div v-for="(imagenpromo, index) in props.nuevo.disenioContenido" :key="index"
+                                    class="bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
                                     <template v-if="imagenpromo.imagen">
                                         <img :src="`/storage/${imagenpromo.imagen}`" alt="Imagen de promoción"
                                             class="w-full h-48 object-cover rounded-md mb-3">
-                                        <div>{{ imagenpromo.titulo }}</div>
+                                        <div class="text-center font-medium text-gray-700 mb-3">{{ imagenpromo.titulo }}</div>
                                         <button @click.prevent="eliminarImagenDesingContent(index)"
-                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">Eliminar
-                                            Imagen</button>
+                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                                            Eliminar Imagen
+                                        </button>
                                     </template>
                                     <template v-else>
-                                        <form @submit.prevent="subirImagenDesingContent(index)" class="space-y-6"
-                                            enctype="multipart/form-data">
-                                            <label for="">{{ imagenpromo.titulo }}</label>
+                                        <form @submit.prevent="subirImagenDesingContent(index)" class="space-y-4" enctype="multipart/form-data">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">{{ imagenpromo.titulo }}</label>
                                             <input type="file" @change="event => onfileUploadDisenio(event, index)"
-                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <button type="submit"
-                                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                                Imagen</button>
+                                                class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out hover:bg-blue-600">
+                                                Subir Imagen
+                                            </button>
                                         </form>
                                     </template>
                                 </div>
                             </div>
                         </div>
 
+
                         <!--Form para cambiar imagen de Colores -->
-                        <div class="mb-4">
-                            <p>Imagenes de los colores</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="mb-10 border-b pb-6">
+                            <p class="text-lg font-semibold text-gray-800">Imágenes de los colores</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                                 <template v-if="props.nuevo.colores && props.nuevo.colores.length">
                                     <div v-for="(color, index) in props.nuevo.colores" :key="index"
-                                        class="bg-white p -4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
+                                        class="bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
                                         <img :src="`/storage/${color}`" alt="Color"
                                             class="w-full h-48 object-cover rounded-md mb-3">
                                         <button @click.prevent="eliminarImagenColor(index)"
-                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">Eliminar
-                                            Imagen</button>
+                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                                            Eliminar Imagen
+                                        </button>
                                     </div>
                                 </template>
                                 <template v-else>
-                                    <p>No hay imagenes en colores actualmente</p>
+                                    <p class="text-center text-gray-500 col-span-full">No hay imágenes en colores actualmente</p>
                                 </template>
-                                <form @submit.prevent="subirImagenColor" class="space-y-6"
-                                    enctype="multipart/form-data">
-                                    <label for="colores" class="block text-sm font-medium text-gray-700">
-                                        Colores
-                                    </label>
-                                    <input type="file" @change="onfileUploadColores" class="mt-1 block
-                                    w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" accept="image/*">
-                                    <button type="submit"
-                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir imagen
-                                        del
-                                        color</button>
-                                </form>
                             </div>
-
-                        </div>
-
-
-                        <!-- Tecnologia Contenido -->
-                        <div class="mb-4">
-                            <p class="pt-6">Imagenes del contenido de Tecnolgia-Seguridad</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div v-for="(content, index) in props.nuevo.tecnologiaContenido" :key="index"
-                                    class="bg-white p -4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
-                                    <template v-if="content.imagen">
-                                        <img :src="`/storage/${content.imagen}`" alt="Imagen de contenido"
-                                            class="w-full h-48 object-cover rounded-md mb-3">
-                                        <div>{{ content.titulo }}</div>
-                                        <button @click.prevent="eliminarImagenTecnologiaContenido(index)"
-                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">Eliminar
-                                            Imagen</button>
-                                    </template>
-                                    <template v-else>
-                                        <form @submit.prevent="subirImagenTecnologiaContenido(index)" class="space-y-6"
-                                            enctype="multipart/form-data">
-                                            <label for="" class="block text-sm font-medium text-gray-700">
-                                                {{ content.titulo }} </label>
-                                            <input type="file"
-                                                @change="event => onfileUploadTecnologiaContenido(event, index)"
-                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <button type="submit"
-                                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                                Imagen</button>
-                                        </form>
-                                    </template>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Versiones falta-->
-                        <div class="mb-4">
-                            <p class="pt-6"> Imagen de la version del modelo</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div v-for="(version, index) in props.nuevo.versiones" :key="index">
-                                    <template v-if="version.imagen">
-                                        <div>{{ version.nomVersion }}</div>
-                                        <div>{{ index }}</div>
-                                        <img :src="`/storage/${version.imagen}`" alt="Imagen de versión"
-                                            class="mt-2 h-20">
-                                        <button @click.prevent="eliminarImagenVersion(index)"
-                                            class="bg-red-500 text-white px-4 py-2 rounded">Eliminar Imagen</button>
-
-                                    </template>
-                                    <template v-else>
-                                        <form @submit.prevent="subirImagenVersion(index)" class="space-y-6"
-                                            enctype="multipart/form-data">
-                                            <label for="versiones" class="block text-sm font-medium text-gray-700">
-                                                {{ version.nomVersion }}</label>
-                                            <input type="file" @change="event => onfileUploadVersion(event, index)"
-                                                class="mt-1 block
-                                        w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                        focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <button type="submit"
-                                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                                Imagen a la version</button>
-                                        </form>
-                                    </template>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-                        <!-- Form para cambiar imagenes del carrusel galeria -->
-                        <div class="mb-4">
-                            <p>Galeria</p>
-                            <template v-if="props.nuevo.galeria && props.nuevo.galeria.length">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div v-for="(galeria, index) in props.nuevo.galeria" :key="index"
-                                        class="bg-white p -4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
-                                        <p>{{ index }}</p>
-                                        <img :src="`/storage/${galeria}`" alt="Imagen de galería"
-                                            class="w-full h-48 object-cover rounded-md mb-3">
-                                        <button @click.prevent="eliminarImagenGaleria(index)"
-                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">Eliminar
-                                            Imagen</button>
-                                    </div>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <p>No hay Imagenes en galeria actualmente</p>
-                            </template>
-                            <form @submit.prevent="subirImagenGaleria" class="space-y-6" enctype="multipart/form-data">
-                                <label for="galeria" class="block text-sm font-medium text-gray-700">
-                                    Galería
+                            <form @submit.prevent="subirImagenColor" class="space-y-4 mt-6" enctype="multipart/form-data">
+                                <label for="colores" class="block text-sm font-medium text-gray-700">
+                                    Subir nueva imagen de color
                                 </label>
-                                <input type="file" @change="onfileUploadGaleria" class="mt-1 block
-                                        w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                        focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" accept="image/*">
+                                <input type="file" @change="onfileUploadColores"
+                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    accept="image/*">
                                 <button type="submit"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                    imagen a la galeria</button>
+                                    class="w-full sm:w-auto bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300 ease-in-out">
+                                    Subir Imagen del Color
+                                </button>
                             </form>
                         </div>
 
 
 
+                        <!-- Tecnologia Contenido -->
+                        <div class="mb-10 border-b pb-6">
+                            <p class="text-lg font-semibold text-gray-800">Imágenes del contenido de Tecnología-Seguridad</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                <div v-for="(content, index) in props.nuevo.tecnologiaContenido" :key="index"
+                                    class="bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
+                                    <template v-if="content.imagen">
+                                        <img :src="`/storage/${content.imagen}`" alt="Imagen de contenido"
+                                            class="w-full h-48 object-cover rounded-md mb-3">
+                                        <div class="text-center text-gray-700 font-medium mb-2">{{ content.titulo }}</div>
+                                        <button @click.prevent="eliminarImagenTecnologiaContenido(index)"
+                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                                            Eliminar Imagen
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <form @submit.prevent="subirImagenTecnologiaContenido(index)" class="space-y-4"
+                                            enctype="multipart/form-data">
+                                            <label for="" class="block text-sm font-medium text-gray-700 text-center">
+                                                {{ content.titulo }}
+                                            </label>
+                                            <input type="file"
+                                                @change="event => onfileUploadTecnologiaContenido(event, index)"
+                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <button type="submit"
+                                                class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300 ease-in-out">
+                                                Subir Imagen
+                                            </button>
+                                        </form>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Versiones falta-->
+                        <div class="mb-10 border-b pb-6">
+                            <p class="text-lg font-semibold text-gray-800">Imagen de la versión del modelo</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                <div v-for="(version, index) in props.nuevo.versiones" :key="index"
+                                    class="bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
+                                    <template v-if="version.imagen">
+                                        <div class="text-center text-gray-700 font-medium mb-2">{{ version.nomVersion }}</div>
+                                        <img :src="`/storage/${version.imagen}`" alt="Imagen de versión"
+                                            class="w-full h-40 object-cover rounded-md mb-3">
+                                        <button @click.prevent="eliminarImagenVersion(index)"
+                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                                            Eliminar Imagen
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <form @submit.prevent="subirImagenVersion(index)" class="space-y-4" enctype="multipart/form-data">
+                                            <label for="versiones" class="block text-sm font-medium text-gray-700 text-center">
+                                                {{ version.nomVersion }}
+                                            </label>
+                                            <input type="file" @change="event => onfileUploadVersion(event, index)"
+                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <button type="submit"
+                                                class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300 ease-in-out">
+                                                Subir Imagen a la versión
+                                            </button>
+                                        </form>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
 
 
+
+                        <!-- Form para cambiar imagenes del carrusel galeria -->
+                        <div class="mb-10 border-b pb-6">
+                            <p class="text-lg font-semibold text-gray-800">Galería</p>
+                            <template v-if="props.nuevo.galeria && props.nuevo.galeria.length">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                                    <div v-for="(galeria, index) in props.nuevo.galeria" :key="index"
+                                        class="bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
+                                        <img :src="`/storage/${galeria}`" alt="Imagen de galería"
+                                            class="w-full h-48 object-cover rounded-md mb-3">
+                                        <button @click.prevent="eliminarImagenGaleria(index)"
+                                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
+                                            Eliminar Imagen
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <p class="text-gray-500 text-center mt-4">No hay imágenes en la galería actualmente</p>
+                            </template>
+                            <form @submit.prevent="subirImagenGaleria" class="space-y-4 mt-6" enctype="multipart/form-data">
+                                <label for="galeria" class="block text-sm font-medium text-gray-700">
+                                    Subir nueva imagen a la galería
+                                </label>
+                                <input type="file" @change="onfileUploadGaleria"
+                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    accept="image/*">
+                                <button type="submit"
+                                    class="w-full sm:w-auto bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300 ease-in-out">
+                                    Subir Imagen
+                                </button>
+                            </form>
+                        </div>
 
                     </div>
                 </div>

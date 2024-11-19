@@ -38,7 +38,7 @@ onMounted(() => {
 
     <UserLayout>
         <div class="relative min-h-screen bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
                 <!-- Breadcrumb -->
                 <nav class="mb-8">
                     <ol class="flex items-center space-x-2 text-sm text-gray-500">
@@ -57,7 +57,6 @@ onMounted(() => {
 
                 <!-- Main Content -->
                 <div class="flex flex-col lg:flex-row gap-8 ">
-
                     <!-- Carrusel de Imágenes -->
                     <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-sm p-4">
                         <div class="container mx-auto py-6 sm:py-8 md:py-0">
@@ -103,7 +102,6 @@ onMounted(() => {
 
                         </div>
                     </div>
-
 
                     <!-- Ficha tecnica -->
                     <div class="w-full lg:w-1/2 space-y-6">
@@ -154,42 +152,7 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-                <!-- Informacion Descripcion -->
-                <!-- <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-xl font-vwheadbold text-gray-900 mb-4">Descripción</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ seminuevo.descripcion }}</p>
-                </div> -->
-
-                <!--Informacion distribuidor -->
-                <!-- <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-xl font-vwheadbold text-gray-900 mb-4">Información del Distribuidor</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="space-y-3">
-                            <div>
-                                <p class="text-sm text-gray-500">Nombre</p>
-                                <p class="font-vwheadlight">{{ seminuevo.infoDistribuidor.nombre }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Ubicación</p>
-                                <p class="font-vwheadlight">{{ seminuevo.infoDistribuidor.ciudad }}, {{ seminuevo.infoDistribuidor.estado }}</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div>
-                                <p class="text-sm text-gray-500">Teléfono</p>
-                                <p class="font-vwheadlight">{{ seminuevo.infoDistribuidor.telefono }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Fecha de Alta</p>
-                                <p class="font-vwheadlight">{{ seminuevo.infoDistribuidor.fechaAlta }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
                 <!-- Back Button -->
                 <div class="flex justify-center mt-8">

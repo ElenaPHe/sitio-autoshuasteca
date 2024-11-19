@@ -47,38 +47,6 @@ console.log(autosInversos);
                     <span class="font-vwheadbold">Nuevos</span>
                 </h2>
 
-                <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div v-for="infoNuevo in autosActivos" :key="infoNuevo.id"
-                        class="bg-white overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl group">
-                        <Link :href="route('autosnuevos.show', infoNuevo.id)" class="block">
-                        <div class="relative aspect-[16/9] overflow-hidden">
-                            <img :src="`/storage/${infoNuevo.fotoAuto}`" :alt="infoNuevo.infoGeneral.modelo"
-                                class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        </Link>
-                        <div class="">
-                            <h3 class="font-vwheadbold text-center text-2xl font-bold mb-2">
-                                {{ infoNuevo.modelo }}
-                            </h3>
-                            <p class="font-vwtext text-center text-lg font-bold text-gray-800">
-                                Precio de contado desde ${{ formatPrice(infoNuevo.infoGeneral.precio) }}
-                            </p>
-                        </div>
-                        <div class="overflow-hidden">
-                            <div
-                                class="transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                                <div class="p-4 bg-white">
-                                    <Link :href="route('autosnuevos.show', infoNuevo.id)"
-                                        class="block w-full bg-blue-600 text-white px-6 py-2 rounded-sm font-medium hover:bg-blue-700 transition-colors duration-300 text-center">
-                                    Descúbrelo
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
                 <div class="card-container font-vwtext">
                     <div v-for="(vehiculo, index) in autosActivos" :key="index" class="card">
                       <!-- <div style="display: flex; width: 100%;"> -->
@@ -92,9 +60,6 @@ console.log(autosInversos);
                             <button class="discover-btn">Descubrir</button>
                           </div>
                         </Link>
-
-                      <!-- </div> -->
-
 
                       <div class="card-content">
 

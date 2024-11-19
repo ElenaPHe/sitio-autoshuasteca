@@ -47,7 +47,7 @@ function eliminarImagen(){
         onSuccess: () => {
             formImagen.reset();
             console.log('Imagen eliminada');
-            window.location = route('refacciones.index');
+            window.location = route('refacciones.edit', props.refacciones.id);
         }
     });
 }

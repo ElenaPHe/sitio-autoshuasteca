@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import {ref, onMounted, onUnmounted, defineEmits} from 'vue';
 // import { version } from 'vite';
 
 // const props = defineProps({
@@ -140,30 +141,51 @@ function addVersion() {
 function removeVersion(index) {
     formNuevos.versiones.splice(index, 1);
 }
+
+
+const visible = ref(false);
+const emit = defineEmits(['cerrar']);
+const cerrarModal = () => {
+    visible.value = false;
+    emit('cerrar');
+};
+
+
+
+
 const submitAuto = () => {
     formNuevos.post(route('nuevos.store'), {
         onSuccess: () => {
             formNuevos.reset();
-            console.log('El formulario se ha enviado correctamente');
+
+            visible.value = true;
+            setTimeout(() => {
+                visible.value = false;
+                console.log('El formulario se ha enviado correctamente');
             window.location.href = route('nuevos.index');
+            }, 3000);
+
+
         }
     });
 };
+
+
 
 </script>
 
 <template>
 
 
-    <Head title="Inicio" />
+    <Head title="Autos Nuevos" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de inicio</h2>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Formulario Autos Nuevos</h2>
         </template>
 
-        <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-vwtext">
+        <div class="min-h-screen bg-gray-100 py-5 px-4 sm:px-6 lg:px-8 font-vwtext">
             <div class="max-w-4xl mx-auto">
-                <h1 class="text-3xl text-gray-900 text-center mb-8">Formulario de autos nuevos</h1>
+                <!-- <h1 class="text-3xl text-gray-900 text-center mb-8">Formulario de autos nuevos</h1> -->
                 <form @submit.prevent="submitAuto" class="bg-white shadow-md rounded-lg overflow-hidden">
                     <div class="p-6 space-y-6">
                         <!-- Informacion general -->
@@ -176,8 +198,8 @@ const submitAuto = () => {
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                                 <div>
-                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">Imagen 
-                                    <small>(Se recomienda imagen 1600x900)</small></label>
+                                    <label for="fotoAuto" class="block text-sm font-medium text-gray-700">Imagen
+                                    <small>(Se recomienda imagen 16:9)</small></label>
                                     <input type="file" id="fotoAuto" @change="onfileUploadAuto"
                                         class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-800 hover:file:bg-indigo-100">
                                 </div>
@@ -457,5 +479,70 @@ const submitAuto = () => {
             </div>
         </div>
 
+
+        <Transition name="fade">
+            <div v-if="visible" class="fixed inset-0 flex items-center justify-center z-50">
+              <div class="fixed inset-0 bg-black opacity-50"></div>
+              <div class="bg-white rounded-lg p-8 shadow-xl z-10 max-w-md w-full mx-4">
+                <div class="text-center">
+                  <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                      <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-lg font-medium text-gray-900 mb-2">¡Operación exitosa!</h3>
+                  <p class="text-sm text-gray-500 mb-4">El registro se ha creado exitosamente</p>
+                  <button
+                    @click="cerrarModal"
+                    class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Transition>
+
+
+
     </AuthenticatedLayout>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: #7ac142;
+  stroke-width: 3;
+  fill: none;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+</style>

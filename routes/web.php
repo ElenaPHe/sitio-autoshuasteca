@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/seccion-nuevos/{id}', [NuevosController::class, 'actualizaInfoNuevo'])->name('nuevos.update');
     Route::post('/seccion-nuevos/{id}/cambiarEstado', [NuevosController::class, 'cambiarEstado'])->name('nuevos.cambiarEstado');
+    Route::delete('/seccion-nuevos/{id}', [NuevosController::class, 'eliminarAuto'])->name('nuevos.destroy');
 
 
     //Seccion Nuevos cambio de imagenes

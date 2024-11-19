@@ -188,7 +188,8 @@ class NuevosController extends Controller
 
         $nuevo->save();
 
-        return redirect()->route('nuevos.index');
+        // return redirect()->route('nuevos.index');
+        return redirect()->back();
     }
 
     public function edit($id)
@@ -535,5 +536,17 @@ class NuevosController extends Controller
             return back()->with('success', 'Imagen eliminada correctamente');
         }
         return back()->with('error', 'No se pudo eliminar la imagen');
+    }
+
+    public function eliminarAuto($id){
+        $nuevo = Nuevo::findOrFail($id);
+
+        $carpetaAuto = "autosNuevos/" . $nuevo->modelo;
+
+        if(Storage::disk('public')->exists($carpetaAuto)){
+            Storage::disk('public')->deleteDirectory($carpetaAuto);
+        }
+        $nuevo->delete();
+        return redirect()->route('nuevos.index');
     }
 }

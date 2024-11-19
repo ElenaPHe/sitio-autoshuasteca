@@ -20,19 +20,6 @@ onMounted(() => {
 
     <UserLayout>
         <div class="relative h-screen">
-            <div class="bg-image h-3/4  bg-cover bg-center"
-                style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');">
-                <!-- Contenido superpuesto en la imagen -->
-                <!-- <div class="absolute inset-0 flex items-center justify-center">
-          <h1 :class="[
-            'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
-            {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
-          ]">
-            Home
-          </h1>
-        </div> -->
-            </div>
-
             <div class=" text-center mb-8">
                 <h2 class="text-5xl font-vwheadbold pt-20">Más kilómetros de vida para tu Volkswagen</h2>
                 <p class="font-vwtext pt-6">Conoce los beneficios y plazos de nuestras garantías para mantener al máximo el valor de tu Volkswagen.</p>
