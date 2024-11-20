@@ -107,4 +107,49 @@ class MantenimientoController extends Controller
         $mantenimiento->delete();
         return redirect()->route('mantenimiento.index');
     }
+
+    public function subirImagen(Request $request, $id)
+    {
+        $mantenimiento = Mantenimiento::findOrFail($id);
+        $request->validate([
+            'imagen' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        //Eliminar la imagen antigua
+        if ($mantenimiento->imagen) {
+            Storage::delete('public/' . $mantenimiento->imagen);
+        }
+
+        //Aqui se guarda la nueva imagen
+        $image = $request->file('imagen');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+        $fotoAutoPath = $request->File('imagen')->storeAs('mantenimientos', $imageName, 'public');
+
+        $mantenimiento->update([
+            'imagen' => $fotoAutoPath
+        ]);
+
+        return back()->with('success', 'Imagen actualizada correctamente');
+    }
+
+
+    public function eliminarImagen($id)
+    {
+        $mantenimiento = Mantenimiento::findOrFail($id);
+        
+        if ($mantenimiento->imagen) {
+            $storagePath =  $mantenimiento->imagen;
+
+            if (Storage::disk('public')->exists($storagePath)) {
+                Storage::disk('public')->delete($storagePath);
+
+                $mantenimiento->update([
+                    'imagen' => null
+                ]);
+            }
+            return back()->with('success', 'Imagen eliminada correctamente');
+        }
+        return back()->with('error', 'No se pudo eliminar la imagen');
+    }
 }

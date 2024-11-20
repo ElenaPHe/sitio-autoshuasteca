@@ -41,9 +41,9 @@ Route::get('/Seminuevos', [SeminuevosController::class, 'seccionseminuevosindex'
 Route::get('/AutosNuevos', [NuevosController::class, 'seccionnuevosindex'])->name('autosnuevos');
 Route::get('/Refacciones', [RefaccionesController::class, 'seccioneRefaccionesIndex'])->name('refacciones');
 
-Route::get('/Seminuevos/{id}', [SeminuevosController::class, 'showSeminuevo'])->name('seminuevos.show');
-Route::get('/AutosNuevos/{id}', [NuevosController::class, 'showNuevo'])->name('autosnuevos.show');
-Route::get('/Refacciones/{id}', [RefaccionesController::class, 'showRefaccion'])->name('refacciones.show');
+Route::get('/Seminuevos/{id}/{marca}/{modelo}/{year}', [SeminuevosController::class, 'showSeminuevo'])->name('seminuevos.show');
+Route::get('/AutosNuevos/{id}/{modelo}', [NuevosController::class, 'showNuevo'])->name('autosnuevos.show');
+Route::get('/Refacciones/{id}/{nombre}', [RefaccionesController::class, 'showRefaccion'])->name('refacciones.show');
 
 // Route::get('/Modelos/', function () {
 //     return Inertia::render('Secciones/AutosNuevos');
@@ -159,6 +159,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/seccion-mantenimiento/{id}/edit', [MantenimientoController::class, 'edit'])->name('mantenimiento.edit');
     Route::put('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'actualizar'])->name('mantenimiento.actualizar');
     Route::delete('/seccion-mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimiento.destroy');
+    Route::post('/seccion-mantenimiento/{id}/subirImagen', [MantenimientoController::class, 'subirImagen'])->name('mantenimiento.subirImagen');
+    Route::delete('/seccion-mantenimiento/{id}/eliminarImagen', [MantenimientoController::class, 'eliminarImagen'])->name('mantenimiento.eliminarImagen');
 
 
     //Seccion Refacciones
@@ -168,6 +170,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/seccion-refacciones/{id}/edit', [RefaccionesController::class, 'edit'])->name('refacciones.edit');
 
     Route::put('/seccion-refacciones/{id}', [RefaccionesController::class, 'update'])->name('refacciones.update');
+    Route::delete('/seccion-refacciones/{id}', [RefaccionesController::class, 'eliminarRefaccion'])->name('refacciones.destroy');
 
     //Refacciones Imagen Update y Delete
     Route::post('seccion-refacciones/{id}/subirImagen', [RefaccionesController::class, 'subirImagen'])->name('refacciones.subirImagen');

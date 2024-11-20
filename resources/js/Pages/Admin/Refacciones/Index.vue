@@ -10,6 +10,25 @@ const props = defineProps({
 
 console.log(props.refacciones);
 
+const form = useForm({
+
+});
+
+function eliminarRefaccion(id) {
+    if (confirm('¿Estás seguro de eliminar esta refacción?')) {
+        form.delete(route('refacciones.destroy', id),
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    console.log('Eliminado');
+                },
+                onError: (error) => {
+                    console.log(error);
+                }
+            });
+    }
+}
+
 </script>
 
 <template>
@@ -36,12 +55,20 @@ console.log(props.refacciones);
                                 <img :src="`/storage/${refaccion.imagen}`" alt=""
                                     class="w-full object-cover mb-4 rounded-md">
                                 <h1 class="font-vwheadbold text-gray-800 text-lg  mb-2"> {{ refaccion.nombre }}</h1>
-                                <p>$ {{ refaccion.infoGeneral.precio }} </p>
-                                <p>{{ refaccion.infoGeneral.numParte }}</p>
+                                
 
+
+                            <div class="flex flex-wrap gap-2 justify-between">
                                 <Link :href="`/seccion-refacciones/${refaccion.id}/edit`"
-                                    class="inline-block text-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out">
-                                Editar</Link>
+                                    class="flex-grow bg-blue-500 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-600 transition duration-300 ease-in-out transform hover:-translate-y-1 text-center">
+                                Editar
+                                </Link>
+
+                                <button @click="eliminarRefaccion(refaccion.id)"
+                                    class="flex-grow bg-red-500 text-white px-4 py-2 rounded-md font-medium hover:bg-red-600 transition duration-300 ease-in-out transform hover:-translate-y-1">
+                                    Eliminar
+                                </button>
+                            </div>
                             </div>
 
                         </div>

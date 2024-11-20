@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             // Agregar las columnas que seran los paquetes que tendran el precio por ejemplo $2,250 que no pueda recibir ningun valor que no sea numero
             $table->integer('paqueteOne');
             $table->integer('paqueteTwo');

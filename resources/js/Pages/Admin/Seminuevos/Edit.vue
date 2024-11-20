@@ -142,127 +142,190 @@ onMounted(() => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="flex justify-start mb-4">
-                            <h1>Formulario para Editar Autos Seminuevos</h1>
-                        </div>
 
-                        <div class="mb-4">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-8">
+                            Información de {{ props.seminuevo.infoGeneral.marca }} {{ props.seminuevo.infoGeneral.modelo }} {{ props.seminuevo.infoGeneral.year }}
+                          </h1>
 
+                        <div class="mb-6 space-y-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <!-- Foto del Auto -->
+                            <label for="imagen" class="block text-gray-700 text-sm font-semibold">
+                                Subir Nueva Imagen
+                            </label>
                             <template v-if="props.seminuevo.fotoAuto">
-
-                                <img :src="`/storage/${props.seminuevo.fotoAuto}`" alt="Foto Actual"
-                                    class="mb-2 w-48 h-auto">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Cambiar Foto del Auto
-                                    (Opcional):</label>
-
-                                <button @click="eliminarImagen" class="bg-red-500 text-white px-3 py-1 rounded-lg">Eliminar Imagen</button>
-
+                                <div class="flex flex-col items-center space-y-3">
+                                    <img :src="`/storage/${props.seminuevo.fotoAuto}`" alt="Foto del Auto"
+                                        class="w-48 h-auto rounded shadow-lg border border-gray-200" />
+                                    <label class="text-gray-700 text-sm font-semibold">
+                                        Cambiar Foto del Auto <span class="text-gray-500">(Opcional):</span>
+                                    </label>
+                                    <button @click="eliminarImagen"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-400">
+                                        Eliminar Imagen
+                                    </button>
+                                </div>
                             </template>
 
                             <template v-else>
-                                <form @submit.prevent="subirImagen">
-                                    <label for="">Subir Nueva Imagen</label>
-                                    <input type="file" @change="onFileChange" class="block w-full" accept="image/*" />
+                                <form @submit.prevent="subirImagen"
+                                    class="space-y-4 border border-gray-200 rounded-lg p-4 shadow-lg bg-white">
+                                    <label for="imagen" class="block text-gray-700 text-sm font-medium">
+                                        Subir Nueva Imagen
+                                    </label>
+                                    <input id="imagen" type="file" @change="onFileChange"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-700"
+                                        accept="image/*" />
                                     <button type="submit"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Subir
-                                        Imagen</button>
+                                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                        Subir Imagen
+                                    </button>
                                 </form>
                             </template>
-
-
-
                         </div>
 
-                        <form @submit.prevent="submit" enctype="multipart/form-data">
 
+                        <form @submit.prevent="submit" enctype="multipart/form-data"
+                            class="space-y-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <!-- Información General -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Información General:</label>
-                                <input v-model="form.infoGeneral.marca" type="text" class="block w-full"
-                                    placeholder="Marca" />
-                                <input v-model="form.infoGeneral.modelo" type="text" class="block w-full mt-2"
-                                    placeholder="Modelo" />
-                                <input v-model="form.infoGeneral.year" type="text" class="block w-full mt-2"
-                                    placeholder="Año" />
-                                <input v-model="form.infoGeneral.kilometraje" type="text" class="block w-full mt-2"
-                                    placeholder="Kilometraje" />
-                                <input v-model="form.infoGeneral.color" type="text" class="block w-full mt-2"
-                                    placeholder="Color" style="text-transform: capitalize;" />
-                                <input v-model="form.infoGeneral.numpuertas" type="text" class="block w-full mt-2"
-                                    placeholder="Número de Puertas" />
-                                <!-- <input v-model="form.infoGeneral.transmision" type="text"  class="block w-full mt-2"
-                                    placeholder="Transmisión" /> -->
-                                    <select class="block w-full mt-2" name="" id="" v-model="form.infoGeneral.transmision">
+                            <div class="space-y-4">
+                                <label class="block text-gray-800 text-lg font-semibold">
+                                    Información General:
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <input v-model="form.infoGeneral.marca" type="text" disabled
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-200 text-gray-500"
+                                        placeholder="Marca" />
+                                    <input v-model="form.infoGeneral.modelo" type="text" disabled
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-200 text-gray-500"
+                                        placeholder="Modelo" />
+                                    <input v-model="form.infoGeneral.year" type="text" disabled
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-200 text-gray-500"
+                                        placeholder="Año" />
+                                    <input v-model="form.infoGeneral.kilometraje" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Kilometraje" />
+                                    <input v-model="form.infoGeneral.color" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Color" style="text-transform: capitalize;" />
+                                    <input v-model="form.infoGeneral.numpuertas" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Número de Puertas" />
+                                    <select
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        v-model="form.infoGeneral.transmision">
                                         <option value="">Selecciona una transmisión</option>
                                         <option value="manual">Manual</option>
                                         <option value="automatica">Automática</option>
                                     </select>
-                                <input v-model="form.infoGeneral.motor" type="text" class="block w-full mt-2"
-                                    placeholder="Motor" />
-                                <input v-model="form.infoGeneral.colorInterno" type="text" class="block w-full mt-2"
-                                    placeholder="Color Interno" style="text-transform: capitalize;"  />
-                                <input v-model="form.infoGeneral.tipoAuto" type="text" class="block w-full mt-2"
-                                    placeholder="Tipo de Auto" />
-                                <input v-model="form.infoGeneral.precio" type="text" class="block w-full mt-2"
-                                    placeholder="Precio" />
-                                <input v-model="form.infoGeneral.precioAnterior" type="text" class="block w-full mt-2"
-                                    placeholder="Precio Anterior" />
+                                    <input v-model="form.infoGeneral.motor" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Motor" />
+                                    <input v-model="form.infoGeneral.colorInterno" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Color Interno" style="text-transform: capitalize;" />
+                                    <input v-model="form.infoGeneral.tipoAuto" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Tipo de Auto" />
+                                    <input v-model="form.infoGeneral.precio" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Precio" />
+                                    <input v-model="form.infoGeneral.precioAnterior" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Precio Anterior" />
+                                </div>
                             </div>
 
                             <!-- Descripción -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
-                                <textarea v-model="form.descripcion" class="block w-full"
+                            <div class="space-y-2">
+                                <label class="block text-gray-800 text-lg font-semibold">
+                                    Descripción:
+                                </label>
+                                <textarea v-model="form.descripcion"
+                                    class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                     placeholder="Descripción del auto"></textarea>
                             </div>
 
                             <!-- Información del Distribuidor -->
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Información del
-                                    Distribuidor:</label>
-                                <input v-model="form.infoDistribuidor.nombre" type="text" class="block w-full"
-                                    placeholder="Nombre del Distribuidor" />
-                                <input v-model="form.infoDistribuidor.estado" type="text" class="block w-full mt-2"
-                                    placeholder="Estado" />
-                                <input v-model="form.infoDistribuidor.ciudad" type="text" class="block w-full mt-2"
-                                    placeholder="Ciudad" />
-                                <input v-model="form.infoDistribuidor.fechaAlta" type="text" class="block w-full mt-2"
-                                    placeholder="Fecha de Alta" />
-                                <input v-model="form.infoDistribuidor.telefono" type="text" class="block w-full mt-2"
-                                    placeholder="Teléfono" />
+                            <div class="space-y-4">
+                                <label class="block text-gray-800 text-lg font-semibold">
+                                    Información del Distribuidor:
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <input v-model="form.infoDistribuidor.nombre" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Nombre del Distribuidor" />
+                                    <input v-model="form.infoDistribuidor.estado" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Estado" />
+                                    <input v-model="form.infoDistribuidor.ciudad" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Ciudad" />
+                                    <input v-model="form.infoDistribuidor.fechaAlta" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Fecha de Alta" />
+                                    <input v-model="form.infoDistribuidor.telefono" type="text"
+                                        class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="Teléfono" />
+                                </div>
                             </div>
 
                             <!-- Botón de Envío -->
-                            <div>
+                            <div class="flex justify-end">
                                 <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
+                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    Actualizar
+                                </button>
                             </div>
                         </form>
 
 
-                        <div class="mb-4">
 
-                            <!-- Foto del Auto -->
+                        <div class="mb-6 space-y-6 bg-white p-6 rounded-lg shadow-md border border-gray-200 mt-6">
+                            <!-- Fotos del carrusel -->
                             <template v-if="props.seminuevo.carrusel && props.seminuevo.carrusel.length > 0">
-                                <div class="flex flex-wrap gap-2">
-                                    <img v-for="img in props.seminuevo.carrusel" :key="img" :src="`/storage/${img}`"
-                                        class="w-32 h-auto mb-2" alt="Imagen Carrusel">
+                                <div>
+                                    <label class="block text-gray-800 text-lg font-semibold mb-2">Imágenes del Carrusel:</label>
+                                    <div class="flex flex-wrap gap-4">
+                                        <img
+                                            v-for="img in props.seminuevo.carrusel"
+                                            :key="img"
+                                            :src="`/storage/${img}`"
+                                            class="w-32 h-32 object-cover rounded-lg border border-gray-200 shadow-md"
+                                            alt="Imagen Carrusel"
+                                        />
+                                    </div>
+                                    <div class="mt-4 flex items-center gap-4">
+                                        <label class="block text-gray-700 text-sm font-bold">Cambiar las imágenes del carrusel:</label>
+                                        <button
+                                            @click="eliminarCarrusel"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-400"
+                                        >
+                                            Cambiar Carrusel
+                                        </button>
+                                    </div>
                                 </div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Cambiar las imagenes del carrusel :</label>
-                                <button @click="eliminarCarrusel" class="bg-green-500 text-white px-3 py-1 rounded-lg">Cambiar carrusel</button>
                             </template>
 
                             <template v-else>
-                                <form @submit.prevent="subirCarrusel">
-                                    <label for="">Subir Carrusel de Imagenes</label>
-                                    <input type="file" multiple @change="onFileChangeCarrusel" class="block w-full" accept="image/*" />
-                                    <button type="submit"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Subir
-                                        Carrusel</button>
+                                <form @submit.prevent="subirCarrusel" class="space-y-4">
+                                    <label class="block text-gray-800 text-lg font-semibold">Subir Carrusel de Imágenes:</label>
+                                    <input
+                                        type="file"
+                                        multiple
+                                        @change="onFileChangeCarrusel"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        accept="image/*"
+                                    />
+                                    <button
+                                        type="submit"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    >
+                                        Subir Carrusel
+                                    </button>
                                 </form>
                             </template>
                         </div>
+
                     </div>
                 </div>
             </div>

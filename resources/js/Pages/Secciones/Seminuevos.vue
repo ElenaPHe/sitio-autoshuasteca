@@ -133,7 +133,7 @@ function formatPrice(value) {
 
                 <div class="space-y-6">
                     <Link v-for="infoSemi in filteredSeminuevos" :key="infoSemi.id"
-                        :href="route('seminuevos.show', infoSemi.id)"
+                        :href="route('seminuevos.show', { id: infoSemi.id, marca: infoSemi.infoGeneral.marca.toUpperCase(), modelo: infoSemi.infoGeneral.modelo.replace(/\s+/g, '-').toUpperCase(), year: infoSemi.infoGeneral.year })"
                         class="block bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
                     <div class="flex flex-col md:flex-row">
                         <!-- Imagen del auto -->

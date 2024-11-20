@@ -111,7 +111,7 @@ const onImageLoad = () => {
                         class="object-cover w-full h-full" />
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-8">
                         <div class="max-w-7xl mx-auto">
-                            <h1 class="text-5xl font-vwheadbold text-white mb-2">{{ props.nuevo.modelo }}</h1>
+                            <h1 class="text-5xl font-vwheadbold text-white mb-2">{{ props.nuevo.modelo.replace(/\s\d{4}$/, '') }}</h1>
                             <p class="text-xl text-white/90">{{ props.nuevo.infoGeneral.eslogan }}</p>
                         </div>
                     </div>

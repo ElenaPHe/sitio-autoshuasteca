@@ -116,173 +116,156 @@ const actualizaRefaccion = () => {
             <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de Refacciones</h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
+        <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+              <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                <div class="p-6 sm:p-10">
+                  <h1 class="text-3xl font-bold text-gray-900 mb-8">
+                    Información de {{ props.refacciones.nombre }}
+                  </h1>
 
-
-                        <form @submit.prevent="actualizaRefaccion" class="bg-white shadow-md rounded-lg overflow-hidden" enctype="multipart/form-data">
-                            <div class="p-6 space-y-6">
-                                <!-- Informacion general -->
-                                <div class="space-y-4">
-                                    <h2 class="text-xl font-semibold text-gray-800">Información general de {{ props.refacciones.nombre }} </h2>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <!-- <div>
-                                            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Refacción</label>
-                                            <input type="text" id="nombre" v-model="form.nombre" disabled
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                                            <input type="text" id="descripcion" v-model="form.infoGeneral.descripcion"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div>
-                                        <div>
-                                            <label for="numParte" class="block text-sm font-medium text-gray-700">No. Parte</label>
-                                            <input type="text" id="noParte" v-model="form.infoGeneral.numParte"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div>
-                                        <div>
-                                            <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
-                                            <input type="number" id="stock" v-model="form.infoGeneral.stock"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div>
-                                        <div>
-                                            <label for="precio"
-                                                class="block text-sm font-medium text-gray-700">Precio</label>
-                                            <input type="text" id="precio" v-model="form.infoGeneral.precio"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div>
-
-                                        <div>
-                                            <label for="precio"
-                                                class="block text-sm font-medium text-gray-700">Presentación</label>
-
-                                                <select v-model="form.tipoRefaccion" name="" id="" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-
-                                                    <option value="Unico">Refacción</option>
-                                                    <option value="Kit">Kit Refacciones</option>
-                                                </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Kit de refacciones -->
-                                <div class="space-y-4">
-                                    <div class="flex justify-between items-center">
-                                        <h2 class="text-xl font-semibold text-gray-800">Información del Kit <small style="font-style: italic;">(Si no es kit no llenar)</small></h2>
-                                        <button type="button" @click="addKit"
-                                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Agregar Contenido del Kit
-                                        </button>
-                                    </div>
-                                    <div v-for="(content, index) in form.infoKit" :key="index"
-                                        class="bg-gray-50 p-4 rounded-md space-y-4">
-                                        <div>
-                                            <label :for="'contentName' + index"
-                                                class="block text-sm font-medium text-gray-700">Nombre</label>
-                                            <input type="text" :id="'contentName' + index" v-model="content.nombre"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        </div>
-
-
-
-                                        <button type="button" @click="removeKit(index)"
-                                            class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Carrusel Kit -->
-                                <!-- <div class="space-y-4">
-                                    <h2 class="text-xl font-semibold text-gray-800">Carrusel kit</h2>
-                                    <div>
-                                        <label for="colores" class="block text-sm font-medium text-gray-700">Imagen</label>
-                                        <input type="file" id="colores" multiple @change="onFileUploadCarrusel"
-                                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" accept="image/*">
-                                    </div>
-                                </div> -->
-                                <!-- Aplicacion -->
-                                <div class="space-y-4">
-                                    <h2 class="text-xl font-semibold text-gray-800">Aplicación</h2>
-                                    <div>
-                                        <label for="colores" class="block text-sm font-medium text-gray-700">Mencionar la compatibilidad de autos</label>
-                                        <textarea id="aplicacion" v-model="form.aplicacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                                    </div>
-                                </div>
-
-                                <!-- Boton de enviar -->
-                                <div class="flex justify-end">
-                                    <button type="submit"
-                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Enviar
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <p>Foto de la refaccion</p>
-                        <template v-if="props.refacciones.imagen">
-                            <img :src="`/storage/${props.refacciones.imagen}`" alt="Foto del auto" class="mt-4 h-40">
-                            <button @click="eliminarImagen"
-                                class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md">Eliminar Imagen</button>
-                        </template>
-                        <template v-else>
-                            <form @submit.prevent="subirImagen" class="space-y-6" enctype="multipart/form-data">
-                                <label for="fotoAuto" class="block text-sm font-medium text-gray-700">
-                                    Foto de la refacción
-                                </label>
-                                <input type="file" @change="onFileUploadImagen" class="mt-1 block
-                                    w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" accept="image/*">
-                                <button type="submit"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir
-                                    Imagen</button>
-                            </form>
-                        </template>
-                    </div>
-
-                    <div class="mb-4">
-                        <p>Imagenes del carrusel </p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <template v-if="props.refacciones.carruselKit && props.refacciones.carruselKit.length">
-                                <div v-for="(imagen, index) in props.refacciones.carruselKit" :key="index"
-                                    class="bg-white p -4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-xl">
-                                    <img :src="`/storage/${imagen}`" alt="Color"
-                                        class="w-full h-48 object-cover rounded-md mb-3">
-                                    <button @click.prevent="eliminarImagenCarrusel(index)"
-                                        class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">Eliminar
-                                        Imagen</button>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <p>No hay imagenes en el carrusel de refaccion</p>
-                            </template>
-                            <form @submit.prevent="subirImagenCarrusel" class="space-y-6"
-                                enctype="multipart/form-data">
-                                <label for="colores" class="block text-sm font-medium text-gray-700">
-                                    Refacciones
-                                </label>
-                                <input type="file" @change="onFileUploadCarrusel" class="mt-1 block
-                                w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
-                                focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" accept="image/*">
-                                <button type="submit"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Subir imagen
-                                    de la refaccion</button>
-                            </form>
+                  <form @submit.prevent="actualizaRefaccion" enctype="multipart/form-data">
+                    <!-- Información general -->
+                    <section class="mb-10">
+                      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Información general</h2>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                          <input type="text" id="descripcion" v-model="form.infoGeneral.descripcion"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         </div>
+                        <div>
+                          <label for="numParte" class="block text-sm font-medium text-gray-700 mb-1">No. Parte</label>
+                          <input type="text" id="noParte" v-model="form.infoGeneral.numParte"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                          <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+                          <input type="number" id="stock" v-model="form.infoGeneral.stock"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                          <label for="precio" class="block text-sm font-medium text-gray-700 mb-1">Precio</label>
+                          <input type="text" id="precio" v-model="form.infoGeneral.precio"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                          <label for="tipoRefaccion" class="block text-sm font-medium text-gray-700 mb-1">Presentación</label>
+                          <select v-model="form.tipoRefaccion" id="tipoRefaccion"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="Unico">Refacción</option>
+                            <option value="Kit">Kit Refacciones</option>
+                          </select>
+                        </div>
+                      </div>
+                    </section>
 
+                    <!-- Kit de refacciones -->
+                    <section class="mb-10">
+                      <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-semibold text-gray-800">Información del Kit</h2>
+                        <button type="button" @click="addKit"
+                          class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                          Agregar Contenido del Kit
+                        </button>
+                      </div>
+                      <p class="text-sm text-gray-500 italic mb-4">Si no es kit, no llenar</p>
+                      <div v-for="(content, index) in form.infoKit" :key="index" class="bg-gray-50 p-6 rounded-lg mb-4">
+                        <div class="mb-4">
+                          <label :for="'contentName' + index" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                          <input type="text" :id="'contentName' + index" v-model="content.nombre"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <button type="button" @click="removeKit(index)"
+                          class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">
+                          Eliminar
+                        </button>
+                      </div>
+                    </section>
+
+                    <!-- Aplicación -->
+                    <section class="mb-10">
+                      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Aplicación</h2>
+                      <div>
+                        <label for="aplicacion" class="block text-sm font-medium text-gray-700 mb-1">Mencionar la compatibilidad de autos</label>
+                        <textarea id="aplicacion" v-model="form.aplicacion" rows="4"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                      </div>
+                    </section>
+
+                    <!-- Botón de enviar -->
+                    <div class="flex justify-end">
+                      <button type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                        Guardar cambios
+                      </button>
                     </div>
-
+                  </form>
                 </div>
+              </div>
+
+              <!-- Imágenes -->
+              <div class="mt-10 bg-white shadow-xl rounded-lg overflow-hidden">
+                <div class="p-6 sm:p-10">
+                  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Imágenes</h2>
+
+                  <!-- Foto principal -->
+                  <section class="mb-10">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Foto principal de la refacción</h3>
+                    <div v-if="props.refacciones.imagen" class="mb-4">
+                      <img :src="`/storage/${props.refacciones.imagen}`" alt="Foto del auto" class="w-full max-w-md h-auto rounded-lg shadow-md">
+                      <button @click="eliminarImagen"
+                        class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">
+                        Eliminar Imagen
+                      </button>
+                    </div>
+                    <form v-else @submit.prevent="subirImagen" enctype="multipart/form-data" class="space-y-4">
+                      <div>
+                        <label for="fotoAuto" class="block text-sm font-medium text-gray-700 mb-1">
+                          Subir foto de la refacción
+                        </label>
+                        <input type="file" id="fotoAuto" @change="onFileUploadImagen" accept="image/*"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                      </div>
+                      <button type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        Subir Imagen
+                      </button>
+                    </form>
+                  </section>
+
+                  <!-- Imágenes del carrusel -->
+                  <section>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Imágenes del carrusel</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+                      <div v-for="(imagen, index) in props.refacciones.carruselKit" :key="index"
+                        class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img :src="`/storage/${imagen}`" alt="Imagen del carrusel" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                          <button @click.prevent="eliminarImagenCarrusel(index)"
+                            class="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">
+                            Eliminar Imagen
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <form @submit.prevent="subirImagenCarrusel" enctype="multipart/form-data" class="space-y-4">
+                      <div>
+                        <label for="imagenCarrusel" class="block text-sm font-medium text-gray-700 mb-1">
+                          Subir imagen para el carrusel
+                        </label>
+                        <input type="file" id="imagenCarrusel" @change="onFileUploadCarrusel" accept="image/*"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                      </div>
+                      <button type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        Subir imagen al carrusel
+                      </button>
+                    </form>
+                  </section>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
     </AuthenticatedLayout>
 </template>

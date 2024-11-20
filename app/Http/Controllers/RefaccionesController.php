@@ -189,4 +189,17 @@ class RefaccionesController extends Controller
         }
         return back()->with('error', 'No se encontro la imagen');
     }
+
+    public function eliminarRefaccion($id){
+        $refaccion = Refacciones::findOrFail($id);
+
+        $rutaCarpeta = 'refacciones/' . $refaccion->nombre;
+
+        if (Storage::disk('public')->exists($rutaCarpeta)) {
+            Storage::disk('public')->deleteDirectory($rutaCarpeta);
+        }
+
+        $refaccion->delete();
+        return redirect()->route('refacciones.index');
+    }
 }

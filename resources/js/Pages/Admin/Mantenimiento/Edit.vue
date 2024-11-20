@@ -5,9 +5,44 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 // Inicializar el formulario con los datos existentes del mantenimiento
 const props = defineProps(['mantenimiento']);
 
+const formImagen = useForm({
+    imagen: null
+});
+
+function onFileChange(event) {
+    formImagen.imagen = event.target.files[0];
+}
+
+function subirImagen() {
+    formImagen.post(route('mantenimiento.subirImagen', props.mantenimiento.id), {
+        onSuccess: () => {
+            console.log('Imagen subida correctamente');
+            formImagen.reset();
+            window.location.reload();
+        },
+        onError: (errors) => {
+            console.log('Error al subir la imagen', errors);
+        },
+    });
+}
+
+function eliminarImagen() {
+    if (confirm('¿Estás seguro de que deseas eliminar la imagen?')) {
+        formImagen.delete(route('mantenimiento.eliminarImagen', props.mantenimiento.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('Imagen eliminada correctamente');
+                window.location.reload();
+            },
+            onError: (errors) => {
+                console.log('Error al eliminar la imagen', errors);
+            },
+        });
+    }
+}
+
 const form = useForm({
     titulo: props.mantenimiento.titulo,
-    imagen: props.mantenimiento.imagen || null,
     paqueteOne: props.mantenimiento.paqueteOne,
     paqueteTwo: props.mantenimiento.paqueteTwo,
     paqueteThree: props.mantenimiento.paqueteThree,
@@ -43,6 +78,46 @@ function submit() {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-8">
+                            Información de {{ props.mantenimiento.titulo }}
+                          </h1>
+
+                          <div class="mb-6 space-y-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <!-- Foto del Auto -->
+                            <label for="imagen" class="block text-gray-700 text-sm font-semibold">
+                                Subir Nueva Imagen
+                            </label>
+                            <template v-if="props.mantenimiento.imagen">
+                                <div class="flex flex-col items-center space-y-3">
+                                    <img :src="`/storage/${props.mantenimiento.imagen}`" alt="Foto del Auto"
+                                        class="w-48 h-auto rounded shadow-lg border border-gray-200" />
+                                    <label class="text-gray-700 text-sm font-semibold">
+                                        Cambiar Foto del Auto <span class="text-gray-500">(Opcional):</span>
+                                    </label>
+                                    <button @click="eliminarImagen"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-400">
+                                        Eliminar Imagen
+                                    </button>
+                                </div>
+                            </template>
+
+                            <template v-else>
+                                <form @submit.prevent="subirImagen"
+                                    class="space-y-4 border border-gray-200 rounded-lg p-4 shadow-lg bg-white">
+                                    <label for="imagen" class="block text-gray-700 text-sm font-medium">
+                                        Subir Nueva Imagen
+                                    </label>
+                                    <input id="imagen" type="file" @change="onFileChange"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-700"
+                                        accept="image/*" />
+                                    <button type="submit"
+                                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                        Subir Imagen
+                                    </button>
+                                </form>
+                            </template>
+                        </div>
+
                         <form @submit.prevent="submit" class="space-y-6" enctype="multipart/form-data">
                             <!-- Titulo -->
                             <div>
@@ -55,15 +130,7 @@ function submit() {
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
-                            <div>
-                                <label for="imagen" class="block text-sm font-medium text-gray-700">
-                                    Imagen
-                                </label>
 
-                                <!-- Input para la imagen -->
-                                <input type="file" id="imagen" name="imagen" @change="event => form.imagen = event.target.files[0]"
-                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            </div>
 
                             <div>
                                 <label for="paqueteOne" class="block text-sm font-medium text-gray-700">

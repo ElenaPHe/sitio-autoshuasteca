@@ -103,7 +103,7 @@ console.log(props.refacciones);
                 <div :class="filteredRefaccion.length === 1 ? 'single-card-container font-vwtext' : filteredRefaccion.length === 2 ? 'two-card-container font-vwtext' : 'card-container font-vwtext'">
                     <div v-for="(refaccion, index) in filteredRefaccion" :key="index" class="card">
                         <!-- <div style="display: flex; width: 100%;"> -->
-                        <Link class="card-image-wrapper" :href="route('refacciones.show', refaccion.id)">
+                        <Link class="card-image-wrapper" :href="route('refacciones.show',{id: refaccion.id, nombre: refaccion.nombre.replace(/\s+/g, '-').toUpperCase() })">
                         <div class="status-badge" v-if="refaccion.infoGeneral.stock">
                             <span class="status-dot"></span>
                             {{ refaccion.infoGeneral.stock > 0 ? 'Disponible' : 'No disponible' }}
