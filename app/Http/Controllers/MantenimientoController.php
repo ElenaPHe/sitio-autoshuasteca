@@ -22,8 +22,15 @@ class MantenimientoController extends Controller
     public function seccionmantenimientoindex()
     {
         $mantenimientos = Mantenimiento::all();
+
+        $modelosAutos = Mantenimiento::all()->map(function ($mantenimiento) {
+            return explode(' ', trim($mantenimiento->titulo))[0];
+        })->unique()->values();
+
+
         return Inertia::render('Secciones/Mantenimiento', [
-            'mantenimientos' => $mantenimientos
+            'mantenimientos' => $mantenimientos,
+            'modelosAutos' => $modelosAutos
         ]);
     }
 
@@ -137,7 +144,7 @@ class MantenimientoController extends Controller
     public function eliminarImagen($id)
     {
         $mantenimiento = Mantenimiento::findOrFail($id);
-        
+
         if ($mantenimiento->imagen) {
             $storagePath =  $mantenimiento->imagen;
 

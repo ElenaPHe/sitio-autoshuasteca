@@ -1,13 +1,16 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import UserLayout from '@/Layouts/UserLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     mantenimientos: Object,
+    modelosAutos: Array,
 });
 
 const isContentLoaded = ref(false);
+const selectedMarca = ref('');
+
 
 onMounted(() => {
     // Add a small delay to trigger the load animation
@@ -16,7 +19,19 @@ onMounted(() => {
     }, 300);
 });
 
-console.log(props.mantenimientos);
+
+const filteredMantenimiento = computed(() => {
+
+    let filtered = props.mantenimientos;
+
+    if (selectedMarca.value != '') {
+        filtered = props.mantenimientos.filter(mantenimiento => mantenimiento.titulo.includes(selectedMarca.value));
+    }
+
+    return filtered;
+
+});
+
 </script>
 
 <template>
@@ -33,13 +48,13 @@ console.log(props.mantenimientos);
                     absolute inset-0 flex
                     items-center justify-center
                     sm:justify-start sm:items-center sm:pt-36
-                    lg:justify-start lg:items-center lg:pt-28"
-                    style="top: 50%;">
-                        <h1 :class="[
+                    lg:justify-start lg:items-center lg:pt-28" style="top: 50%;">
+                    <h1
+                        :class="[
                             'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vwheadbold text-white shadow-lg transition-all duration-1000 ease-out',
                             { 'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded }]">
-                            Mantenimiento <span><br>  &nbsp; &nbsp;Volkswagen</span>
-                        </h1>
+                        Mantenimiento <span><br> &nbsp; &nbsp;Volkswagen</span>
+                    </h1>
 
                 </div>
 
@@ -218,6 +233,21 @@ console.log(props.mantenimientos);
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+
+                <div class="bg-white shadow-lg p-6 mb-8">
+                    <h3 class="text-2xl font-vwheadbold text-gray-800 mb-6">Filtros</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <label for="marca" class="block text-sm font-medium text-gray-700">Marca:</label>
+                            <select v-model="selectedMarca" id="marca"
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="">Todos los modelos</option>
+                                <option v-for="marca in modelosAutos" :key="marca" :value="marca">{{ marca }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-full divide-y divide-gray-300">
                     <h2
                         :class="['text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-10 transition-all duration-1000 ease-out font-vwheadlight text-center',
@@ -225,10 +255,12 @@ console.log(props.mantenimientos);
                         Modelos
                     </h2>
 
+
+
                     <!-- Tabla de mantenimientos -->
 
                     <!-- Cuerpo -->
-                    <div v-for="info in mantenimientos" :key="info.id" class="flex flex-col md:flex-col mb-6">
+                    <div v-for="info in filteredMantenimiento" :key="info.id" class="flex flex-col md:flex-col mb-6">
                         <!-- Título del modelo -->
                         <div class="text-center mt-8">
                             <div class="px-6 py-4 whitespace-nowrap text-lg font-vwheadbold text-gray-900">

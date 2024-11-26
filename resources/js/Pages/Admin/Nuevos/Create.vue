@@ -18,7 +18,7 @@ const formNuevos = useForm({
         potencia: '',
         torque: '',
         versiones: '',
-        stock: '',
+        // stock: '',
     },
     disenio: {
         titulo: '',
@@ -57,6 +57,7 @@ const formNuevos = useForm({
                     precioVersion: '',
                     rendimiento: '',
                     potencia: '',
+                    stock: '',
                 }
             ],
             caracteristicas: [],
@@ -132,6 +133,7 @@ function addVersion() {
                 precioVersion: '',
                 rendimiento: '',
                 potencia: '',
+                stock: '',
             }
         ],
         caracteristicas: [],
@@ -240,11 +242,11 @@ const submitAuto = () => {
                                 </div>
 
 
-                                <div>
+                                <!-- <div>
                                     <label for="torque" class="block text-sm font-medium text-gray-700">Cantidad en Existencia</label>
                                     <input type="number" id="stock" min="1"  v-model="formNuevos.infoGeneral.stock"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                </div>
+                                </div> -->
                                 <div>
                                     <label for="versiones"
                                         class="block text-sm font-medium text-gray-700">Versiones</label>
@@ -443,6 +445,13 @@ const submitAuto = () => {
                                         class="block text-sm font-medium text-gray-700">Potencia</label>
                                     <input type="text" :id="'versionPower' + index"
                                         v-model="version.infoGen[0].potencia"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label :for="'versionPrice' + index"
+                                        class="block text-sm font-medium text-gray-700">En existencia</label>
+                                    <input type="number" :id="'versionStock' + index"
+                                        v-model="version.infoGen[0].stock"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                                 <!-- agregar caracteristicas -->

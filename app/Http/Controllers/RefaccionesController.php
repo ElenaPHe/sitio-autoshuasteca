@@ -47,7 +47,7 @@ class RefaccionesController extends Controller
     {
 
         $validatedData = $request->validate([
-            'imagen' => 'required|mimes:png,jpg,jpeg,svg|max:5120',
+            'imagen' => 'required|mimes:png,jpg,jpeg,svg,webp|max:5120',
             'nombre' => 'required|string',
             'infoGeneral' => 'nullable|array',
             'tipoRefaccion' => 'required|string',
@@ -118,7 +118,7 @@ class RefaccionesController extends Controller
 
         if ($refacciones) {
             $validatedData = $request->validate([
-                'imagen' => 'required|mimes:png,jpg,jpeg,svg|max:5120'
+                'imagen' => 'required|mimes:png,jpg,jpeg,svg,webp|max:5120'
             ]);
             $folderName = 'refacciones/' . $refacciones->nombre;
             if ($request->hasFile('imagen')) {
@@ -155,7 +155,7 @@ class RefaccionesController extends Controller
         // dd($request->all());
 
         $request->validate([
-            'carruselKit.*' => 'required|image|mimes:png,jpg,jpeg,svg|max:5120'
+            'carruselKit.*' => 'required|image|mimes:png,jpg,jpeg,svg,webp|max:5120'
         ]);
 
         $folderName = 'refacciones/' . $refacciones->nombre . '/carrusel';

@@ -15,28 +15,30 @@ const form = useForm({
     infoKit: [
         {
             nombre: '',
+            descripcion: '',
         }
     ],
     carruselKit: [],
     aplicacion: '',
 });
 
-function onFileUploadImagen(event){
+function onFileUploadImagen(event) {
     form.imagen = event.target.files[0];
 }
 
-function onFileUploadCarrusel(event){
+function onFileUploadCarrusel(event) {
     const files = Array.from(event.target.files);
     form.carruselKit = files;
 }
 
-function addKit(){
+function addKit() {
     form.infoKit.push({
         nombre: '',
+        descripcion: '',
     });
 }
 
-function removeKit(index){
+function removeKit(index) {
     form.infoKit.splice(index, 1);
 }
 
@@ -59,26 +61,24 @@ const submit = () => {
 
     <Head title="Refacciones" />
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de Refacciones</h2>
-        </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="flex justify-start mb-4">
-                            <h1>Formulario Autos Seminuevos</h1>
+                            <h1>Formulario de Refacciones</h1>
                         </div>
 
-                        <form @submit.prevent="submit" class="bg-white shadow-md rounded-lg overflow-hidden" enctype="multipart/form-data">
+                        <form @submit.prevent="submit" class="bg-white shadow-md rounded-lg overflow-hidden"
+                            enctype="multipart/form-data">
                             <div class="p-6 space-y-6">
                                 <!-- Informacion general -->
                                 <div class="space-y-4">
                                     <h2 class="text-xl font-semibold text-gray-800">Información General</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Refacción</label>
+                                            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre
+                                                Refacción</label>
                                             <input type="text" id="nombre" v-model="form.nombre"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         </div>
@@ -93,17 +93,20 @@ const submit = () => {
                                 <div class="space-y-4">
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                                            <label for="descripcion"
+                                                class="block text-sm font-medium text-gray-700">Descripción</label>
                                             <input type="text" id="descripcion" v-model="form.infoGeneral.descripcion"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         </div>
                                         <div>
-                                            <label for="numParte" class="block text-sm font-medium text-gray-700">No. Parte</label>
+                                            <label for="numParte" class="block text-sm font-medium text-gray-700">No.
+                                                Parte</label>
                                             <input type="text" id="noParte" v-model="form.infoGeneral.numParte"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         </div>
                                         <div>
-                                            <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
+                                            <label for="stock"
+                                                class="block text-sm font-medium text-gray-700">Stock</label>
                                             <input type="number" id="stock" v-model="form.infoGeneral.stock"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         </div>
@@ -118,19 +121,21 @@ const submit = () => {
                                             <label for="precio"
                                                 class="block text-sm font-medium text-gray-700">Presentación</label>
 
-                                                <select v-model="form.tipoRefaccion" name="" id="" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            <select v-model="form.tipoRefaccion" name="" id=""
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
 
-                                                    <option value="Unico">Refacción</option>
-                                                    <option value="Kit">Kit Refacciones</option>
-                                                </select>
+                                                <option value="Unico">Unico</option>
+                                                <option value="Kit">Kit Refacciones</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Kit de refacciones -->
-                                <div class="space-y-4">
+                                <div class="space-y-4" v-if="form.tipoRefaccion == 'Kit'">
                                     <div class="flex justify-between items-center">
-                                        <h2 class="text-xl font-semibold text-gray-800">Información del Kit <small style="font-style: italic;">(Si no es kit no llenar)</small></h2>
+                                        <h2 class="text-xl font-semibold text-gray-800">Información del Kit <small
+                                                style="font-style: italic;">(Si no es kit no llenar)</small></h2>
                                         <button type="button" @click="addKit"
                                             class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Agregar Contenido del Kit
@@ -138,10 +143,16 @@ const submit = () => {
                                     </div>
                                     <div v-for="(content, index) in form.infoKit" :key="index"
                                         class="bg-gray-50 p-4 rounded-md space-y-4">
+                                        <h3 class="text-lg font-semibold text-gray-800">Refacción {{ index + 1 }}</h3>
                                         <div>
                                             <label :for="'contentName' + index"
                                                 class="block text-sm font-medium text-gray-700">Nombre</label>
                                             <input type="text" :id="'contentName' + index" v-model="content.nombre"
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            <label :for="'contentDescription' + index"
+                                                class="block text-sm font-medium text-gray-700">Descripción</label>
+                                            <input type="text" :id="'contentDescription' + index"
+                                                v-model="content.descripcion"
                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         </div>
 
@@ -155,12 +166,15 @@ const submit = () => {
                                 </div>
 
                                 <!-- Carrusel Kit -->
-                                <div class="space-y-4">
-                                    <h2 class="text-xl font-semibold text-gray-800">Carrusel kit</h2>
+                                <div class="space-y-4"  v-if="form.tipoRefaccion == 'Kit'">
+                                    <h2 class="text-xl font-semibold text-gray-800">Carrusel kit <small
+                                            class="italic">Tambien añade la foto del kit</small> </h2>
                                     <div>
-                                        <label for="colores" class="block text-sm font-medium text-gray-700">Imagen</label>
+                                        <label for="colores"
+                                            class="block text-sm font-medium text-gray-700">Imagen</label>
                                         <input type="file" id="colores" multiple @change="onFileUploadCarrusel"
-                                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" accept="image/*">
+                                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                                            accept="image/*">
                                     </div>
                                 </div>
 
@@ -168,8 +182,10 @@ const submit = () => {
                                 <div class="space-y-4">
                                     <h2 class="text-xl font-semibold text-gray-800">Aplicación</h2>
                                     <div>
-                                        <label for="colores" class="block text-sm font-medium text-gray-700">Mencionar la compatibilidad de autos</label>
-                                        <textarea id="aplicacion" v-model="form.aplicacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                        <label for="colores" class="block text-sm font-medium text-gray-700">Mencionar
+                                            la compatibilidad de autos</label>
+                                        <textarea id="aplicacion" v-model="form.aplicacion"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
                                     </div>
                                 </div>
 

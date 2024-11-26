@@ -114,7 +114,6 @@ onMounted(() => {
                                 <span class="text-3xl font-vwheadbold text-[#001E50]">${{ refaccion.infoGeneral.precio
                                     }}</span>
                             </div>
-
                         </div>
 
                         <!-- Technical Specifications -->
@@ -129,6 +128,19 @@ onMounted(() => {
                                     <div>
                                         <p class="text-sm text-gray-500">Aplicacion</p>
                                         <p class="font-vwheadlight">{{ refaccion.aplicacion}}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Descrpcion</p>
+                                        <p class="font-vwheadlight">{{ refaccion.infoGeneral.descripcion}}</p>
+                                    </div>
+
+                                    <div v-if="props.refaccion.tipoRefaccion == 'Kit'">
+                                        <p class="text-sm text-gray-500">Incluye:</p>
+                                        <p class="font-vwheadlight" v-for="(info, index) in props.refaccion.infoKit" :key="index"> {{ info.nombre}} -> {{info.descripcion}} </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">En existencia</p>
+                                        <p class="font-vwheadlight">{{ refaccion.infoGeneral.stock}}</p>
                                     </div>
                                 </div>
                                 <!-- <div class="space-y-3">

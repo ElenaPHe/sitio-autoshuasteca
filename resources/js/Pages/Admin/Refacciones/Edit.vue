@@ -2,10 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+
 const props = defineProps({
     refacciones: Object,
 });
 
+
+console.log(props.refacciones.infoKit);
+console.log('hola');
 const form = useForm({
     // imagen: props.refacciones.imagen || '',
     nombre: props.refacciones.nombre || '',
@@ -16,9 +20,11 @@ const form = useForm({
         precio: props.refacciones.infoGeneral.precio || '',
     },
     tipoRefaccion: props.refacciones.tipoRefaccion || '',
-    infoKit: [
+    infoKit: props.refacciones.infoKit || [
         {
-            nombre: props.refacciones.infoKit.nombre || '',
+            nombre: '',
+            descripcion: '',
+
         }
     ],
     // carruselKit: props.refacciones.carruselKit || [],
@@ -87,6 +93,7 @@ function eliminarImagenCarrusel(index){
 function addKit(){
     form.infoKit.push({
         nombre: '',
+        descripcion: '',
     });
 }
 
@@ -161,7 +168,7 @@ const actualizaRefaccion = () => {
                     </section>
 
                     <!-- Kit de refacciones -->
-                    <section class="mb-10">
+                    <section class="mb-10" v-if="props.refacciones.tipoRefaccion=='Kit'">
                       <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-semibold text-gray-800">Información del Kit</h2>
                         <button type="button" @click="addKit"
@@ -169,12 +176,18 @@ const actualizaRefaccion = () => {
                           Agregar Contenido del Kit
                         </button>
                       </div>
-                      <p class="text-sm text-gray-500 italic mb-4">Si no es kit, no llenar</p>
+                      <!-- <p class="text-sm text-gray-500 italic mb-4">Si no es kit, no llenar</p> -->
                       <div v-for="(content, index) in form.infoKit" :key="index" class="bg-gray-50 p-6 rounded-lg mb-4">
                         <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Refacción {{ index + 1 }}</h3>
                           <label :for="'contentName' + index" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
                           <input type="text" :id="'contentName' + index" v-model="content.nombre"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <label :for="'contentDescription' + index"
+                                                class="block text-sm font-medium text-gray-700">Descripción</label>
+                                            <input type="text" :id="'contentDescription' + index"
+                                                v-model="content.descripcion"
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         </div>
                         <button type="button" @click="removeKit(index)"
                           class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">
@@ -235,7 +248,7 @@ const actualizaRefaccion = () => {
                   </section>
 
                   <!-- Imágenes del carrusel -->
-                  <section>
+                  <section v-if="props.refacciones.tipoRefaccion=='Kit'">
                     <h3 class="text-xl font-semibold text-gray-700 mb-4">Imágenes del carrusel</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
                       <div v-for="(imagen, index) in props.refacciones.carruselKit" :key="index"

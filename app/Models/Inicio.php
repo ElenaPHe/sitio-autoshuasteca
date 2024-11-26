@@ -12,7 +12,8 @@ class Inicio extends Model
     protected $fillable = [
         'imagen',
         'carrusel',
-        'promociones'
+        'promociones',
+        'terminos',
     ];
 
     protected $casts = [

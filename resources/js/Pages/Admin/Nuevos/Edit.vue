@@ -18,7 +18,7 @@ const formNuevos = useForm({
         potencia: props.nuevo.infoGeneral.potencia || '',
         torque: props.nuevo.infoGeneral.torque || '',
         versiones: props.nuevo.infoGeneral.versiones || '',
-        stock: props.nuevo.infoGeneral.stock || '',
+        // stock: props.nuevo.infoGeneral.stock || '',
     },
     disenio: {
         titulo: props.nuevo.disenio?.titulo || '',
@@ -57,6 +57,7 @@ const formNuevos = useForm({
                     precioVersion: props.nuevo.versiones?.infoGen?.precioVersion || '',
                     rendimiento: props.nuevo.versiones?.infoGen?.rendimiento || '',
                     potencia: props.nuevo.versiones?.infoGen?.potencia || '',
+                    stock: props.nuevo.versiones?.infoGen?.stock || '',
                 }
             ],
             caracteristicas: props.nuevo.versiones?.caracteristicas || [],
@@ -289,6 +290,16 @@ function addDesingContent() {
 }
 function removeDesingContent(index) {
     formNuevos.disenioContenido.splice(index, 1);
+    formDisenioContenido.delete(route('nuevos.eliminarImagenDesingContent', { id: props.nuevo.id, index }), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('La imagen se ha eliminado correctamente');
+                // window.location.reload();
+            },
+            onError: (errors) => {
+                console.log(errors);
+            }
+        });
 }
 function addTecnologiaContenido() {
     formNuevos.tecnologiaContenido.push({
@@ -300,6 +311,16 @@ function addTecnologiaContenido() {
 }
 function removeTecnologiaContenido(index) {
     formNuevos.tecnologiaContenido.splice(index, 1);
+    formTecnologiaContenido.delete(route('nuevos.eliminarImagenTecnologiaContenido', { id: props.nuevo.id, index }), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('La imagen se ha eliminado correctamente');
+                // window.location.reload();
+            },
+            onError: (errors) => {
+                console.log(errors);
+            }
+        });
 }
 
 function addVersion() {
@@ -311,6 +332,7 @@ function addVersion() {
                 precioVersion: '',
                 rendimiento: '',
                 potencia: '',
+                stock: '',
             }
         ],
         caracteristicas: [],
@@ -318,6 +340,20 @@ function addVersion() {
 }
 function removeVersion(index) {
     formNuevos.versiones.splice(index, 1);
+
+        formVersion.delete(route('nuevos.eliminarImagenVersiones', { id: props.nuevo.id, index }), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('La imagen se ha eliminado correctamente');
+                // window.location.reload();
+            },
+            onError: (errors) => {
+                console.log(errors);
+            }
+        });
+
+
+
 }
 
 const actualizaAuto = () => {
@@ -575,6 +611,13 @@ const actualizaAuto = () => {
                                                     class="block text-sm font-medium text-gray-700">Potencia</label>
                                                 <input type="text" :id="'versionPower' + index"
                                                     v-model="version.infoGen[0].potencia"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            </div>
+                                            <div>
+                                                <label :for="'versionPower' + index"
+                                                    class="block text-sm font-medium text-gray-700">En existencia</label>
+                                                <input type="text" :id="'versionPower' + index"
+                                                    v-model="version.infoGen[0].stock"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
                                             <!-- agregar caracteristicas -->

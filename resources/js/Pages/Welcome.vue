@@ -67,6 +67,19 @@ const goToSlide = (index) => {
     currentIndex.value = index;
     transitionEnabled.value = true;
 };
+
+const mostrarTerminos = ref(false);
+
+const toggleTerminos = () => {
+  mostrarTerminos.value = !mostrarTerminos.value;
+};
+
+const scrollToButton = (event) => {
+  event.preventDefault();
+  const button = document.getElementById('terminos');
+  button.scrollIntoView({ behavior: 'smooth' });
+};
+
 </script>
 
 <template>
@@ -172,9 +185,24 @@ const goToSlide = (index) => {
                         <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">{{
                             promocion.titulo }}</h3>
                         <p class="text-base sm:text-lg font-vwheadlight text-gray-700">{{ promocion.descripcion }}</p>
+                        <a @click="scrollToButton" href="#terminos">Terminos y condiciones</a>
                     </div>
                 </div>
             </div>
+
+            <div class="container ">
+                <button  id="terminos" @click="toggleTerminos" :class="{ 'cerrar': mostrarTerminos }" class="button">
+                  {{ mostrarTerminos ? 'Cerrar' : 'Términos y Condiciones' }}
+                </button>
+                <transition name="fade">
+                  <div v-if="mostrarTerminos" class="terminos">
+                    <p>
+                      {{ info.terminos }}
+
+                    </p>
+                  </div>
+                </transition>
+              </div>
 
 
         </div>
@@ -195,4 +223,72 @@ const goToSlide = (index) => {
 .transition-none {
     transition: none;
 }
+
+html {
+    scroll-behavior: smooth;
+  }
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    background-color: rgb(0,30,80);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .button:hover {
+    background-color: rgb(0,40,100);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .cerrar {
+    background-color: rgb(180,0,0);
+  }
+
+  .cerrar:hover {
+    background-color: rgb(220,0,0);
+  }
+
+  .terminos {
+    max-width: 800px;
+    margin-top: 20px;
+    text-align: justify;
+    font-size: 12px;
+    line-height: 1.6;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.6s ease, transform 0.6s ease-out;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
 </style>

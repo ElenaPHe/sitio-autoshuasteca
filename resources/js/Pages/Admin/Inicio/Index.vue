@@ -20,10 +20,10 @@ const props = defineProps({
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="flex justify-between items-center mb-8">
                             <h1 class="text-3xl font-bold text-gray-800">Sección de inicio</h1>
-                            <Link :href="route('inicio.create')"
+                            <!-- <Link :href="route('inicio.create')"
                                 class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
                             Crear Nuevo
-                            </Link>
+                            </Link> -->
                         </div>
 
                         <div v-for="info in inicios" :key="info.id" class="mb-12 last:mb-0">
@@ -60,6 +60,14 @@ const props = defineProps({
                                                 <p class="text-gray-600">{{ promo.descripcion }}</p>
                                             </div>
                                         </div>
+                                    </div>
+                                </section>
+
+                                <!-- Terminos y condiciones -->
+                                <section>
+                                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Términos y condiciones</h2>
+                                    <div class="space-y-6">
+                                        <p class="text-gray-600 text-xs">{{ info.terminos }}</p>
                                     </div>
                                 </section>
 

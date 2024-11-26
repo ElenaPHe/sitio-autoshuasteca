@@ -162,10 +162,10 @@ const onImageLoad = () => {
                             <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.versiones }}</p>
                         </div>
 
-                        <div class="flex-1 min-w-[200px]">
+                        <!-- <div class="flex-1 min-w-[200px]">
                             <h2 class=" font-vwheadlight text-gray-800" style="font-size: 16px; font-weight: 400; line-height: 19px; ">Stock</h2>
                             <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.stock }} disponibles</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- Diseño -->
@@ -399,6 +399,15 @@ const onImageLoad = () => {
                                             <p class="font-vwheadbold text-gray-900"
                                                 style="display: inline; font-size: 22px; line-height: 22px;">
                                                 {{ infoGen.potencia }}
+                                            </p>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <p class="font-vwheadlight text-gray-600"
+                                                style="display: grid; line-height: 16px; margin: 0px;">
+                                                Disponible</p>
+                                            <p class="font-vwheadbold text-gray-900"
+                                                style="display: inline; font-size: 22px; line-height: 22px;">
+                                                {{ infoGen.stock }}
                                             </p>
                                         </div>
                                     </div>

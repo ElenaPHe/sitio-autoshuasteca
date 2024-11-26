@@ -45,6 +45,7 @@ class InicioController extends Controller
             'promociones.*.titulo' => 'required|string|max:255',
             'promociones.*.descripcion' => 'required|string|max:500',
             'promociones.*.imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'terminos' => 'required|string',
         ]);
 
         $inicio = new Inicio();
@@ -110,6 +111,7 @@ class InicioController extends Controller
         // $inicio->imagen = $request->imagen;
         // $inicio->carrusel = $request->carrusel;
         $inicio->promociones = $request->promociones;
+        $inicio->terminos = $request->terminos;
 
         $inicio->save();
 

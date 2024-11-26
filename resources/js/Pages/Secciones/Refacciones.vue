@@ -121,7 +121,7 @@ console.log(props.refacciones);
 
                                 <div style="position: relative; width: 55%;">
                                     <h3 class="model-name font-vwheadbold">{{ refaccion.nombre }}</h3>
-                                    <p class="model-specs">{{ refaccion.infoGeneral.descripcion }}</p>
+                                    <!-- <p class="model-specs">{{ refaccion.infoGeneral.descripcion }}</p> -->
                                 </div>
 
                                 <div style="position: relative; width: 45%;">
