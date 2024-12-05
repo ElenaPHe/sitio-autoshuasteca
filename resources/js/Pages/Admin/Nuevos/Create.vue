@@ -57,7 +57,7 @@ const formNuevos = useForm({
                     precioVersion: '',
                     rendimiento: '',
                     potencia: '',
-                    stock: '',
+
                 }
             ],
             caracteristicas: [],
@@ -133,7 +133,6 @@ function addVersion() {
                 precioVersion: '',
                 rendimiento: '',
                 potencia: '',
-                stock: '',
             }
         ],
         caracteristicas: [],
@@ -447,13 +446,13 @@ const submitAuto = () => {
                                         v-model="version.infoGen[0].potencia"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <label :for="'versionPrice' + index"
                                         class="block text-sm font-medium text-gray-700">En existencia</label>
                                     <input type="number" :id="'versionStock' + index"
                                         v-model="version.infoGen[0].stock"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                </div>
+                                </div> -->
                                 <!-- agregar caracteristicas -->
                                 <div class="flex justify-between items-center">
                                     <h2 class="text-xl font-semibold text-gray-800">Características</h2>

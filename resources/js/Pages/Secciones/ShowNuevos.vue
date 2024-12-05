@@ -32,39 +32,32 @@ onUnmounted(() => {
 });
 
 const startAutoPlay = () => {
-    // console.log('Starting autoplay');
     autoPlayInterval.value = setInterval(() => {
-        // console.log('Next slide');
         nextSlide();
-    }, 3000); // Cambia cada 3 segundos
+    }, 3000);
 };
 
 const stopAutoPlay = () => {
-    // console.log('Stopping autoplay');
     clearInterval(autoPlayInterval.value);
 };
 
 const nextSlide = () => {
     transitionEnabled.value = true;
-    // console.log('Current index before next slide:', currentIndex.value);
 
-    // Si es la última imagen, vuelve a la primera
+
     if (currentIndex.value === props.nuevo.colores.length - 1) {
         setTimeout(() => {
             transitionEnabled.value = false;
-            currentIndex.value = 0; // Vuelve a la primera sin transiciones
-            // console.log('Reset to first slide');
-        }, 500); // El tiempo para evitar el salto visual
+            currentIndex.value = 0;
+        }, 500);
     } else {
         currentIndex.value++;
-        // console.log('Current index after next slide:', currentIndex.value);
     }
 };
 
 const prevSlide = () => {
     transitionEnabled.value = true;
 
-    // Si es la primera imagen, vuelve a la última
     if (currentIndex.value === 0) {
         setTimeout(() => {
             transitionEnabled.value = false;
@@ -132,40 +125,36 @@ const onImageLoad = () => {
                         </div>
 
                         <!-- Motor -->
-                        <div class="flex-1 min-w-[200px]">
+                        <div class="flex-1 min-w-[200px]" v-if="props.nuevo.infoGeneral.motor">
                             <h2 class="font-vwheadlight text-gray-800" style="font-size: 16px; font-weight: 400; line-height: 19px;">Motor</h2>
                             <p class=" font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.motor }}</p>
                         </div>
 
                         <!-- Transmisión -->
-                        <div class="flex-1 min-w-[200px]">
+                        <div class="flex-1 min-w-[200px]" v-if="props.nuevo.infoGeneral.transmision">
                             <h2 class="font-vwheadlight text-gray-800" style="font-size: 16px; font-weight: 400; line-height: 19px; ">Transmisión</h2>
                             <p class=" font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.transmision }}
                             </p>
                         </div>
 
                         <!-- Potencia -->
-                        <div class="flex-1 min-w-[200px]">
+                        <div class="flex-1 min-w-[200px]" v-if="props.nuevo.infoGeneral.potencia">
                             <h2 class=" font-vwheadlight text-gray-800 " style="font-size: 16px; font-weight: 400; line-height: 19px; ">Potencia</h2>
                             <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.potencia }}</p>
                         </div>
 
                         <!-- Torque -->
-                        <div class="flex-1 min-w-[200px]">
+                        <div class="flex-1 min-w-[200px]" v-if="props.nuevo.infoGeneral.torque">
                             <h2 class=" font-vwheadlight text-gray-800 " style="font-size: 16px; font-weight: 400; line-height: 19px; ">Torque</h2>
                             <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.torque }}</p>
                         </div>
 
                         <!-- Versiones -->
-                        <div class="flex-1 min-w-[200px]">
+                        <div class="flex-1 min-w-[200px]" v-if="props.nuevo.infoGeneral.versiones">
                             <h2 class="font-vwheadlight text-gray-800" style="font-size: 16px; font-weight: 400; line-height: 19px; ">Versiones</h2>
                             <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.versiones }}</p>
                         </div>
 
-                        <!-- <div class="flex-1 min-w-[200px]">
-                            <h2 class=" font-vwheadlight text-gray-800" style="font-size: 16px; font-weight: 400; line-height: 19px; ">Stock</h2>
-                            <p class="font-vwheadbold text-gray-900" style="font-size: 30px; font-weight: 400px; line-height: 36px;">{{ props.nuevo.infoGeneral.stock }} disponibles</p>
-                        </div> -->
                     </div>
                 </div>
                 <!-- Diseño -->
@@ -230,7 +219,6 @@ const onImageLoad = () => {
                             <!-- Imágenes del carrusel -->
                             <div class="w-full flex-shrink-0" v-for="(image, index) in props.nuevo.colores"
                                 :key="index">
-                                <!-- <img :src="`/storage/${image}`" alt="Carrusel Image" class="w-full h-64 sm:h-80 md:h-96 lg:h-auto object-cover" /> -->
                                 <img :src="`/storage/${image}`" alt="Carrusel Image"
                                     class="w-full h-auto object-cover" />
 
@@ -305,27 +293,6 @@ const onImageLoad = () => {
                     </div>
                 </div>
 
-                <!-- Galeria -->
-                <!-- <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 bg-white">
-                    <h2 class="font-vwheadbold text-center"
-                        style="font-size: 45px; font-weight: 500; line-height: 63px; margin: 30px 0px;">Galería</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div v-for="(imagen, index) in props.nuevo.galeria" :key="index"
-                            class="relative aspect-[4/3] bg-[#ffffff] rounded-lg overflow-hidden">
-                            <img :src="`/storage/${imagen}`" :alt="props.nuevo.modelo"
-                                class="w-full h-full object-cover p-4">
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="p-5 sm:p-8">
-                    <div
-                        class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-3">
-                        <div v-for="(imagen, index) in props.nuevo.galeria" :key="index">
-                            <img :src="`/storage/${imagen}`" :alt="props.nuevo.modelo">
-                        </div>
-                    </div>
-                </div> -->
                 <h2 Colores class="font-vwheadbold text-center"
                     style="font-size: 45px; font-weight: 500; line-height: 63px; margin: 30px 0px;"> Galeria
                 </h2>
@@ -336,23 +303,13 @@ const onImageLoad = () => {
                     </div>
                 </div>
 
-
-                <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-                    <div class="group cursor-pointer relative" v-for="(imagen, index) in props.nuevo.galeria"
-                        :key="index">
-                        <img :src="`/storage/${imagen}`" :alt="props.nuevo.modelo" alt="Image 1"
-                            class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105">
-                    </div>
-                </div> -->
-
-                <!-- Versiones -->
                 <section class="py-4 px-4 sm:px-6 lg:px-8 bg-white">
                     <div class="max-w-7xl mx-auto">
                         <h2 class="font-vwheadbold text-center"
                             style="font-size: 45px; font-weight: 500; line-height: 63px; margin: 10px 0px;">Versiones
                         </h2>
 
-                        <!-- Tabs de versiones -->
+
                         <div class="flex flex-wrap justify-center gap-2 sm:gap-8 mb-4 border-b-2 border-slate-200 ">
                             <button v-for="(version, index) in props.nuevo.versiones" :key="index"
                                 @click="selectedVersion = index"
@@ -374,7 +331,7 @@ const onImageLoad = () => {
                                     </div>
                                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center"
                                         v-for="infoGen in version.infoGen" :key="infoGen">
-                                        <div class="space-y-2">
+                                        <div class="space-y-2" v-if="infoGen.precioVersion">
                                             <p class="font-vwheadlight text-gray-600"
                                                 style="display: grid; line-height: 16px; margin: 0px;">
                                                 Desde</p>
@@ -383,7 +340,7 @@ const onImageLoad = () => {
                                                 ${{ formatPrice(infoGen.precioVersion) }}
                                             </p>
                                         </div>
-                                        <div class="space-y-2">
+                                        <div class="space-y-2" v-if="infoGen.rendimiento">
                                             <p class="font-vwheadlight text-gray-600"
                                                 style="display: grid; line-height: 16px; margin: 0px;">
                                                 Rendimiento</p>
@@ -392,22 +349,13 @@ const onImageLoad = () => {
                                                 {{ infoGen.rendimiento }}
                                             </p>
                                         </div>
-                                        <div class="space-y-2">
+                                        <div class="space-y-2" v-if="infoGen.potencia">
                                             <p class="font-vwheadlight text-gray-600"
                                                 style="display: grid; line-height: 16px; margin: 0px;">
                                                 Potencia</p>
                                             <p class="font-vwheadbold text-gray-900"
                                                 style="display: inline; font-size: 22px; line-height: 22px;">
                                                 {{ infoGen.potencia }}
-                                            </p>
-                                        </div>
-                                        <div class="space-y-2">
-                                            <p class="font-vwheadlight text-gray-600"
-                                                style="display: grid; line-height: 16px; margin: 0px;">
-                                                Disponible</p>
-                                            <p class="font-vwheadbold text-gray-900"
-                                                style="display: inline; font-size: 22px; line-height: 22px;">
-                                                {{ infoGen.stock }}
                                             </p>
                                         </div>
                                     </div>
@@ -448,7 +396,7 @@ const onImageLoad = () => {
 <style scoped>
 .contFoto {
 
-    backgroundImage: url('/storage/${props.nuevo.fotoAuto}');
+    background-image: url('/storage/${props.nuevo.fotoAuto}');
 
     background-size: cover;
     background-position: center;

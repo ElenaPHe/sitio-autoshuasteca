@@ -79,7 +79,7 @@ onUnmounted(() => {
                         </svg>
                     </button>
 
-                    <a href="https://goo.gl/maps/your-dealership-location" target="_blank" rel="noopener noreferrer"
+                    <a href="https://maps.app.goo.gl/67V2UPKFLKd27ioo9" target="_blank" rel="noopener noreferrer"
                         class="flex items-center group">
                         <svg class="h-5 w-5 mr-4 sm:mr-2"
                             :class="[isScrolledPastImage || !hasHeroImage ? 'text-[#002873]' : 'text-white', 'group-hover:text-[rgb(0,176,240)] transition-colors duration-200']"
@@ -171,10 +171,10 @@ onUnmounted(() => {
                                 class="block py-2 text-base text-white hover:bg-blue-700 rounded px-2">
                             Precios de Mantenimiento
                             </Link>
-                            <Link :href="route('garantia')"
+                            <!-- <Link :href="route('garantia')"
                                 class="block py-2 text-base text-white hover:bg-blue-700 rounded px-2">
                             Garantia
-                            </Link>
+                            </Link> -->
                         </div>
                     </div>
 

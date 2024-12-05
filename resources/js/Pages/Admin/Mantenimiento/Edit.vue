@@ -71,7 +71,7 @@ function submit() {
     <Head title="Editar Mantenimiento" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar Mantenimiento</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar Formulario de Mantenimiento</h2>
         </template>
 
         <div class="py-12">

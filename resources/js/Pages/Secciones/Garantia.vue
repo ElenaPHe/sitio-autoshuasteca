@@ -19,7 +19,7 @@ onMounted(() => {
     <Head title="Home" />
 
     <UserLayout>
-        <div class="relative h-screen">
+        <!-- <div class="relative h-screen">
             <div class=" text-center mb-8">
                 <h2 class="text-5xl font-vwheadbold pt-20">Más kilómetros de vida para tu Volkswagen</h2>
                 <p class="font-vwtext pt-6">Conoce los beneficios y plazos de nuestras garantías para mantener al máximo el valor de tu Volkswagen.</p>
@@ -46,7 +46,7 @@ onMounted(() => {
             </div>
 
 
-        </div>
+        </div> -->
 
     </UserLayout>
 </template>

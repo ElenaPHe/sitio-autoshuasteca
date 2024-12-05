@@ -120,7 +120,7 @@ const actualizaRefaccion = () => {
     <Head title="Refacciones" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de Refacciones</h2>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Editar Formulario de Refacciones</h2>
         </template>
 
         <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">

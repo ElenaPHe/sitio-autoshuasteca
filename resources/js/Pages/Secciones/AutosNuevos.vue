@@ -53,13 +53,12 @@ console.log(autosInversos);
 
                 <div class="card-container font-vwtext">
                     <div v-for="(vehiculo, index) in autosActivos" :key="index" class="card">
-                      <!-- <div style="display: flex; width: 100%;"> -->
-                        <!-- Poner el vehiculo modelo para mandarlo por la ruta con este formato ejemplo Jetta-2025 -->
+
 
                         <Link class="card-image-wrapper" :href="route('autosnuevos.show', { id: vehiculo.id, modelo: vehiculo.modelo.replace(/\s+/g, '-').toUpperCase() })">
-                          <div class="status-badge" v-if="vehiculo.infoGeneral.stock">
+                          <div class="status-badge">
                             <span class="status-dot"></span>
-                            {{ vehiculo.infoGeneral.stock > 0 ? 'Disponible' : 'No disponible' }}
+                            Disponible
                           </div>
                           <img :src="`/storage/${vehiculo.fotoAuto}`" :alt="vehiculo.infoGeneral.modelo" class="card-image" />
                           <div class="hover-overlay">

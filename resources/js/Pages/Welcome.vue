@@ -92,35 +92,13 @@ const scrollToButton = (event) => {
             <div class=" relative bg-image  bg-cover bg-center"
             :style="` background-image: url('/storage/${item.imagen}'); `" style="height: 80vh;">
 
-            <!-- Contenido superpuesto en la imagen -->
-            <!-- <div class="absolute inset-0 flex items-center justify-center">
-          <h1 :class="[
-            'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
-            {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
-          ]">
-            Home
-          </h1>
-        </div> -->
+
         </div>
 
         </div>
 
         <div class="relative" v-for="info in inicios" :key="info.id">
-            <!-- <div class="bg-image h-3/4  bg-cover bg-center" style=" background-image: url('https://vw-huasteca.com.mx/Assets/ModelosNuevos/PortaHome/web_1920x720.jpg');"> -->
-            <!-- <div class=" relative bg-image h-3/4  bg-cover bg-center" -->
-                <!-- :style="` background-image: url('/storage/${info.imagen}'); `"> -->
-                <!-- Contenido superpuesto en la imagen -->
-                <!-- <div class="absolute inset-0 flex items-center justify-center">
-              <h1 :class="[
-                'text-6xl font-bold text-white shadow-lg transition-all duration-1000 ease-out',
-                {'opacity-0 translate-y-[-20px]': !isContentLoaded, 'opacity-100 translate-y-0': isContentLoaded}
-              ]">
-                Home
-              </h1>
-            </div> -->
-            <!-- </div> -->
 
-            <!-- Nombre de la empresa -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 text-center">
                 <h2 :class="[
                     'text-3xl sm:text-4xl md:text-5xl mb-4 transition-all duration-1000 ease-out font-vwheadbold',

@@ -61,13 +61,14 @@ const submit = () => {
 
     <Head title="Refacciones" />
     <AuthenticatedLayout>
+        <template #header>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Formulario de Refacciones</h2>
+        </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="flex justify-start mb-4">
-                            <h1>Formulario de Refacciones</h1>
-                        </div>
+
 
                         <form @submit.prevent="submit" class="bg-white shadow-md rounded-lg overflow-hidden"
                             enctype="multipart/form-data">

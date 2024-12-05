@@ -135,7 +135,7 @@ onMounted(() => {
     <Head title="Editar Seminuevo" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar Auto Seminuevo</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar Formulario de Seminuevo</h2>
         </template>
 
         <div class="py-12">
@@ -214,8 +214,8 @@ onMounted(() => {
                                         class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                         v-model="form.infoGeneral.transmision">
                                         <option value="">Selecciona una transmisión</option>
-                                        <option value="manual">Manual</option>
-                                        <option value="automatica">Automática</option>
+                                        <option value="Manual">Manual</option>
+                                        <option value="Automatica">Automática</option>
                                     </select>
                                     <input v-model="form.infoGeneral.motor" type="text"
                                         class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"

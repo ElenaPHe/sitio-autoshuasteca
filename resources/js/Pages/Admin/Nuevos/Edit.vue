@@ -57,7 +57,7 @@ const formNuevos = useForm({
                     precioVersion: props.nuevo.versiones?.infoGen?.precioVersion || '',
                     rendimiento: props.nuevo.versiones?.infoGen?.rendimiento || '',
                     potencia: props.nuevo.versiones?.infoGen?.potencia || '',
-                    stock: props.nuevo.versiones?.infoGen?.stock || '',
+
                 }
             ],
             caracteristicas: props.nuevo.versiones?.caracteristicas || [],
@@ -332,7 +332,7 @@ function addVersion() {
                 precioVersion: '',
                 rendimiento: '',
                 potencia: '',
-                stock: '',
+
             }
         ],
         caracteristicas: [],
@@ -374,7 +374,7 @@ const actualizaAuto = () => {
     <Head title="Inicio" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Contendo de inicio</h2>
+            <h2 class="font-vwtext text-xl text-gray-800 leading-tight">Editar Formulario de Autos Nuevos</h2>
         </template>
 
         <div class="py-12 font-vwtext">
@@ -435,12 +435,12 @@ const actualizaAuto = () => {
                                                 <input type="text" id="torque" v-model="formNuevos.infoGeneral.torque"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
-                                            <div>
+                                            <!-- <div>
                                                 <label for="stock"
                                                     class="block text-sm font-medium text-gray-700">Stock</label>
                                                 <input type="number" min="1" id="torque" v-model="formNuevos.infoGeneral.stock"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                            </div>
+                                            </div> -->
                                             <div>
                                                 <label for="versiones"
                                                     class="block text-sm font-medium text-gray-700">Versiones</label>
@@ -613,13 +613,13 @@ const actualizaAuto = () => {
                                                     v-model="version.infoGen[0].potencia"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                             </div>
-                                            <div>
+                                            <!-- <div>
                                                 <label :for="'versionPower' + index"
                                                     class="block text-sm font-medium text-gray-700">En existencia</label>
                                                 <input type="text" :id="'versionPower' + index"
                                                     v-model="version.infoGen[0].stock"
                                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                            </div>
+                                            </div> -->
                                             <!-- agregar caracteristicas -->
                                             <div class="flex justify-between items-center">
                                                 <h2 class="text-xl font-semibold text-gray-800">Características</h2>
