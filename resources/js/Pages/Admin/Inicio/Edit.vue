@@ -17,6 +17,7 @@ const form = useForm({
             titulo: '',
             // imagen: null,
             descripcion: '',
+            terminos: '',
         }
     ],
     terminos: props.inicio.terminos || '',
@@ -113,6 +114,7 @@ function addPromocion() {
         titulo: '',
         imagen: null,
         descripcion: '',
+        terminos: '',
     });
 }
 
@@ -289,7 +291,10 @@ function submit() {
                                     <input type="text" v-model="promo.titulo" placeholder="Titulo de la promoción"
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                     <textarea v-model="promo.descripcion" placeholder="Descripción de la promoción"
-                                        rows="3"
+                                        rows="5"
+                                        class="mt-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                                    <textarea v-model="promo.terminos" placeholder="Terminos y condiciones de la promoción"
+                                        rows="5"
                                         class="mt-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
                                 </div>
                                 <button @click.prevent="addPromocion"
@@ -305,11 +310,11 @@ function submit() {
 
 
                             <!-- Terminos y condiciones -->
-                            <section class="bg-gray-50 rounded-lg p-6">
+                            <!-- <section class="bg-gray-50 rounded-lg p-6">
                                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Términos y condiciones</h2>
                                 <textarea v-model="form.terminos" placeholder="Términos y condiciones"
                                     class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-                            </section>
+                            </section> -->
 
                             <div class="flex justify-end space-x-4">
                                 <Link href="/seccionbienvenida"

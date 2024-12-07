@@ -68,16 +68,19 @@ const goToSlide = (index) => {
     transitionEnabled.value = true;
 };
 
-const mostrarTerminos = ref(false);
 
-const toggleTerminos = () => {
-  mostrarTerminos.value = !mostrarTerminos.value;
-};
 
 const scrollToButton = (event) => {
-  event.preventDefault();
-  const button = document.getElementById('terminos');
-  button.scrollIntoView({ behavior: 'smooth' });
+    event.preventDefault();
+    const button = document.getElementById('terminos');
+    button.scrollIntoView({ behavior: 'smooth' });
+};
+
+
+const mostrarTerminos = ref(props.inicios.promociones ? props.inicios.promociones.map(() => false) : []);
+
+const toggleTerminos = (index) => {
+    mostrarTerminos.value[index] = !mostrarTerminos.value[index];
 };
 
 </script>
@@ -90,10 +93,10 @@ const scrollToButton = (event) => {
 
         <div v-for="item in inicios" :key="item.id" class="h-3/4">
             <div class=" relative bg-image  bg-cover bg-center"
-            :style="` background-image: url('/storage/${item.imagen}'); `" style="height: 80vh;">
+                :style="` background-image: url('/storage/${item.imagen}'); `" style="height: 80vh;">
 
 
-        </div>
+            </div>
 
         </div>
 
@@ -160,27 +163,30 @@ const scrollToButton = (event) => {
                         'w-full md:w-1/2 px-4 mt-6',
                         index % 2 === 0 ? 'md:order-2' : 'md:order-1'
                     ]">
-                        <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">{{
-                            promocion.titulo }}</h3>
+                        <h3 class="text-center -my-10 text-xl sm:text-2xl md:text-3xl font-vwheadbold mb-4">
+                            {{ promocion.titulo }}
+                        </h3>
                         <p class="text-base sm:text-lg font-vwheadlight text-gray-700">{{ promocion.descripcion }}</p>
-                        <a @click="scrollToButton" href="#terminos">Terminos y condiciones</a>
+                        <button @click="toggleTerminos(index)"
+                            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mx-auto block text-sm">
+                            {{ mostrarTerminos[index] ? 'Ocultar' : 'Mostrar' }} Términos y condiciones
+                        </button>
+
+                        <transition name="fade">
+                            <div v-if="mostrarTerminos[index]" class="terminos mt-4 p-4 bg-gray-100 rounded" >
+                                <p class="text-gray-700" style="font-size: 10px; line-height: 12px;">
+                                    {{ promocion.terminos }}
+
+                                </p>
+                            </div>
+                        </transition>
+
+
                     </div>
                 </div>
             </div>
 
-            <div class="container ">
-                <button  id="terminos" @click="toggleTerminos" :class="{ 'cerrar': mostrarTerminos }" class="button">
-                  {{ mostrarTerminos ? 'Cerrar' : 'Términos y Condiciones' }}
-                </button>
-                <transition name="fade">
-                  <div v-if="mostrarTerminos" class="terminos">
-                    <p>
-                      {{ info.terminos }}
 
-                    </p>
-                  </div>
-                </transition>
-              </div>
 
 
         </div>
@@ -204,7 +210,7 @@ const scrollToButton = (event) => {
 
 html {
     scroll-behavior: smooth;
-  }
+}
 
 
 
@@ -214,10 +220,10 @@ html {
     align-items: center;
     padding: 20px;
     margin-bottom: 20px;
-  }
+}
 
-  .button {
-    background-color: rgb(0,30,80);
+.button {
+    background-color: rgb(0, 30, 80);
     border: none;
     color: white;
     padding: 12px 24px;
@@ -229,23 +235,23 @@ html {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .button:hover {
-    background-color: rgb(0,40,100);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
+.button:hover {
+    background-color: rgb(0, 40, 100);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  .cerrar {
-    background-color: rgb(180,0,0);
-  }
+.cerrar {
+    background-color: rgb(180, 0, 0);
+}
 
-  .cerrar:hover {
-    background-color: rgb(220,0,0);
-  }
+.cerrar:hover {
+    background-color: rgb(220, 0, 0);
+}
 
-  .terminos {
+.terminos {
     max-width: 800px;
     margin-top: 20px;
     text-align: justify;
@@ -255,18 +261,17 @@ html {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 
-  .fade-enter-active,
-  .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.6s ease, transform 0.6s ease-out;
-  }
+}
 
-  .fade-enter-from,
-  .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
     opacity: 0;
     transform: translateY(-10px);
-  }
-
+}
 </style>

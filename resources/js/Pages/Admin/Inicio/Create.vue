@@ -14,6 +14,7 @@ const form = useForm({
             titulo: '',
             imagen: null,
             descripcion: '',
+            terminos: '',
         }
     ],
     terminos: '',
@@ -44,6 +45,7 @@ function addPromocion() {
         titulo: '',
         imagen: null,
         descripcion: '',
+        terminos: '',
     });
 }
 
@@ -72,6 +74,7 @@ function submit() {
 </script>
 
 <template>
+
     <Head title="Formulario de inicio" />
     <AuthenticatedLayout>
         <template #header>
@@ -89,7 +92,8 @@ function submit() {
                                 <label for="imagen" class="block text-sm font-medium text-gray-700">
                                     Imagen de inicio
                                 </label>
-                                <input type="file" id="imagen" name="imagen" @change="event => handleImageUpload(event, 'imagen')"
+                                <input type="file" id="imagen" name="imagen"
+                                    @change="event => handleImageUpload(event, 'imagen')"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -98,7 +102,8 @@ function submit() {
                                 <label for="carrusel" class="block text-sm font-medium text-gray-700">
                                     Carrusel de imágenes
                                 </label>
-                                <input type="file" id="carrusel" name="carrusel" @change="event => handleFileUpload(event)" multiple
+                                <input type="file" id="carrusel" name="carrusel"
+                                    @change="event => handleFileUpload(event)" multiple
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
 
@@ -113,33 +118,49 @@ function submit() {
                                         <input type="text" v-model="promo.titulo" placeholder="Título de la promoción"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                                         <!-- Campo de Imagen -->
-                                        <input type="file" @change="event => handleImageUpload(event, 'promociones', index)"
+                                        <input type="file"
+                                            @change="event => handleImageUpload(event, 'promociones', index)"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
                                         <!-- Campo de Descripción -->
-                                        <input type="text" v-model="promo.descripcion" placeholder="Descripción de la promoción"
+                                        <input type="text" v-model="promo.descripcion"
+                                            placeholder="Descripción de la promoción"
                                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+
+                                        <label for="terminos" class="block text-sm font-medium text-gray-700">
+                                            Términos y condiciones
+                                        </label>
+                                        <textarea v-model="promo.terminos" id="terminos" name="terminos" rows="3"
+                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+
+
                                         <!-- Botón para eliminar promoción -->
-                                        <button @click.prevent="removePromocion(index)" class="bg-red-500 text-white px-4 py-2 rounded">Eliminar</button>
+                                        <button @click.prevent="removePromocion(index)"
+                                            class="bg-red-500 text-white px-4 py-2 rounded">Eliminar</button>
                                     </div>
                                 </div>
                                 <!-- Botón para agregar promoción -->
-                                <button @click.prevent="addPromocion" class="bg-green-500 text-white px-4 py-2 rounded">Agregar promoción</button>
+                                <button @click.prevent="addPromocion"
+                                    class="bg-green-500 text-white px-4 py-2 rounded">Agregar
+                                    promoción</button>
                             </div>
 
 
                             <!-- Términos y condiciones -->
-                            <div>
+                            <!-- <div>
                                 <label for="terminos" class="block text-sm font-medium text-gray-700">
                                     Términos y condiciones
                                 </label>
                                 <textarea v-model="form.terminos" id="terminos" name="terminos" rows="3"
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-                            </div>
+                            </div> -->
 
                             <!-- Botones de acción -->
                             <div class="flex justify-end">
-                                <Link :href="route('inicio.index')" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 mr-4">Cancelar</Link>
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar</button>
+                                <Link :href="route('inicio.index')"
+                                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 mr-4">Cancelar
+                                </Link>
+                                <button type="submit"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar</button>
                             </div>
                         </form>
                     </div>

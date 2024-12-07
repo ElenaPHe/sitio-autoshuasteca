@@ -64,12 +64,12 @@ const props = defineProps({
                                 </section>
 
                                 <!-- Terminos y condiciones -->
-                                <section>
+                                <!-- <section>
                                     <h2 class="text-2xl font-semibold text-gray-700 mb-4">Términos y condiciones</h2>
                                     <div class="space-y-6">
                                         <p class="text-gray-600 text-xs">{{ info.terminos }}</p>
                                     </div>
-                                </section>
+                                </section> -->
 
                                 <div class="flex justify-end mt-8">
                                     <Link :href="`/seccionbienvenida/${info.id}/edit`"

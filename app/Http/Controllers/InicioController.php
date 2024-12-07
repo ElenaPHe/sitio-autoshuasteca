@@ -45,6 +45,7 @@ class InicioController extends Controller
             'promociones.*.titulo' => 'required|string|max:255',
             'promociones.*.descripcion' => 'required|string|max:500',
             'promociones.*.imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'promociones.*.terminos' => 'required|string',
             'terminos' => 'required|string',
         ]);
 
